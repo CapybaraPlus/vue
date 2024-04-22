@@ -1,0 +1,10 @@
+{
+  "name": "@capybara-ui/vue",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
