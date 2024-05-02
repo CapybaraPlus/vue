@@ -1,15 +1,11 @@
 <template>
-   <div> 
-        我是按钮
-   </div>
-</template> 
+  <div>{{ ucn.m("primary") }}</div>
+</template>
 
-<script setup lang="ts"> 
-import {test} from "@capybara-ui/utils"
+<script setup lang="ts">
+import { useClassName } from "@capybara-ui/utils";
 
-test()
-</script> 
+const ucn = useClassName("button");
+</script>
 
-<style scoped> 
-
-</style>
+<style scoped></style>

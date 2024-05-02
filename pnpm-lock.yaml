@@ -31,6 +31,28 @@ importers:
         specifier: ^2.0.6
         version: 2.0.14(typescript@5.4.5)
 
+  examples:
+    dependencies:
+      '@capybara-ui/vue':
+        specifier: workspace:^
+        version: link:../packages/components
+      vue:
+        specifier: ^3.4.21
+        version: 3.4.23(typescript@5.4.5)
+    devDependencies:
+      '@vitejs/plugin-vue':
+        specifier: ^5.0.4
+        version: 5.0.4(vite@5.2.10)(vue@3.4.23)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.4.5
+      vite:
+        specifier: ^5.2.0
+        version: 5.2.10
+      vue-tsc:
+        specifier: ^2.0.6
+        version: 2.0.14(typescript@5.4.5)
+
   packages/components: {}
 
   packages/utils: {}

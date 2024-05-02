@@ -1,4 +1,2 @@
 
-export const test = () => {
-    console.log('hello world')
-}
+export * from "./use-class-name";
