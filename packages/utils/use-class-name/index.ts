@@ -55,6 +55,7 @@ export const useClassName = (block: string) => {
     m,
     be,
     bm,
+    em,
     bem,
   };
 };
