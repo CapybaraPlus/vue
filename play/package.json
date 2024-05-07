@@ -7,8 +7,5 @@
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview"
-  },
-  "dependencies": {
-    "@capybara-ui/vue": "workspace:^"
   }
 }

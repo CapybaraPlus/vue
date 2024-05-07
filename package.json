@@ -12,14 +12,14 @@
   "peerDependencies": {
     "vue": "^3.4.21"
   },
-  "dependencies": {
-    "@capybara-ui/utils": "workspace:^",
-    "@capybara-ui/vue": "workspace:^"
-  },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
     "vue-tsc": "^2.0.6"
+  },
+  "dependencies": {
+    "@capybara-ui/components": "workspace:^",
+    "@capybara-ui/utils": "workspace:^"
   }
 }
