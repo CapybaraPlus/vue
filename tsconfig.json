@@ -1,26 +1,26 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "module": "ESNext",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "skipLibCheck": true,
-    "baseUrl": ".",
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "preserve",
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "target": "ES2020", // 目标语言版本
+    "module": "ESNext", // 打包模块类型ESNext
+    "lib": ["ES2020", "DOM", "DOM.Iterable"], // 编译时使用的库
+    "skipLibCheck": true, // 跳过类库检测
+    "baseUrl": ".", // 基础路径
+    "sourceMap": false, // 不生成sourceMap
+    "moduleResolution": "node", // 模块解析策略：node
+    "esModuleInterop": true, // 支持commonjs模块
+    "allowJs": false, // 不允许导入js文件
+    "allowSyntheticDefaultImports": true, // 允许从没有设置默认导出的模块中默认导入
+    "allowImportingTsExtensions": true, // 允许导入.ts文件
+    "resolveJsonModule": true, // 支持导入json文件
+    "isolatedModules": true, // 每个文件都是独立的模块
+    "noEmit": true, // 不生成输出文件
+    "jsx": "preserve", // 保留jsx
+    "strict": true, // 启用所有严格类型检查
+    "noUnusedLocals": true, // 检查未使用的局部变量
+    "noUnusedParameters": true, // 检查未使用的参数
+    "noFallthroughCasesInSwitch": true // 防止switch语句贯穿
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"], // 包含文件
+  "exclude": ["node_modules", "dist/**", "**/__tests__"], // 排除文件
   "references": [{ "path": "./tsconfig.node.json" }]
 }
