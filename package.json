@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "examples": "pnpm -C examples dev"
+    "play": "pnpm -C play dev"
   },
   "peerDependencies": {
     "vue": "^3.4.21"

@@ -1,4 +1,4 @@
-const defaultNameSpace = "ra";
+const defaultNameSpace = "ra"; // 默认的类名前缀
 
 const generateClassName = (
   block: string, // 块
@@ -21,7 +21,7 @@ const generateClassName = (
 
 // 当传入button时
 export const useClassName = (block: string) => {
-  // 生成block类名，例如：ra-button、ra-button-group
+  // 生成block或者blockSuffix类名，例如：ra-button、ra-button-group
   const b = (blockSuffix?: string) => 
     generateClassName(block, blockSuffix, "", "");
 
