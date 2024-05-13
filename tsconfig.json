@@ -18,7 +18,10 @@
     "strict": true, // 启动所有的严格类型检查
     "noUnusedLocals": true, // 检查未使用的局部变量
     "noUnusedParameters": true, // 检查未使用的参数
-    "noFallthroughCasesInSwitch": true // 防止switch语句贯穿
+    "noFallthroughCasesInSwitch": true, // 防止switch语句贯穿
+    "removeComments": true, // 移除注释
+    "noImplicitAny": true, // 不允许隐式的any类型
+    "noImplicitThis": true, // 不允许隐式的this类型
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"], // 包含文件
   "exclude": ["node_modules", "dist/**", "**/__tests__"], // 排除文件
