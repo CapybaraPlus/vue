@@ -1,11 +1,11 @@
 <template>
-  <div :class="[
-    ucn.m(modifier),
-    ucn.b()
-  ]">
-    {{ ucn.m(modifier) }}
-    <button @click="handleClick">点击</button>
-  </div>
+    <div :class="[
+      ucn.m(modifier),
+      ucn.b()
+    ]">
+      {{ ucn.m(modifier) }}
+      <button @click="handleClick">点击</button>
+    </div>
 </template>
 
 <script setup lang="ts">
