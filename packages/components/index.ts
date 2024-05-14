@@ -5,3 +5,4 @@ export default {
     install(app: App) {
         app.component("RaButton", Button)
     }
+}
