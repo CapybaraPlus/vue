@@ -16,5 +16,17 @@ export default [
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   ...pluginVue.configs['flat/recommended'],
-  eslintConfigPrettier
+  eslintConfigPrettier,
+  {
+    ignores: [
+      "node_modules",
+      "dist",
+      "**/*.css",
+      "**/*.jpg",
+      "**/*.jpeg",
+      "**/*.png",
+      "**/*.gif",
+      "**/*.d.ts",
+    ]
+  }
 ]
