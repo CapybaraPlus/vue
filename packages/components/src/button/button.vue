@@ -10,6 +10,10 @@
 import { useClassName } from '@capybara-ui/utils'
 import { ref } from 'vue'
 
+defineOptions({
+  name: "RaButton"
+})
+
 const ucn = useClassName('button')
 
 const modifier = ref('primary')

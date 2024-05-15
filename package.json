@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "play": "pnpm -C play dev"
+    "play": "pnpm -C play dev",
+    "prepare": "husky"
   },
   "peerDependencies": {
     "vue": "^3.4.21"
@@ -19,6 +20,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-vue": "^9.26.0",
     "globals": "^15.2.0",
+    "husky": "^9.0.11",
     "typescript": "^5.2.2",
     "typescript-eslint": "^7.8.0",
     "vite": "^5.2.0",
