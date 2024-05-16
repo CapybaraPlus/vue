@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "@capybara-ui/components": "workspace:^",
+    "@capybara-ui/hooks": "workspace:^",
     "@capybara-ui/utils": "workspace:^"
   },
   "lint-staged": {

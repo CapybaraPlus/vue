@@ -11,6 +11,9 @@ importers:
       '@capybara-ui/components':
         specifier: workspace:^
         version: link:packages/components
+      '@capybara-ui/hooks':
+        specifier: workspace:^
+        version: link:packages/hooks
       '@capybara-ui/utils':
         specifier: workspace:^
         version: link:packages/utils
@@ -62,6 +65,8 @@ importers:
         version: 2.0.14(typescript@5.4.5)
 
   packages/components: {}
+
+  packages/hooks: {}
 
   packages/utils: {}
 

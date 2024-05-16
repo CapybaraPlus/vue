@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { useClassName } from '@capybara-ui/utils'
+import { useClassName } from '@capybara-ui/hooks'
 import { ref } from 'vue'
 
 const ucn = useClassName('button')
