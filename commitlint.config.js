@@ -2,7 +2,7 @@ export default {
   extends: ['@commitlint/config-conventional'],
   rules: {
     /**
-     * type[scope]: [function] description
+     * type(scope): <subject>
      */
     'type-enum': [
       2, // 错误级别，0为关闭，1为警告，2为错误
@@ -36,7 +36,7 @@ export default {
         'ci', // 持续集成
         'docs', // 文档
         'lint', // 代码检查
-        'other', // 其
+        'other', // 其它
       ]
     ]
   },
