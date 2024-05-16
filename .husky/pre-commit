@@ -1,1 +1,1 @@
-pnpx eslint .
+pnpm exec lint-staged
