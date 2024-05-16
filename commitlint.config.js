@@ -1,6 +1,9 @@
 export default {
   extends: ['@commitlint/config-conventional'],
   rules: {
+    /**
+     * type[scope]: [function] description
+     */
     'type-enum': [
       2, // 错误级别，0为关闭，1为警告，2为错误
       'always', // 是否应用，always/never
@@ -17,5 +20,24 @@ export default {
         'chore', // 构建过程或辅助工具的变动
       ],
     ],
+    'scope-enum': [
+      2,
+      'always',
+      [
+        'deps', // 依赖
+        'config', // 配置
+        'utils', // 工具
+        'components', // 组件
+        'styles', // 样式
+        'hooks', // 钩子
+        'plugins', // 插件
+        'test', // 测试
+        'release', // 发布
+        'ci', // 持续集成
+        'docs', // 文档
+        'lint', // 代码检查
+        'other', // 其他
+      ]
+    ]
   },
 }
