@@ -36,7 +36,7 @@ export default {
         'ci', // 持续集成
         'docs', // 文档
         'lint', // 代码检查
-        'other', // 其他
+        'other', // 其
       ]
     ]
   },
