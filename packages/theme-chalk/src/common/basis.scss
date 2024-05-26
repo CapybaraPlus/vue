@@ -16,9 +16,7 @@ $color-error-dark: #d13a3a; // 错误色
 // ------ 中性色 ------
 $black: #000;
 $white: #fff;
-
-$themes: (
-    ) !default;
+$themes: () !default;
 $themes: map.deep-merge(('primary': ('light': $color-primary-light,
                 'dark': $color-primary-dark ),
             'success': ('light': $color-success-light,
