@@ -1,0 +1,81 @@
+@use 'sass:map';
+@use 'sass:math';
+
+$types: primary, success, warning, danger, error;
+
+// 基础颜色
+// ------ 辅助色-light ------
+$primary: #125bf6; // 主色
+$success: #04b626; // 成功色
+$warning: #f7b500; // 警告色
+$danger: #f93e3e; // 危险色
+$error: #f93e3e; // 错误色
+
+// ------ 中性色 ------
+$black: #000;
+$white: #fff;
+$gray: #1e2025;
+$transparent: transparent;
+
+// 颜色映射
+$colors: () !default;
+$colors: map.deep-merge(
+  (
+    'white': $white,
+    'black': $black,
+    'transparent': $transparent,
+    'gray': (
+      'base': $gray,
+    ),
+    'primary': (
+      'base': $primary,
+    ),
+    'success': (
+      'base': $success,
+    ),
+    'warning': (
+      'base': $warning,
+    ),
+    'danger': (
+      'base': $danger,
+    ),
+    'error': (
+      'base': $error,
+    ),
+  ),
+  $colors
+);
+
+@mixin set-color-level($type, $level, $light: true) {
+  $mix-color: $white !default;
+  $mode: 'light' !default;
+
+  @if $light {
+    $mix-color: $white;
+    $mode: 'light';
+  } @else {
+    $mix-color: $black;
+    $mode: 'dark';
+  }
+
+  $colors: map.deep-merge(
+    (
+      $type: (
+        '#{$mode}-#{$level}':
+          mix(
+            $mix-color,
+            map.get($colors, $type, 'base'),
+            math.percentage(math.div($level, 5))
+          ),
+      ),
+    ),
+    $colors
+  ) !global;
+}
+
+@each $type in $types {
+  @for $i from 1 to 5 {
+    @include set-color-level($type, $i, true);
+    @include set-color-level($type, $i, false);
+  }
+}

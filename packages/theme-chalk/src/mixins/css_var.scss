@@ -1,0 +1,31 @@
+@use '../config/index' as config;
+
+// generate css variable name
+// return such as: --ra-primary-base
+@function setCssVarName($args) {
+  $name: '--' + #{config.$namespace};
+  @each $arg in $args {
+    @if $arg != '' {
+      $name: $name + '-' + $arg;
+    }
+  }
+  @return $name;
+}
+
+// get css variable name
+// return such as: --ra-primary-base
+@function getCssVarName($args...) {
+  @return setCssVarName($args);
+}
+
+// get css variable value
+// return such as: var(--ra-primary-base)
+@function getCssVar($args...) {
+  @return var(#{setCssVarName($args)});
+}
+
+// get css variable value with default value
+// return such as: var(--ra-primary-base, #125bf6)
+@function getCssVarWithDefault($args, $default) {
+  @return var(#{setCssVarName($args)}, $default);
+}
