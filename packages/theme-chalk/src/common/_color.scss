@@ -148,3 +148,48 @@ $colors: map.deep-merge(
 // ----------------------
 // ----- text color -----
 // ----------------------
+
+$text: () !default;
+$text: map.merge(
+  (
+    'primary': getNeutralColor(),
+    'regular': getNeutralColorWithLevel(3),
+    'secondary': getNeutralColorWithLevel(5),
+    'placeholder': getNeutralColorWithLevel(7),
+    'disabled': getNeutralColorWithLevel(9),
+  ),
+  $text
+);
+
+// ------------------------
+// ----- border color -----
+// ------------------------
+
+$border: () !default;
+$border: map.merge(
+  (
+    'base': getNeutralColor(),
+    'light': getNeutralColorWithLevel(7),
+    'lighter': getNeutralColorWithLevel(8),
+    'lightest': getNeutralColorWithLevel(9),
+    'dark': getNeutralColorWithLevel(4),
+    'darker': getNeutralColorWithLevel(2),
+    'darkest': getNeutralColorWithLevel(1),
+  ),
+  $border
+);
+
+// ---------------------------------
+// ----- fill/background color -----
+// ---------------------------------
+
+$fill: () !default;
+$fill: map.merge(
+  (
+    'base': getWhite(),
+    'dark': getNeutralColorWithLevel(9),
+    'darker': getNeutralColorWithLevel(8),
+    'darkest': getNeutralColorWithLevel(7),
+  ),
+  $fill
+);
