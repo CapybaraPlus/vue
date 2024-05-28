@@ -99,3 +99,52 @@ $colors: map.deep-merge(
 }
 
 // @debug $colors;
+
+// -----------------------------------
+// ----- get base color function -----
+// -----------------------------------
+
+// get white
+@function getWhite() {
+  @return map.get($colors, 'white');
+}
+// @debug getWhite();
+
+// get black
+@function getBlack() {
+  @return map.get($colors, 'black');
+}
+// @debug getBlack();
+
+// get color
+// primary success warning danger error
+@function getColor($type: 'primary') {
+  @return map.get($colors, $type, 'base');
+}
+// @debug getColor('primary');
+
+// get level color
+// getColorWithLevel(primary, light, 1)
+// light: 1 => 6
+// dark: 1 => 3
+@function getColorWithLevel($type: 'primary', $mode: 'light', $level: 1) {
+  @return map.get($colors, $type, '#{$mode}-#{$level}');
+}
+// @debug getColorWithLevel(primary, light, 1);
+
+// get neutral color
+@function getNeutralColor() {
+  @return map.get($colors, 'neutral', 'base');
+}
+// @debug getNeutralColor();
+
+// get neutral color
+// getNeutralColorWithLevel(1)
+@function getNeutralColorWithLevel($level) {
+  @return map.get($colors, 'neutral', $level + '');
+}
+// @debug getNeutralColorWithLevel(1);
+
+// ----------------------
+// ----- text color -----
+// ----------------------

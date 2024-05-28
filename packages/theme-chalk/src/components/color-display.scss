@@ -1,5 +1,4 @@
 @use '../common/color.scss' as color;
-@use '../utils/getter.scss' as getter;
 @use '../utils/bem.scss' as bem with (
   $block: 'color-display'
 );
