@@ -1,0 +1,74 @@
+@use 'sass:map';
+
+// ---------------------
+// ----- font size -----
+// ---------------------
+$font-size: () !default;
+$font-size: map.merge(
+  (
+    'extra-large': 32px,
+    'large': 24px,
+    'medium': 18px,
+    'base': 16px,
+    'small': 14px,
+    'extra-small': 12px,
+  ),
+  $font-size
+);
+@function getFontSize($type) {
+  @return map.get($font-size, $type);
+}
+// @debug getFontSize('extra-large');
+
+// ----------------------
+// ----- box-shadow -----
+// ----------------------
+$box-shadow: () !default;
+$box-shadow: map.merge(
+  (
+    'light': 0 6px 6px -2px rgba(0, 0, 0, 0.12),
+    'base': 0 4 16px 0 rgba(0, 0, 0, 0.15),
+    'dark': 0 4px 48px 0 rgba(0, 0, 0, 0.12),
+  ),
+  $box-shadow
+);
+@function getBoxShadow($type) {
+  @return map.get($box-shadow, $type);
+}
+// @debug getBoxShadow('light');
+
+// -------------------------
+// ----- border-radius -----
+// -------------------------
+$border-radius: () !default;
+$border-radius: map.merge(
+  (
+    'small': 3px,
+    'base': 5px,
+    'medium': 8px,
+    'large': 20px,
+    'circle': 50%,
+  ),
+  $border-radius
+);
+@function getBorderRadius($type) {
+  @return map.get($border-radius, $type);
+}
+// @debug getBorderRadius('small');
+
+// -------------------
+// ----- overlay -----
+// -------------------
+$overlay: () !default;
+$overlay: map.merge(
+  (
+    'light': rgba(0, 0, 0, 0.5),
+    'base': rgba(0, 0, 0, 0.7),
+    'dark': rgba(0, 0, 0, 0.8),
+  ),
+  $overlay
+);
+@function getOverlay($type) {
+  @return map.get($overlay, $type);
+}
+// @debug getOverlay('light');

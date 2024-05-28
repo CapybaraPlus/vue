@@ -160,6 +160,10 @@ $text: map.merge(
   ),
   $text
 );
+@function getTextColor($type) {
+  @return map.get($text, $type);
+}
+// @debug getTextColor('primary');
 
 // ------------------------
 // ----- border color -----
@@ -178,6 +182,10 @@ $border: map.merge(
   ),
   $border
 );
+@function getBorderColor($type) {
+  @return map.get($border, $type);
+}
+// @debug getBorderColor('base');
 
 // ---------------------------------
 // ----- fill/background color -----
@@ -193,3 +201,7 @@ $fill: map.merge(
   ),
   $fill
 );
+@function getFillColor($type) {
+  @return map.get($fill, $type);
+}
+// @debug getBoxShadow('base');
