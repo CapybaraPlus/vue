@@ -1,0 +1,45 @@
+@use '../common/color.scss' as color;
+@use '../utils/getter.scss' as getter;
+@use '../utils/bem.scss' as bem with (
+  $block: 'color-display'
+);
+@use 'sass:map';
+
+// ra-color-picker-primary-base
+// ra-color-picker--primary-light-1
+@include bem.b() {
+  border-radius: 20px;
+  margin: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  @include bem.e(item) {
+    display: flex;
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+  @each $neutral in color.$bases {
+    @include bem.m($neutral) {
+      background-color: map.get(color.$colors, $neutral);
+    }
+  }
+  @each $type in color.$types {
+    @each $key, $value in map.get(color.$colors, $type) {
+      $modifier: #{$type}-#{$key};
+      @include bem.m($modifier) {
+        background-color: $value;
+      }
+    }
+  }
+  @for $i from 1 through 9 {
+    @include bem.m('gray-#{$i}') {
+      background-color: map.get(color.$colors, 'gray', $i + '');
+    }
+  }
+  @include bem.m('gray-base') {
+    background-color: map.get(color.$colors, 'gray', 'base');
+  }
+}

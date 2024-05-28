@@ -1,23 +1,27 @@
 @use 'sass:map';
 @use 'sass:math';
 
+// base color
+$bases: 'white', 'black', 'transparent';
+$neutrals: 'gray';
 $types: primary, success, warning, danger, error;
 
-// 基础颜色
-// ------ 辅助色-light ------
+// ----- base colors -----
+$black: #000;
+$white: #fff;
+$transparent: transparent;
+
+// ----- neutral colors -----
+$gray: #1e2025;
+
+// ----- complementray colors -----
 $primary: #125bf6; // 主色
 $success: #04b626; // 成功色
 $warning: #f7b500; // 警告色
 $danger: #f93e3e; // 危险色
 $error: #f93e3e; // 错误色
 
-// ------ 中性色 ------
-$black: #000;
-$white: #fff;
-$gray: #1e2025;
-$transparent: transparent;
-
-// 颜色映射
+// color map
 $colors: () !default;
 $colors: map.deep-merge(
   (
@@ -46,36 +50,51 @@ $colors: map.deep-merge(
   $colors
 );
 
-@mixin set-color-level($type, $level, $light: true) {
+// to set color level
+@mixin set-color-level($key, $level, $light: true, $netural: false) {
   $mix-color: $white !default;
   $mode: 'light' !default;
+  $percent-divisor: 5 !default;
+  $name: '' !default;
 
   @if $light {
     $mix-color: $white;
     $mode: 'light';
+    $percent-divisor: 10;
   } @else {
     $mix-color: $black;
     $mode: 'dark';
+    $percent-divisor: 5;
+  }
+  @if $netural {
+    $name: '#{$level}';
+  } @else {
+    $name: '#{$mode}-#{$level}';
   }
 
   $colors: map.deep-merge(
     (
-      $type: (
-        '#{$mode}-#{$level}':
-          mix(
-            $mix-color,
-            map.get($colors, $type, 'base'),
-            math.percentage(math.div($level, 5))
-          ),
+      $key: (
+        #{$name}: mix($mix-color, map.get($colors, $key, 'base'), math.percentage(math.div($level, $percent-divisor))),
       ),
     ),
     $colors
   ) !global;
 }
 
+// generate different color level
 @each $type in $types {
-  @for $i from 1 to 5 {
+  // to lighter
+  @for $i from 1 through 6 {
     @include set-color-level($type, $i, true);
+  }
+  // to darker
+  @for $i from 1 to 4 {
     @include set-color-level($type, $i, false);
   }
 }
+@for $i from 1 through 9 {
+  @include set-color-level($key: 'gray', $level: $i, $netural: true);
+}
+
+@debug $colors;

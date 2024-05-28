@@ -1,0 +1,29 @@
+@use '../common/color.scss' as color;
+@use 'sass:map';
+
+// -----------------
+// ----- color -----
+// -----------------
+// get base color
+// primary success warning danger error gray
+@function getBaseColor($type: 'primary') {
+  @return map.get(color.$colors, $type, 'base');
+}
+
+// get white
+@function getWhite() {
+  @return map.get(color.$colors, 'white');
+}
+
+// get black
+@function getBlack() {
+  @return map.get(color.$colors, 'black');
+}
+
+// get level color
+// getColor(primary, light, 1)
+// light: 1 => 6
+// dark: 1 => 3
+@function getColor($type: 'primary', $mode: 'light', $level: 1) {
+  @return map.get(color.$colors, $type, '#{$mode}-#{$level}');
+}

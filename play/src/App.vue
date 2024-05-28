@@ -1,11 +1,8 @@
 <template>
   <Ra-Button />
-  {{ useComponetName('') }}
+  <Ra-Color-Display></Ra-Color-Display>
 </template>
 
-<script setup lang="ts">
-import { useComponetName } from '@capybara-ui/hooks';
-</script>
+<script setup lang="ts"></script>
 
-<style scoped>
-</style>
+<style scoped></style>
