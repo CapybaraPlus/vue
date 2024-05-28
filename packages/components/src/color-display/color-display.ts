@@ -20,7 +20,7 @@ for (const t of types) {
     defaultNamesMap.push(`${t}-dark-${i}`)
   }
 }
-defaultNamesMap.push('gray-base')
+defaultNamesMap.push('neutral-base')
 for (let i = 1; i <= 9; i++) {
-  defaultNamesMap.push(`gray-${i}`)
+  defaultNamesMap.push(`neutral-${i}`)
 }

@@ -21,9 +21,9 @@
     justify-content: center;
     align-items: center;
   }
-  @each $neutral in color.$bases {
-    @include bem.m($neutral) {
-      background-color: map.get(color.$colors, $neutral);
+  @each $base in color.$bases {
+    @include bem.m($base) {
+      background-color: map.get(color.$colors, $base);
     }
   }
   @each $type in color.$types {
@@ -35,11 +35,11 @@
     }
   }
   @for $i from 1 through 9 {
-    @include bem.m('gray-#{$i}') {
-      background-color: map.get(color.$colors, 'gray', $i + '');
+    @include bem.m('neutral-#{$i}') {
+      background-color: map.get(color.$colors, 'neutral', $i + '');
     }
   }
-  @include bem.m('gray-base') {
-    background-color: map.get(color.$colors, 'gray', 'base');
+  @include bem.m('neutral-base') {
+    background-color: map.get(color.$colors, 'neutral', 'base');
   }
 }

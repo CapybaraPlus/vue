@@ -3,7 +3,7 @@
 
 // base color
 $bases: 'white', 'black', 'transparent';
-$neutrals: 'gray';
+$neutrals: 'neutral';
 $types: primary, success, warning, danger, error;
 
 // ----- base colors -----
@@ -12,7 +12,7 @@ $white: #fff;
 $transparent: transparent;
 
 // ----- neutral colors -----
-$gray: #1e2025;
+$neutral: #1e2024;
 
 // ----- complementray colors -----
 $primary: #125bf6; // 主色
@@ -28,8 +28,8 @@ $colors: map.deep-merge(
     'white': $white,
     'black': $black,
     'transparent': $transparent,
-    'gray': (
-      'base': $gray,
+    'neutral': (
+      'base': $neutral,
     ),
     'primary': (
       'base': $primary,
@@ -54,7 +54,7 @@ $colors: map.deep-merge(
 @mixin set-color-level($key, $level, $light: true, $netural: false) {
   $mix-color: $white !default;
   $mode: 'light' !default;
-  $percent-divisor: 5 !default;
+  $percent-divisor: 10 !default;
   $name: '' !default;
 
   @if $light {
@@ -89,12 +89,13 @@ $colors: map.deep-merge(
     @include set-color-level($type, $i, true);
   }
   // to darker
-  @for $i from 1 to 4 {
+  @for $i from 1 through 3 {
     @include set-color-level($type, $i, false);
   }
 }
+// to neutral
 @for $i from 1 through 9 {
-  @include set-color-level($key: 'gray', $level: $i, $netural: true);
+  @include set-color-level($key: 'neutral', $level: $i, $netural: true);
 }
 
-@debug $colors;
+// @debug $colors;
