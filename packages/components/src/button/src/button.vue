@@ -18,7 +18,7 @@ const handleClick = () => {
 }
 
 defineOptions({
-  name: "RaButton"
+  name: 'RaButton',
 })
 </script>
 

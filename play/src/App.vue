@@ -1,6 +1,5 @@
 <template>
-  <Ra-Button />
-  <Ra-Color-Display></Ra-Color-Display>
+  <ra-button></ra-button>
 </template>
 
 <script setup lang="ts"></script>

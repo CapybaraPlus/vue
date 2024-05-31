@@ -21,7 +21,7 @@
     "noFallthroughCasesInSwitch": true, // 防止switch语句贯穿
     "removeComments": true, // 移除注释
     "noImplicitAny": true, // 不允许隐式的any类型
-    "noImplicitThis": true, // 不允许隐式的this类型
+    "noImplicitThis": true // 不允许隐式的this类型
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"], // 包含文件
   "exclude": ["node_modules", "dist/**", "**/__tests__"], // 排除文件
