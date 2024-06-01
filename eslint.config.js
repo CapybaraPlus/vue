@@ -23,6 +23,11 @@ export default [
   ...pluginVue.configs['flat/recommended'], // vue recommended rules
   eslintConfigPrettier, // eslint with prettier rules
   {
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off', // allow any type
+    },
+  },
+  {
     ignores: [
       'node_modules',
       'dist',
