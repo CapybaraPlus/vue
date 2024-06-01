@@ -1,10 +1,5 @@
-import { PropType } from 'vue'
+import { definePropType } from '@capybara-ui/utils'
 
-// a function to define a prop type
-// example: definePropType<string>(String)
-// example: definePropType<string | number>([String, Number])
-// example: definePropType<Person>(Object)
-const definePropType = <T>(type: any): PropType<T> => type
 interface Person {
   name: string
   age: number
