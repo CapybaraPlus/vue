@@ -3,6 +3,7 @@ import pluginJs from '@eslint/js'
 import tseslint from 'typescript-eslint'
 import pluginVue from 'eslint-plugin-vue'
 import eslintConfigPrettier from 'eslint-config-prettier'
+import vueParser from 'vue-eslint-parser'
 
 export default [
   {
@@ -11,22 +12,26 @@ export default [
         ...globals.browser,
         ...globals.node,
       },
+      parser: vueParser,
+      parserOptions: {
+        parser: tseslint.parser,
+      },
     },
   },
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
-  ...pluginVue.configs['flat/recommended'],
-  eslintConfigPrettier,
+  pluginJs.configs.recommended, // eslint recommended rules
+  ...tseslint.configs.recommended, // ts recommended rules
+  ...pluginVue.configs['flat/recommended'], // vue recommended rules
+  eslintConfigPrettier, // eslint with prettier rules
   {
     ignores: [
-      "node_modules",
-      "dist",
-      "**/*.css",
-      "**/*.jpg",
-      "**/*.jpeg",
-      "**/*.png",
-      "**/*.gif",
-      "**/*.d.ts",
-    ]
-  }
+      'node_modules',
+      'dist',
+      '**/*.css',
+      '**/*.jpg',
+      '**/*.jpeg',
+      '**/*.png',
+      '**/*.gif',
+      '**/*.d.ts',
+    ],
+  },
 ]

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "dist", // 输出目录
     "target": "ES2020", // 目标语言版本
     "module": "ESNext", // 打包模块类型ESNext
     "lib": ["ES2020", "DOM", "DOM.Iterable"], // 编译时使用的库
