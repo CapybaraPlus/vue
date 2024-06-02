@@ -1,5 +1,5 @@
 import { PropType } from 'vue'
-import { hasKey } from '../object'
+import { hasKey, isObject } from '../object'
 
 /**
  * define a prop type
@@ -9,29 +9,44 @@ import { hasKey } from '../object'
  */
 export const definePropType = <Type>(type: any): PropType<Type> => type
 
-type Prop<
+// vue prop native type
+type NativeType<T> = PropType<T> | null | undefined
+
+// prop options
+type PropOptions<
   Type,
   Values extends Array<any>,
   Required extends boolean,
   Default
 > = {
-  type: PropType<Type> | null | undefined
+  type: NativeType<Type>
   values?: Values
   validator?: (val: any) => boolean
   required?: Required
   default?: Default
 }
 
-// build a prop
-export const buildProp = <
+/**
+ * build prop options
+ * @param @requires type: prop type
+ * @param values: allowed values
+ * @param validator: custom validator
+ * @param required: whether the prop is required
+ * @param default: default value
+ */
+export const buildPropOptions = <
   Type,
   Values extends Array<any>,
   Required extends boolean = false,
   Default = undefined
 >(
-  prop: Prop<Type, Values, Required, Default>
+  options: PropOptions<Type, Values, Required, Default>
 ) => {
-  const { values, validator, required, default: _default, type } = prop
+  if (options == null || !isObject(options)) {
+    return options
+  }
+
+  const { values, validator, required, default: _default, type } = options
 
   // generate validator function
   const _validator =
@@ -42,7 +57,7 @@ export const buildProp = <
           if (values) {
             allowValues.push(...values)
             // check whether prop has the key of default
-            if (hasKey(prop, 'default')) {
+            if (hasKey(options, 'default')) {
               if (!allowValues.includes(_default)) {
                 console.warn(
                   `Invalid prop: validation failed! The values are ${allowValues.join(
@@ -59,23 +74,62 @@ export const buildProp = <
           return isVailded
         }
       : undefined
-  const _prop: any = {
+  const _options: any = {
     type,
     required: !!required,
     validator: _validator,
   }
-  if (hasKey(prop, 'default')) {
-    _prop.default = _default
+  if (hasKey(options, 'default')) {
+    _options.default = _default
   }
 
-  return _prop
+  return _options
 }
 
-console.log(
-  buildProp({
-    type: String,
-    values: ['a', 1, 2],
-    default: 'a',
-    validator: (val: any) => val === 'b',
-  }).validator('b')
-)
+/**
+ * build props
+ * @example: buildProps({
+ *   type: {
+ *     type: String,
+ *     values: ['primary', 'success', 'warning', 'danger'],
+ *     default: 'primary',
+ *   },
+ *   size: {
+ *     type: String,
+ *     default: 'medium',
+ *   },
+ * })
+ */
+export const buildProps = (
+  props: Record<string, PropOptions<any, any, any, any> | NativeType<any>>
+) => {
+  const _props: Record<string, any> = {}
+  for (const [key, options] of Object.entries(props)) {
+    _props[key] = buildPropOptions(options as any)
+  }
+  return _props
+}
+
+// console.log(
+//   buildPropOptions({
+//     type: String,
+//     values: ['a', 1, 2],
+//     default: 'a',
+//     validator: (val: any) => val === 'b',
+//   }).validator('b')
+// )
+
+// console.log(
+//   buildProps({
+//     type: {
+//       type: String,
+//       values: ['primary', 'success', 'warning', 'danger'],
+//       default: 'primary',
+//     },
+//     size: {
+//       type: String,
+//       default: 'medium',
+//     },
+//     disabled: undefined,
+//   })
+// )
