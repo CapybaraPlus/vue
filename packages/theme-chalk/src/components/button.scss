@@ -3,6 +3,14 @@
 );
 @use '../common/var' as *;
 
+@mixin buttonHover() {
+  &:hover {
+    &:not(:disabled) {
+      @content;
+    }
+  }
+}
+
 @include b() {
   border: none;
   padding: 8px 16px;
@@ -14,28 +22,49 @@
   color: getTextColor();
   transition: all getTransition();
   margin: 10px;
-  &:hover {
+  @include buttonHover() {
     color: getColor();
     border-color: getColor();
-    font-size: getFontSize('large');
   }
 }
 
 // button theme mixin
 @mixin buttonTheme($theme) {
   @include m($theme) {
-    border: none;
+    border-color: transparent;
     background-color: getColor($theme);
     color: getWhite();
-    &:hover {
+    @include buttonHover() {
       color: getColor($theme);
       background-color: getWhite();
       border: 1px solid getColor($theme);
     }
   }
 }
-
 @include buttonTheme(primary);
 @include buttonTheme(success);
 @include buttonTheme(warning);
 @include buttonTheme(danger);
+
+// button size
+@include m(large) {
+  padding: 16px 32px;
+}
+@include m(medium) {
+  padding: 12px 24px;
+}
+@include m(small) {
+  padding: 6px 12px;
+}
+
+@include is(disabled) {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+// animation when hover the button
+.hover-zoom-in {
+  @include buttonHover() {
+    font-size: getFontSize('large');
+  }
+}

@@ -56,7 +56,7 @@ export const useClassName = (block: string) => {
       : ''
 
   // generate state class name
-  const is = (state: string) => {
+  const is = (state?: string) => {
     return state ? `is-${state}` : ''
   }
 

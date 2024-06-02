@@ -35,6 +35,12 @@ export const buttonProps = buildProps({
   },
   // custom button color
   color: String,
+  // button animation when hover the button
+  hoverAnimation: {
+    type: String,
+    values: ['default', 'zoom-in'],
+    default: 'default',
+  },
 })
 
 // button emits

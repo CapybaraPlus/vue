@@ -1,5 +1,15 @@
 <template>
-  <button :class="[ucn.b(), ucn.m(_theme)]" @click="handleClick">
+  <button
+    :class="[
+      ucn.b(),
+      ucn.m(_theme),
+      ucn.m(_size),
+      ucn.is(_disabled),
+      _hoverAnimation,
+    ]"
+    :disabled="disabled"
+    @click="handleClick"
+  >
     <slot></slot>
   </button>
 </template>
@@ -24,6 +34,16 @@ const handleClick = (e: MouseEvent) => {
 
 const _theme = computed(() =>
   $props.theme == 'default' ? undefined : $props.theme
+)
+
+const _size = computed(() =>
+  $props.size == 'normal' ? undefined : $props.size
+)
+
+const _disabled = computed(() => ($props.disabled ? 'disabled' : undefined))
+
+const _hoverAnimation = computed(() =>
+  $props.hoverAnimation ? `hover-${$props.hoverAnimation}` : undefined
 )
 </script>
 

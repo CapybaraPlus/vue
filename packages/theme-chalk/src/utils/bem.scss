@@ -64,3 +64,9 @@ $block: '' !default;
     @content;
   }
 }
+
+@mixin is($state) {
+  .is-#{$state} {
+    @content;
+  }
+}
