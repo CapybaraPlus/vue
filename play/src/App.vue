@@ -1,5 +1,5 @@
 <template>
-  <ra-button></ra-button>
+  <ra-button>按钮</ra-button>
 </template>
 
 <script setup lang="ts"></script>

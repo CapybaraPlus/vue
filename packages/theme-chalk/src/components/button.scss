@@ -1,0 +1,13 @@
+@use '../utils/bem.scss' as * with (
+  $block: button
+);
+@use '../common/var' as *;
+
+@include b() {
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border: 1px solid getBorderColor('base');
+  border-radius: getBorderRadius('small');
+  font-size: getFontSize('base');
+}

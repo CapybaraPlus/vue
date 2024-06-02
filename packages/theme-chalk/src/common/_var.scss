@@ -1,4 +1,210 @@
 @use 'sass:map';
+@use 'sass:math';
+
+// base color
+$bases: 'white', 'black', 'transparent';
+$neutrals: 'neutral';
+$types: primary, success, warning, danger, error;
+
+// ----- base colors -----
+$black: #000;
+$white: #fff;
+$transparent: transparent;
+
+// ----- neutral colors -----
+$neutral: #1e2024;
+
+// ----- complementray colors -----
+$primary: #125bf6; // 主色
+$success: #04b626; // 成功色
+$warning: #f7b500; // 警告色
+$danger: #f93e3e; // 危险色
+$error: #f93e3e; // 错误色
+
+// color map
+$colors: () !default;
+$colors: map.deep-merge(
+  (
+    'white': $white,
+    'black': $black,
+    'transparent': $transparent,
+    'neutral': (
+      'base': $neutral,
+    ),
+    'primary': (
+      'base': $primary,
+    ),
+    'success': (
+      'base': $success,
+    ),
+    'warning': (
+      'base': $warning,
+    ),
+    'danger': (
+      'base': $danger,
+    ),
+    'error': (
+      'base': $error,
+    ),
+  ),
+  $colors
+);
+
+// to set color level
+@mixin set-color-level($key, $level, $light: true, $netural: false) {
+  $mix-color: $white !default;
+  $mode: 'light' !default;
+  $percent-divisor: 10 !default;
+  $name: '' !default;
+
+  @if $light {
+    $mix-color: $white;
+    $mode: 'light';
+    $percent-divisor: 10;
+  } @else {
+    $mix-color: $black;
+    $mode: 'dark';
+    $percent-divisor: 5;
+  }
+  @if $netural {
+    $name: '#{$level}';
+  } @else {
+    $name: '#{$mode}-#{$level}';
+  }
+
+  $colors: map.deep-merge(
+    (
+      $key: (
+        #{$name}: mix($mix-color, map.get($colors, $key, 'base'), math.percentage(math.div($level, $percent-divisor))),
+      ),
+    ),
+    $colors
+  ) !global;
+}
+
+// generate different color level
+@each $type in $types {
+  // to lighter
+  @for $i from 1 through 6 {
+    @include set-color-level($type, $i, true);
+  }
+  // to darker
+  @for $i from 1 through 3 {
+    @include set-color-level($type, $i, false);
+  }
+}
+// to neutral
+@for $i from 1 through 9 {
+  @include set-color-level($key: 'neutral', $level: $i, $netural: true);
+}
+
+// @debug $colors;
+
+// -----------------------------------
+// ----- get base color function -----
+// -----------------------------------
+
+// get white
+@function getWhite() {
+  @return map.get($colors, 'white');
+}
+// @debug getWhite();
+
+// get black
+@function getBlack() {
+  @return map.get($colors, 'black');
+}
+// @debug getBlack();
+
+// get color
+// primary success warning danger error
+@function getColor($type: 'primary') {
+  @return map.get($colors, $type, 'base');
+}
+// @debug getColor('primary');
+
+// get level color
+// getColorWithLevel(primary, light, 1)
+// light: 1 => 6
+// dark: 1 => 3
+@function getColorWithLevel($type: 'primary', $mode: 'light', $level: 1) {
+  @return map.get($colors, $type, '#{$mode}-#{$level}');
+}
+// @debug getColorWithLevel(primary, light, 1);
+
+// get neutral color
+@function getNeutralColor() {
+  @return map.get($colors, 'neutral', 'base');
+}
+// @debug getNeutralColor();
+
+// get neutral color
+// getNeutralColorWithLevel(1)
+@function getNeutralColorWithLevel($level) {
+  @return map.get($colors, 'neutral', $level + '');
+}
+// @debug getNeutralColorWithLevel(1);
+
+// ----------------------
+// ----- text color -----
+// ----------------------
+
+$text: () !default;
+$text: map.merge(
+  (
+    'primary': getNeutralColor(),
+    'regular': getNeutralColorWithLevel(3),
+    'secondary': getNeutralColorWithLevel(5),
+    'placeholder': getNeutralColorWithLevel(7),
+    'disabled': getNeutralColorWithLevel(9),
+  ),
+  $text
+);
+@function getTextColor($type) {
+  @return map.get($text, $type);
+}
+// @debug getTextColor('primary');
+
+// ------------------------
+// ----- border color -----
+// ------------------------
+
+$border: () !default;
+$border: map.merge(
+  (
+    'base': getNeutralColor(),
+    'light': getNeutralColorWithLevel(7),
+    'lighter': getNeutralColorWithLevel(8),
+    'lightest': getNeutralColorWithLevel(9),
+    'dark': getNeutralColorWithLevel(4),
+    'darker': getNeutralColorWithLevel(2),
+    'darkest': getNeutralColorWithLevel(1),
+  ),
+  $border
+);
+@function getBorderColor($type) {
+  @return map.get($border, $type);
+}
+// @debug getBorderColor('base');
+
+// ---------------------------------
+// ----- fill/background color -----
+// ---------------------------------
+
+$fill: () !default;
+$fill: map.merge(
+  (
+    'base': getWhite(),
+    'dark': getNeutralColorWithLevel(9),
+    'darker': getNeutralColorWithLevel(8),
+    'darkest': getNeutralColorWithLevel(7),
+  ),
+  $fill
+);
+@function getFillColor($type) {
+  @return map.get($fill, $type);
+}
+// @debug getBoxShadow('base');
 
 // ---------------------
 // ----- font size -----

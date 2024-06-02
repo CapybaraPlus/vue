@@ -1,5 +1,7 @@
+import { ExtractPropTypes } from 'vue'
 import { buildProps } from '@capybara-ui/utils'
 
+// button props
 export const buttonProps = buildProps({
   // button theme
   theme: {
@@ -34,3 +36,14 @@ export const buttonProps = buildProps({
   // custom button color
   color: String,
 })
+
+// button emits
+export const buttonEmits = {
+  click: (e: MouseEvent) => e instanceof MouseEvent,
+}
+
+// typescript button props
+export type ButtonProps = ExtractPropTypes<typeof buttonProps>
+
+// typescript button emits
+export type ButtonEmits = typeof buttonEmits
