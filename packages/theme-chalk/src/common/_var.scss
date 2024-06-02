@@ -160,7 +160,7 @@ $text: map.merge(
   ),
   $text
 );
-@function getTextColor($type) {
+@function getTextColor($type: 'primary') {
   @return map.get($text, $type);
 }
 // @debug getTextColor('primary');
@@ -182,7 +182,7 @@ $border: map.merge(
   ),
   $border
 );
-@function getBorderColor($type) {
+@function getBorderColor($type: 'base') {
   @return map.get($border, $type);
 }
 // @debug getBorderColor('base');
@@ -201,7 +201,7 @@ $fill: map.merge(
   ),
   $fill
 );
-@function getFillColor($type) {
+@function getFillColor($type: 'base') {
   @return map.get($fill, $type);
 }
 // @debug getBoxShadow('base');
@@ -221,7 +221,7 @@ $font-size: map.merge(
   ),
   $font-size
 );
-@function getFontSize($type) {
+@function getFontSize($type: 'base') {
   @return map.get($font-size, $type);
 }
 // @debug getFontSize('extra-large');
@@ -238,7 +238,7 @@ $box-shadow: map.merge(
   ),
   $box-shadow
 );
-@function getBoxShadow($type) {
+@function getBoxShadow($type: 'base') {
   @return map.get($box-shadow, $type);
 }
 // @debug getBoxShadow('light');
@@ -249,15 +249,15 @@ $box-shadow: map.merge(
 $border-radius: () !default;
 $border-radius: map.merge(
   (
-    'small': 3px,
-    'base': 5px,
+    'small': 4px,
+    'base': 6px,
     'medium': 8px,
     'large': 20px,
     'circle': 50%,
   ),
   $border-radius
 );
-@function getBorderRadius($type) {
+@function getBorderRadius($type: 'base') {
   @return map.get($border-radius, $type);
 }
 // @debug getBorderRadius('small');
@@ -274,7 +274,24 @@ $overlay: map.merge(
   ),
   $overlay
 );
-@function getOverlay($type) {
+@function getOverlay($type: 'base') {
   @return map.get($overlay, $type);
 }
 // @debug getOverlay('light');
+
+// ----------------------
+// ----- transition -----
+// ----------------------
+$transition: () !default;
+$transition: map.merge(
+  (
+    'base': 0.5s,
+    'fast': 0.3s,
+    'slow': 0.7s,
+  ),
+  $transition
+);
+@function getTransition($type: 'base') {
+  @return map.get($transition, $type);
+}
+@debug getTransition('base');
