@@ -12,9 +12,30 @@
   font-size: getFontSize();
   background-color: getFillColor();
   color: getTextColor();
-  transition: getTransition();
+  transition: all getTransition();
+  margin: 10px;
   &:hover {
     color: getColor();
     border-color: getColor();
+    font-size: getFontSize('large');
   }
 }
+
+// button theme mixin
+@mixin buttonTheme($theme) {
+  @include m($theme) {
+    border: none;
+    background-color: getColor($theme);
+    color: getWhite();
+    &:hover {
+      color: getColor($theme);
+      background-color: getWhite();
+      border: 1px solid getColor($theme);
+    }
+  }
+}
+
+@include buttonTheme(primary);
+@include buttonTheme(success);
+@include buttonTheme(warning);
+@include buttonTheme(danger);

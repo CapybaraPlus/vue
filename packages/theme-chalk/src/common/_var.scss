@@ -127,7 +127,7 @@ $colors: map.deep-merge(
 // getColorWithLevel(primary, light, 1)
 // light: 1 => 6
 // dark: 1 => 3
-@function getColorWithLevel($type: 'primary', $mode: 'light', $level: 1) {
+@function getColorWithLevel($type: 'primary', $level: 1, $mode: 'light') {
   @return map.get($colors, $type, '#{$mode}-#{$level}');
 }
 // @debug getColorWithLevel(primary, light, 1);
