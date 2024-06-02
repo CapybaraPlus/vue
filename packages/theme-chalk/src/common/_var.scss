@@ -295,3 +295,19 @@ $transition: map.merge(
   @return map.get($transition, $type);
 }
 @debug getTransition('base');
+
+// -------------------
+// ----- opacity -----
+// -------------------
+$opacity: () !default;
+$opacity: map.merge(
+  (
+    'disabled': 0.5,
+    'base': 0.7,
+  ),
+  $opacity
+);
+@function getOpacity($type: 'base') {
+  @return map.get($opacity, $type);
+}
+// @debug getOpacity('disabled');
