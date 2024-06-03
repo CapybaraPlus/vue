@@ -94,6 +94,7 @@
 @include is(color) {
   background-color: var(--color);
   color: getWhite();
+  border-color: transparent;
   @include buttonHover() {
     background-color: getWhite();
     color: var(--color);
