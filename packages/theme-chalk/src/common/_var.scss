@@ -253,6 +253,8 @@ $border-radius: map.merge(
     'base': 6px,
     'medium': 8px,
     'large': 20px,
+    'larger': 30px,
+    'largest': 50px,
     'circle': 50%,
   ),
   $border-radius

@@ -1,10 +1,21 @@
 <template>
-  <ra-button theme="default" @click="handleClick">default button</ra-button>
-  <ra-button disabled theme="primary" hover-animation="zoom-in" size="large"
+  <ra-button color="rgb(255, 109, 109)" block shape="round" @click="handleClick"
+    >default button</ra-button
+  >
+  <ra-button
+    color="rgb(255, 109, 109)"
+    block
+    shape="round"
+    theme="primary"
+    hover-animation="zoom-in"
+    size="large"
+    disabled
     >primary button</ra-button
   >
   <ra-button theme="success" size="medium">success button</ra-button>
-  <ra-button theme="warning" size="small">warning button</ra-button>
+  <ra-button shape="round" theme="warning" size="small"
+    >warning button</ra-button
+  >
   <ra-button theme="danger">danger button</ra-button>
 </template>
 

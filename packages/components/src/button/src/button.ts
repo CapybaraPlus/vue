@@ -3,39 +3,59 @@ import { buildProps } from '@capybara-ui/utils'
 
 // button props
 export const buttonProps = buildProps({
-  // button theme
+  /**
+   * @description button theme
+   */
   theme: {
     type: String,
     values: ['default', 'primary', 'success', 'warning', 'danger'],
     default: 'default',
   },
-  // disabled state
+  /**
+   * @description disabled state
+   */
   disabled: Boolean,
-  // set button size
+  /**
+   * @description set button size
+   */
   size: {
     type: String,
     values: ['normal', 'large', 'medium', 'small'],
     default: 'normal',
   },
-  // set button shape
+  /**
+   * @description set button shape
+   * @todo add circle shape
+   */
   shape: {
     type: String,
-    values: ['default', 'round', 'circle'],
+    values: ['default', 'round'],
     default: 'default',
   },
-  // set button width to 100%
+  /**
+   * @description set button width to 100%
+   */
   block: Boolean,
-  // loading state
-  loading: Boolean,
-  // native button type
+  /**
+   * @description native button type
+   */
   type: {
     type: String,
     values: ['button', 'submit', 'reset'],
     default: 'button',
   },
-  // custom button color
+  /**
+   * @description custom button color
+   * it will cover the theme
+   */
   color: String,
-  // button animation when hover the button
+  /**
+   * @description loading state
+   */
+  loading: Boolean,
+  /**
+   * @description button animation when hover the button
+   */
   hoverAnimation: {
     type: String,
     values: ['default', 'zoom-in'],

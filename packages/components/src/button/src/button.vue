@@ -5,9 +5,14 @@
       ucn.m(_theme),
       ucn.m(_size),
       ucn.is(_disabled),
+      ucn.m(_shape),
+      ucn.is(_block),
+      ucn.is(_color.cls),
       _hoverAnimation,
     ]"
     :disabled="disabled"
+    :type="type"
+    :style="[_color.style]"
     @click="handleClick"
   >
     <slot></slot>
@@ -33,14 +38,27 @@ const handleClick = (e: MouseEvent) => {
 }
 
 const _theme = computed(() =>
-  $props.theme == 'default' ? undefined : $props.theme
+  $props.theme == 'default' || $props.color ? '' : $props.theme
 )
 
-const _size = computed(() =>
-  $props.size == 'normal' ? undefined : $props.size
-)
+const _size = computed(() => ($props.size == 'normal' ? '' : $props.size))
 
 const _disabled = computed(() => ($props.disabled ? 'disabled' : undefined))
+
+const _shape = computed(() =>
+  $props.shape == 'default' ? undefined : $props.shape
+)
+
+const _block = computed(() => ($props.block ? 'block' : undefined))
+
+const _color = computed(() => {
+  const cls = $props.color ? 'color' : ''
+  const style = `--color: ${$props.color}`
+  return {
+    cls,
+    style,
+  }
+})
 
 const _hoverAnimation = computed(() =>
   $props.hoverAnimation ? `hover-${$props.hoverAnimation}` : undefined
