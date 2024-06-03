@@ -1,6 +1,6 @@
-import _Button from './src/button.vue'
+import Button from './src/button.vue'
 import { withInstall } from '@capybara-ui/utils'
 
-export const Button = withInstall(_Button)
+export const RaButton = withInstall(Button)
 
 export * from './src/button'

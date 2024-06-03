@@ -13,7 +13,6 @@
     theme="primary"
     hover-animation="zoom-in"
     size="large"
-    disabled
     >primary button</ra-button
   >
   <ra-button active-animation="zoom-out" theme="success" size="medium"

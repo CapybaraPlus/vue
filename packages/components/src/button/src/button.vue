@@ -22,13 +22,13 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useClassName, useComponetName } from '@capybara-ui/hooks'
+import { useClassName } from '@capybara-ui/hooks'
 import { buttonProps, buttonEmits } from './button'
 import '../styles/index'
 
 const ucn = useClassName('button')
 defineOptions({
-  name: useComponetName('button'),
+  name: 'RaButton',
 })
 
 const $props = defineProps(buttonProps)

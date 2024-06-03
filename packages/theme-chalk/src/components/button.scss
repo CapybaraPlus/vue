@@ -2,7 +2,9 @@
   $block: button
 );
 @use '../common/var' as *;
+@use 'sass:color';
 
+// hover button mixin
 @mixin buttonHover() {
   &:hover {
     &:not(:disabled) {
@@ -11,6 +13,7 @@
   }
 }
 
+// active button mixin
 @mixin buttonActive() {
   transition: all getTransition('fast');
   &:active {
@@ -110,6 +113,12 @@
     background-color: getWhite();
     color: var(--color);
     border-color: var(--color);
+  }
+  @include buttonActive() {
+    &.active-zoom-default {
+      $color: var(--color);
+      background-color: mix(getWhite(), #{var(--color)}, 0.7);
+    }
   }
 }
 
