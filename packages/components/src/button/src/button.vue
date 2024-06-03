@@ -9,6 +9,7 @@
       ucn.is(_block),
       ucn.is(_color.cls),
       _hoverAnimation,
+      _activeAnimation,
     ]"
     :disabled="disabled"
     :type="type"
@@ -62,6 +63,10 @@ const _color = computed(() => {
 
 const _hoverAnimation = computed(() =>
   $props.hoverAnimation ? `hover-${$props.hoverAnimation}` : undefined
+)
+
+const _activeAnimation = computed(() =>
+  $props.activeAnimation ? `active-${$props.activeAnimation}` : ''
 )
 </script>
 

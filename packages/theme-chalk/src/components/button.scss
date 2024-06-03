@@ -11,7 +11,14 @@
   }
 }
 
-@debug var(--color);
+@mixin buttonActive() {
+  transition: all getTransition('fast');
+  &:active {
+    &:not(:disabled) {
+      @content;
+    }
+  }
+}
 
 @include b() {
   display: inline-flex;
@@ -37,6 +44,10 @@
     color: getColor();
     border-color: getColor();
   }
+  @include buttonActive {
+    background-color: getColor();
+    color: getWhite();
+  }
 }
 
 // button theme mixin
@@ -49,6 +60,12 @@
       color: getColor($theme);
       background-color: getWhite();
       border: 1px solid getColor($theme);
+    }
+    @include buttonActive() {
+      &.active-default {
+        background-color: getColorWithLevel($theme, 3);
+        color: getWhite();
+      }
     }
   }
 }
@@ -79,15 +96,9 @@
   border-radius: getBorderRadius(larger);
 }
 
+// block
 @include is(block) {
   width: 100%;
-}
-
-// animation when hover the button
-.hover-zoom-in {
-  @include buttonHover() {
-    font-size: getFontSize('large');
-  }
 }
 
 // custom color
@@ -99,5 +110,19 @@
     background-color: getWhite();
     color: var(--color);
     border-color: var(--color);
+  }
+}
+
+// animation when hover the button
+.hover-zoom-in {
+  @include buttonHover() {
+    font-size: getFontSize('large');
+  }
+}
+
+// animation when the button is actived
+.active-zoom-out {
+  @include buttonActive() {
+    transform: scale(0.9);
   }
 }

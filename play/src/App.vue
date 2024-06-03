@@ -1,5 +1,9 @@
 <template>
-  <ra-button color="rgb(255, 109, 109)" block shape="round" @click="handleClick"
+  <ra-button
+    active-animation="zoom-out"
+    block
+    shape="round"
+    @click="handleClick"
     >default button</ra-button
   >
   <ra-button
@@ -12,7 +16,9 @@
     disabled
     >primary button</ra-button
   >
-  <ra-button theme="success" size="medium">success button</ra-button>
+  <ra-button active-animation="zoom-out" theme="success" size="medium"
+    >success button</ra-button
+  >
   <ra-button shape="round" theme="warning" size="small"
     >warning button</ra-button
   >

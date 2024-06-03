@@ -61,6 +61,14 @@ export const buttonProps = buildProps({
     values: ['default', 'zoom-in'],
     default: 'default',
   },
+  /**
+   * @description button animation when the button is actived
+   */
+  activeAnimation: {
+    type: String,
+    values: ['default', 'zoom-out'],
+    default: 'default',
+  },
 })
 
 // button emits

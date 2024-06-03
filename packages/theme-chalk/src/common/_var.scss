@@ -289,14 +289,16 @@ $transition: map.merge(
   (
     'base': 0.5s,
     'fast': 0.3s,
+    'faster': 0.1s,
     'slow': 0.7s,
+    'slower': 0.9s,
   ),
   $transition
 );
 @function getTransition($type: 'base') {
   @return map.get($transition, $type);
 }
-@debug getTransition('base');
+// @debug getTransition('base');
 
 // -------------------
 // ----- opacity -----
