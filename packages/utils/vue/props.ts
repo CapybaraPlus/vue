@@ -2,7 +2,7 @@ import { PropType } from 'vue'
 import { hasKey, isObject } from '../object'
 
 /**
- * define a prop type
+ * @description define a prop type
    @example: definePropType<string>(String)
    @example: definePropType<string | number>([String, Number])
    @example: definePropType<Person>(Object)
