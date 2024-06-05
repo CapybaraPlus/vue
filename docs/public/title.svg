@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Kapybara" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1133.2 332.23">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #604c3f;
+      }
+
+      .cls-2 {
+        fill: none;
+        opacity: .49;
+        stroke: #faee12;
+        stroke-width: 5px;
+      }
+
+      .cls-2, .cls-3 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-2, .cls-4 {
+        font-family: Bauhaus93, 'Bauhaus 93';
+        font-size: 161px;
+        isolation: isolate;
+      }
+
+      .cls-3 {
+        fill: url(#_未命名的渐变);
+        stroke: url(#_未命名的渐变_2);
+      }
+
+      .cls-4 {
+        fill: #ed5a0b;
+      }
+    </style>
+    <linearGradient id="_未命名的渐变" data-name="未命名的渐变" x1=".5" y1="968.27" x2="328.13" y2="968.27" gradientTransform="translate(0 -802.16)" gradientUnits="userSpaceOnUse">
+      <stop offset=".08" stop-color="#fff21f"/>
+      <stop offset=".12" stop-color="#ffe400"/>
+      <stop offset=".17" stop-color="#fed700"/>
+      <stop offset=".22" stop-color="#fdcf00"/>
+      <stop offset=".27" stop-color="#fccd00"/>
+      <stop offset=".49" stop-color="#f1942e"/>
+      <stop offset=".89" stop-color="#ea652d"/>
+      <stop offset="1" stop-color="#e5352b"/>
+    </linearGradient>
+    <linearGradient id="_未命名的渐变_2" data-name="未命名的渐变 2" x1="0" y1="-374.69" x2="328.63" y2="-374.69" gradientTransform="translate(0 -208.58) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset=".08" stop-color="#fff21f"/>
+      <stop offset=".12" stop-color="#ffe400"/>
+      <stop offset=".17" stop-color="#fed700"/>
+      <stop offset=".22" stop-color="#fdcf00"/>
+      <stop offset=".27" stop-color="#fccd00"/>
+      <stop offset=".49" stop-color="#f1942e"/>
+      <stop offset=".89" stop-color="#ea652d"/>
+      <stop offset="1" stop-color="#e5352b"/>
+    </linearGradient>
+  </defs>
+  <g id="outer_ring" data-name="outer ring">
+    <g id="_图层_1" data-name=" 图层 1">
+      <path class="cls-3" d="M320.39,232.04c-9.6-10.6-25.5-13.1-36.8-9.4-16.2,5.2-20.3,21.6-28.2,32.3-30,40.9-147.6,45.5-185.1-8.9-19.8-28.6-11.5-65.5-3.2-102.3,7.9-34.4,24.4-51.9,34.2-61.1h0c-1.9-1.2-3.7-2.4-5.2-4-5.5-5.7-8.1-15.9-2.2-21.7,5.2-5.1,11.2-6.1,15.9-2,3.2,1.9,6.9,9.5,8.1,13.1,.5,2.4,.8,2.7,1,1.7,14.2-7.5,28.5-11.1,38.5-12.4,11.6-1.6,30.1-4.6,50.7,2.8,2.8,1,5,1.9,6.5,2.6,.9-9.3,5.5-17,12.1-19.4,1.3-.5,5.7-2,10.1,0,4.2,1.9,5.9,5.8,6.4,7,2.3,6-.5,13.8-7.1,19.4,1.7,1,4.2,2.4,7.3,4.1,4.8,2.6,8.6,4.6,9.4,5,4.8,2.4,15.4,7.7,27.4,7.9,5.9,.1,19.2,0,27.9-9.7,9.6-10.8,5.8-27,5.6-28C305.09,14.14,215.99-11.86,140.69,6.64,91.19,18.84,61.09,47.04,54.09,53.94c-10.1,9.7-40.7,42.1-50,93.9-2.9,15.8-13.4,74.2,23.8,121.7,22,28.2,51.6,40.6,65.7,46.6,26.5,11.3,48.9,13.4,65.2,14.9,7.6,.6,53.5,4.2,104.7-13.8,9.9-3.5,20.5-8.3,31.9-16.2,12.6-8.9,29.2-20.4,32.3-39.5h0c.3-3.4,2.6-18-7.3-29.5h0Z"/>
+    </g>
+  </g>
+  <g id="nose">
+    <path id="nose_step4" data-name="nose step4" class="cls-1" d="M154.89,145.44c4.4-.2,7.6-.1,10.9,0,8.7,.3,9.4,1,9.5,1.5,.4,1.2-2.4,3.1-4,4-1.9,1.1-5.6,3.5-11,3.6-1,0-7.1,0-11.7-4-1-.9-2.7-2.2-2.2-3.4,.1-.7,.9-1.4,8.5-1.7h0Z"/>
+    <g id="nose_step3" data-name="nose step3">
+      <path class="cls-1" d="M157.99,150.84c-3.9,10.8-4.4,22.5-4.6,33.9-.1,6.1-.2,12.3-.2,18.4s0,11.9,.7,17.7c.9,6.5,2.7,12.7,5.3,18.8,.6,1.3,2.8,1.7,3.9,1,1.5-.9,1.6-2.5,1-3.8-2.2-4.9-3.7-10.2-4.5-15.5-.9-5.6-.8-11.3-.8-16.9,0-11.4-.1-23,.9-34.4,.6-6,1.6-12.1,3.8-17.9,.6-1.4-.6-3-2.1-3.5-1.4-.2-2.8,.7-3.4,2.2h0Z"/>
+    </g>
+    <g id="nose_step2" data-name="nose step2">
+      <path class="cls-1" d="M158.69,235.84c-.2,.1-.5,.2-.7,.4,.2-.1,.5-.2,.7-.2-.5,.2-1,.3-1.6,.5,.2,0,.5-.1,.8-.1-2.1,.2-4.3,.3-6.4,.6-.8,.1-1.5,.2-2.1,.8-.5,.5-.9,1.2-.8,2,.1,1.4,1.3,2.9,2.9,2.8,1.6-.1,3.4-.2,5-.4,1.7-.1,3.7-.2,5.2-1.2,.6-.4,1.2-.9,1.3-1.7,.2-.7,.1-1.6-.2-2.1-.8-1.5-2.7-2.3-4.1-1.4h0Z"/>
+    </g>
+    <g id="nose_step1" data-name="nose step1">
+      <path class="cls-1" d="M161.19,240.24c2.5,1.6,5.5,2.7,8.6,3.2,.8,.1,1.5,.1,2.2-.2,.6-.3,1.2-1,1.3-1.7s.1-1.6-.2-2.1-1-1.1-1.7-1.2c-1.6-.2-3.2-.8-4.7-1.3,.2,.1,.5,.2,.7,.2-1-.4-2.1-1-3.1-1.6-1.3-.8-3.2-.3-3.9,1-1.1,1.2-.6,2.9,.8,3.7h0Z"/>
+    </g>
+  </g>
+  <text class="cls-2" transform="translate(334.03 207.51)"><tspan x="0" y="0">apybara UI</tspan></text>
+  <text class="cls-4" transform="translate(330.99 204.46)"><tspan x="0" y="0">apybara UI</tspan></text>
+</svg>

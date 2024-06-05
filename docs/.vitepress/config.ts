@@ -1,28 +1,35 @@
 import { defineConfig } from 'vitepress'
+import useSidebar from './configs/useSidebar'
 
-// https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "CapybaraUI",
-  description: "A Vue3 + TypeScript Component Library",
+  title: 'CapybaraUI',
+  description: 'A Vue3 + TypeScript Component Library',
+  base: '/docs/',
   themeConfig: {
-    // https://vitepress.dev/reference/default-theme-config
+    siteTitle: false,
+    logo: 'title.svg',
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
+      { text: '指南', link: '/guide/installation' },
+      { text: '组件', link: '/examples/button/' },
+      {
+        text: 'beta',
+        items: [
+          {
+            text: '更新日志',
+            link: 'https://github.com/Ranaran315/capybara-ui.git',
+          },
+          {
+            text: '参与贡献',
+            link: 'https://github.com/Ranaran315/capybara-ui.git',
+          },
+        ],
+      },
     ],
 
-    sidebar: [
-      {
-        text: 'Examples',
-        items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
-        ]
-      }
-    ],
+    sidebar: useSidebar(),
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
-    ]
-  }
+      { icon: 'github', link: 'https://github.com/Ranaran315/capybara-ui.git' },
+    ],
+  },
 })
