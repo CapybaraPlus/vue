@@ -1,6 +1,8 @@
-import { createApp } from 'vue'
+import { App as TypeApp, createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
-import { RaButton } from '@capybara-ui/components'
+// import { RaButton } from '@capybara-ui/components'
+import CapybaraUI from '@capybara-ui/components'
 
-createApp(App).use(RaButton).mount('#app')
+const app: TypeApp = createApp(App)
+app.use(CapybaraUI).mount('#app')

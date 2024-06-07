@@ -13,8 +13,8 @@ hero:
       text: 快速开始
       link: /guide/getting-started.md
     - theme: alt
-      text: 在Gitee上查看
-      link: https://gitee.com/capybara-ui/docs.git
+      text: 在Github上查看
+      link: https://github.com/Ranaran315/capybara-ui.git
 
 features:
   - icon: 💡
