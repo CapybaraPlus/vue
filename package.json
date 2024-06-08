@@ -37,8 +37,10 @@
   "dependencies": {
     "@capybara-ui/components": "workspace:^",
     "@capybara-ui/hooks": "workspace:^",
-    "@capybara-ui/utils": "workspace:^",
     "@capybara-ui/theme-chalk": "workspace:^",
+    "@capybara-ui/utils": "workspace:^",
+    "@vitepress-demo-preview/component": "^2.3.2",
+    "@vitepress-demo-preview/plugin": "^1.2.3",
     "vue": "3.4.27"
   },
   "lint-staged": {

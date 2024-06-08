@@ -21,7 +21,7 @@ const useGuide: SidebarItem[] = [
         link: `${guide_prefix}/quick-start`,
       },
     ],
-  },
+  }
 ]
 
 /**

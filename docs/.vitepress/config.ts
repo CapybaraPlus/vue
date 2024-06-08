@@ -1,5 +1,9 @@
 import { defineConfig } from 'vitepress'
 import { sidebar, nav, socialLinks } from './configs'
+import {
+  containerPreview,
+  componentPreview,
+} from '@vitepress-demo-preview/plugin'
 
 export default defineConfig({
   title: 'CapybaraUI',
@@ -11,5 +15,10 @@ export default defineConfig({
     nav,
     sidebar,
     socialLinks,
+  },
+  markdown: {
+    config: (md) => {
+      md.use(containerPreview).use(componentPreview)
+    },
   },
 })

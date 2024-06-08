@@ -37,6 +37,7 @@ export default [
       '**/*.png',
       '**/*.gif',
       '**/*.d.ts',
+      'docs/**/*.vue',
     ],
   },
 ]
