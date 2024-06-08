@@ -36,6 +36,7 @@
   border: 1px solid getBorderColor('light');
   border-radius: getBorderRadius();
   font-size: getFontSize();
+  font-weight: normal;
   background-color: getFillColor();
   color: getTextColor();
   transition: all getTransition();
@@ -116,7 +117,7 @@
   }
   @include buttonActive() {
     &.active-zoom-default {
-      $color: var(--color);
+      // todo: active color
     }
   }
 }

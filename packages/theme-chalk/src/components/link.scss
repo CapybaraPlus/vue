@@ -1,0 +1,111 @@
+@use '../utils/bem.scss' as * with (
+  $block: link
+);
+@use '../common/var' as *;
+
+// link state mixin
+@mixin linkState($state) {
+  &:#{$state} {
+    @content;
+  }
+}
+@mixin linkLink() {
+  @include linkState('link') {
+    @content;
+  }
+}
+@mixin linkVisited() {
+  @include linkState('visited') {
+    @content;
+  }
+}
+@mixin linkFocus() {
+  @include linkState('focus') {
+    @content;
+  }
+}
+@mixin linkHover() {
+  @include e(inner) {
+    &:hover {
+      @content;
+    }
+  }
+}
+@mixin linkActive() {
+  @include e(inner) {
+    &:active {
+      @content;
+    }
+  }
+}
+
+@include b() {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  outline: none;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0 5px;
+  margin: 10px;
+  font-size: getFontSize();
+  font-weight: normal;
+  transition: all getTransition();
+  box-sizing: border-box;
+  text-align: center;
+  white-space: nowrap;
+  user-select: none;
+  outline: 2px solid transparent;
+  border-radius: getBorderRadius('larger');
+  @include linkLink() {
+    text-decoration: underline;
+  }
+  @include linkVisited() {
+    color: getColor();
+  }
+  @include linkFocus() {
+    outline-color: getBorderColor();
+  }
+  @include linkHover() {
+  }
+  @include linkActive() {
+    color: getColorWithLevel(primary, 1);
+  }
+}
+
+// link theme mixin
+@mixin linkTheme($theme) {
+  @include m($theme) {
+    color: getColor($theme);
+    @include linkVisited() {
+      color: getColorWithLevel($theme, 1, dark);
+    }
+    @include linkFocus() {
+      outline-color: getColor($theme);
+    }
+    @include linkHover() {
+      color: getColorWithLevel($theme, 1);
+    }
+    @include linkActive() {
+      color: getColorWithLevel($theme, 2);
+    }
+  }
+}
+@include linkTheme(primary);
+@include linkTheme(success);
+@include linkTheme(warning);
+@include linkTheme(danger);
+
+// link disabled state
+@include is(disabled) {
+  cursor: not-allowed;
+  @include e(inner) {
+    pointer-events: none;
+  }
+}
+
+// underline
+@include is(underline) {
+  text-decoration: underline;
+}

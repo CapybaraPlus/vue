@@ -1,33 +1,19 @@
 <template>
-  <ra-button
-    active-animation="zoom-out"
-    block
-    shape="round"
-    @click="handleClick"
-    >default button</ra-button
+  <ra-link href="https://www.baidu.com" target="_blank">default</ra-link>
+  <ra-link href="https://www.baidu.com" target="_blank" theme="primary"
+    >primary</ra-link
   >
-  <ra-button
-    color="rgb(255, 109, 109)"
-    block
-    shape="round"
-    theme="primary"
-    hover-animation="zoom-in"
-    size="large"
-    >primary button</ra-button
+  <ra-link disabled href="https://www.baidu.com" target="_blank" theme="success"
+    >success</ra-link
   >
-  <ra-button active-animation="zoom-out" theme="success" size="medium"
-    >success button</ra-button
+  <ra-link href="https://www.baidu.com" target="_blank" theme="warning"
+    >warning</ra-link
   >
-  <ra-button shape="round" theme="warning" size="small"
-    >warning button</ra-button
+  <ra-link href="https://www.baidu.com" target="_blank" theme="danger"
+    >danger</ra-link
   >
-  <ra-button theme="danger">danger button</ra-button>
 </template>
 
-<script setup lang="ts">
-const handleClick = () => {
-  console.log('clicked')
-}
-</script>
+<script setup lang="ts"></script>
 
 <style scoped></style>
