@@ -69,7 +69,7 @@ export const buttonProps = buildProps({
     values: ['default', 'zoom-out'],
     default: 'default',
   },
-})
+} as const)
 
 // button emits
 export const buttonEmits = {
