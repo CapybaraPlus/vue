@@ -5,4 +5,5 @@ import App from './App.vue'
 import CapybaraUI from '@capybara-ui/components'
 
 const app: TypeApp = createApp(App)
-app.use(CapybaraUI).mount('#app')
+app.use(CapybaraUI)
+app.mount('#app')

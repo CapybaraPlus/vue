@@ -1,11 +1,13 @@
-export const ColorDisplayProps = {
+import { buildProps } from '@capybara-ui/utils'
+
+export const colorDisplayProps = buildProps({
   color: {
     type: String,
   },
   name: {
     type: String,
   },
-}
+})
 
 export const defaultNamesMap = ['white', 'black', 'transparent']
 

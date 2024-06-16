@@ -13,14 +13,14 @@
 <script setup lang="ts">
 import { useClassName } from '@capybara-ui/hooks'
 import './styles/index'
-import { ColorDisplayProps, defaultNamesMap } from './color-display'
+import { colorDisplayProps, defaultNamesMap } from './color-display'
 
 const ucn = useClassName('color-display')
 defineOptions({
   name: 'RaColorDisplay',
 })
 
-defineProps(ColorDisplayProps)
+defineProps(colorDisplayProps)
 </script>
 
 <style scoped lang="scss"></style>
