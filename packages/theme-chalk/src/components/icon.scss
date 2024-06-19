@@ -1,0 +1,20 @@
+@use '../utils/bem.scss' as * with (
+  $block: icon
+);
+
+@include b() {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+  font-size: 1em;
+  position: relative;
+  svg {
+    fill: currentColor;
+    width: inherit;
+    height: inherit;
+  }
+}

@@ -8,6 +8,11 @@
     <span :class="ucn.e('inner')">
       <slot></slot>
     </span>
+    <template v-if="icon">
+      <ra-icon>
+        <component :is="icon"></component>
+      </ra-icon>
+    </template>
   </a>
 </template>
 
@@ -16,6 +21,7 @@ import { useClassName } from '@capybara-ui/hooks'
 import { linkProps, linkEmits } from './link'
 import { computed } from 'vue'
 import '../styles'
+import { RaIcon } from '@capybara-ui/components/src/icon'
 
 const ucn = useClassName('link')
 defineOptions({
@@ -28,5 +34,3 @@ defineEmits(linkEmits)
 const _theme = computed(() => ($props.theme == 'defualt' ? '' : $props.theme))
 const _disabled = computed(() => ($props.disabled ? 'disabled' : ''))
 </script>
-
-<style scoped lang="scss"></style>

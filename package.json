@@ -35,6 +35,7 @@
     "vue-tsc": "^2.0.6"
   },
   "dependencies": {
+    "@capybara-plus/icons-vue": "^1.0.4",
     "@capybara-ui/components": "workspace:^",
     "@capybara-ui/hooks": "workspace:^",
     "@capybara-ui/theme-chalk": "workspace:^",

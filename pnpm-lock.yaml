@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@capybara-plus/icons-vue':
+        specifier: ^1.0.4
+        version: 1.0.4(vue@3.4.27)
       '@capybara-ui/components':
         specifier: workspace:^
         version: link:packages/components
@@ -264,6 +267,14 @@ packages:
       '@babel/helper-string-parser': 7.24.1
       '@babel/helper-validator-identifier': 7.24.5
       to-fast-properties: 2.0.0
+
+  /@capybara-plus/icons-vue@1.0.4(vue@3.4.27):
+    resolution: {integrity: sha512-4Y+DBPuE1uTGV9FINOXhHUEuRp9q9+YrynNcGsepU/K+IkITAeXQTDkZnaI8oCluAADsh0BV4oRIcqN5B47jBg==}
+    peerDependencies:
+      vue: ^3.4.21
+    dependencies:
+      vue: 3.4.27(typescript@5.4.5)
+    dev: false
 
   /@commitlint/cli@19.3.0(@types/node@20.12.12)(typescript@5.4.5):
     resolution: {integrity: sha512-LgYWOwuDR7BSTQ9OLZ12m7F/qhNY+NpAyPBgo4YNMkACE7lGuUnuQq1yi9hz1KA4+3VqpOYl8H1rY/LYK43v7g==}
