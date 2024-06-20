@@ -69,6 +69,7 @@
     outline-color: getBorderColor();
   }
   @include linkHover() {
+    color: getColor();
   }
   // @include linkActive() {
   //   color: getColorWithLevel(primary, 1);
@@ -76,9 +77,9 @@
   @include e(inner) {
     transition: inherit;
     text-decoration: underline;
-  }
-  @include e(icon) {
-    margin-left: 5px;
+    @include e(icon) {
+      margin-left: 5px;
+    }
   }
 }
 
@@ -86,18 +87,18 @@
 @mixin linkTheme($theme) {
   @include m($theme) {
     color: getColor($theme);
-    @include linkVisited() {
-      color: getColorWithLevel($theme, 1, dark);
-    }
+    // @include linkVisited() {
+    //   color: getColorWithLevel($theme, 1, dark);
+    // }
     @include linkFocus() {
       outline-color: getColor($theme);
     }
     @include linkHover() {
       color: getColorWithLevel($theme, 1);
     }
-    @include linkActive() {
-      color: getColorWithLevel($theme, 2);
-    }
+    // @include linkActive() {
+    //   color: getColorWithLevel($theme, 2);
+    // }
   }
 }
 @include linkTheme(primary);

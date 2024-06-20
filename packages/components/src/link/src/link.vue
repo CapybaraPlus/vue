@@ -7,12 +7,12 @@
   >
     <span :class="ucn.e('inner')">
       <slot></slot>
+      <template v-if="_icon">
+        <ra-icon :class="[ucn.e('icon')]">
+          <component :is="_icon"></component>
+        </ra-icon>
+      </template>
     </span>
-    <template v-if="_icon">
-      <ra-icon :class="[ucn.e('icon')]">
-        <component :is="_icon"></component>
-      </ra-icon>
-    </template>
   </a>
 </template>
 
