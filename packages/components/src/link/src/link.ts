@@ -1,6 +1,5 @@
 import { buildProps, definePropType } from '@capybara-ui/utils'
 import { Component, ExtractPropTypes } from 'vue'
-import { Link } from '@capybara-plus/icons-vue'
 
 const IconType = definePropType<string | Component>([String, Object, Function])
 
@@ -29,13 +28,12 @@ export const linkProps = buildProps({
   /**
    * @description original attribute href
    */
-  href: {
-    type: String,
-    required: true,
-  },
+  href: String,
+  /**
+   * @description link icon
+   */
   icon: {
     type: IconType,
-    default: Link,
   },
 })
 

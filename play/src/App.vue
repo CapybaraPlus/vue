@@ -1,8 +1,16 @@
 <template>
-  <ra-link>default</ra-link>
-  <ra-link theme="primary">disabled</ra-link>
-  <ra-link>default</ra-link>
-  <ra-link icon="external-link">default</ra-link>
+  <ra-link href="https://www.baidu.com" icon="none" target="_blank"
+    >default</ra-link
+  >
+  <ra-link href="https://www.baidu.com" theme="primary" target="_blank"
+    >primary</ra-link
+  >
+  <ra-link href="https://www.baidu.com" disabled target="_blank"
+    >disabled</ra-link
+  >
+  <ra-link href="https://www.baidu.com" icon="external-link" target="_blank"
+    >default</ra-link
+  >
   <ra-icon :color="color" size="2em">
     <ExternalLink></ExternalLink>
   </ra-icon>

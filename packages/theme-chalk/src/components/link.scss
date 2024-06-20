@@ -40,14 +40,15 @@
 }
 
 @include b() {
+  position: relative;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   vertical-align: middle;
   outline: none;
-  text-decoration: underline;
+  text-decoration: none;
   cursor: pointer;
-  padding: 0 5px;
+  padding: 0 8px;
   margin: 10px;
   font-size: getFontSize();
   font-weight: normal;
@@ -58,19 +59,26 @@
   user-select: none;
   outline: 2px solid transparent;
   border-radius: getBorderRadius('larger');
-  @include linkLink() {
-    text-decoration: underline;
-  }
-  @include linkVisited() {
-    color: getColor();
-  }
+  // @include linkLink() {
+  //   text-decoration: underline;
+  // }
+  // @include linkVisited() {
+  //   color: getColor();
+  // }
   @include linkFocus() {
     outline-color: getBorderColor();
   }
   @include linkHover() {
   }
-  @include linkActive() {
-    color: getColorWithLevel(primary, 1);
+  // @include linkActive() {
+  //   color: getColorWithLevel(primary, 1);
+  // }
+  @include e(inner) {
+    transition: inherit;
+    text-decoration: underline;
+  }
+  @include e(icon) {
+    margin-left: 5px;
   }
 }
 
@@ -103,9 +111,4 @@
   @include e(inner) {
     pointer-events: none;
   }
-}
-
-// underline
-@include is(underline) {
-  text-decoration: underline;
 }

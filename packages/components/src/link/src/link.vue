@@ -8,9 +8,9 @@
     <span :class="ucn.e('inner')">
       <slot></slot>
     </span>
-    <template v-if="icon">
-      <ra-icon>
-        <component :is="icon"></component>
+    <template v-if="_icon">
+      <ra-icon :class="[ucn.e('icon')]">
+        <component :is="_icon"></component>
       </ra-icon>
     </template>
   </a>
@@ -22,6 +22,7 @@ import { linkProps, linkEmits } from './link'
 import { computed } from 'vue'
 import '../styles'
 import { RaIcon } from '@capybara-ui/components/src/icon'
+import { Link, Unlink, ExternalLink } from '@capybara-plus/icons-vue'
 
 const ucn = useClassName('link')
 defineOptions({
@@ -33,4 +34,17 @@ defineEmits(linkEmits)
 
 const _theme = computed(() => ($props.theme == 'defualt' ? '' : $props.theme))
 const _disabled = computed(() => ($props.disabled ? 'disabled' : ''))
+const _icon = computed(() => {
+  if ($props.icon == 'none') {
+    return undefined
+  } else if ($props.icon) {
+    return $props.icon
+  } else if (!$props.href) {
+    return Unlink
+  } else if ($props.target == '_blank') {
+    return ExternalLink
+  } else {
+    return Link
+  }
+})
 </script>
