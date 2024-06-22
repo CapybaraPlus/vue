@@ -2,8 +2,9 @@ import { App, Plugin } from 'vue'
 import { RaButton } from './src/button'
 import { RaLink } from './src/link'
 import { RaIcon } from './src/icon'
+import { RaTooltip } from './src/tooltip'
 
-export const plugins = [RaButton, RaLink, RaIcon] as Plugin[]
+export const plugins = [RaButton, RaLink, RaIcon, RaTooltip] as Plugin[]
 
 export default {
   install: (app: App) => {

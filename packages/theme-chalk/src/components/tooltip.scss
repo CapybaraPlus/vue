@@ -1,0 +1,22 @@
+@use '../utils/bem.scss' as * with (
+  $block: tooltip
+);
+@use '../common/var' as *;
+
+@include b() {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  padding: 5px 10px;
+  border-radius: getBorderRadius();
+  box-sizing: border-box;
+  background-color: getBlack();
+  color: getWhite();
+  z-index: 1;
+  @include e(arrow) {
+  }
+}
+@include m(reference) {
+  cursor: pointer;
+}
