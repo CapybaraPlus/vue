@@ -59,6 +59,12 @@ export const tooltipProps = buildProps({
     values: ['hover', 'click'],
     default: 'hover',
   },
+  /**
+   * @description whether the tooltip is disabled or not
+   */
+  disabled: {
+    type: Boolean,
+  },
 })
 
 // typescript tooltip props

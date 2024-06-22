@@ -7,6 +7,7 @@
         content="Top Left prompts info"
         placement="top-start"
         :trigger="trigger"
+        disabled
       >
         <template #content>
           <ra-icon>

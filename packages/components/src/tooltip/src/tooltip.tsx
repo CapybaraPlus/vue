@@ -111,7 +111,7 @@ export default defineComponent({
       }
       // create floating node
       function createFloatingNode() {
-        if (!visibility.value) {
+        if (!visibility.value || props.disabled) {
           return null
         }
         return (
