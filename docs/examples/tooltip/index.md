@@ -36,3 +36,9 @@
 可以通过 `content` 插槽来实现更加丰富的文字提示，这将覆盖属性 `content` 的内容
 
 <preview path="./content.vue" title="内容扩展" />
+
+## 禁用状态
+
+通过属性 `disabled` 来设置该组件的禁用状态，当该组件被禁用时，文字提示将不会展示
+
+<preview path="./disabled.vue" title="禁用状态" />
