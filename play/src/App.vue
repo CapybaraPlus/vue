@@ -6,8 +6,14 @@
         effect="dark"
         content="Top Left prompts info"
         placement="top-start"
-        trigger="click"
+        :trigger="trigger"
       >
+        <template #content>
+          <ra-icon>
+            <ExternalLink></ExternalLink>
+          </ra-icon>
+          top-start
+        </template>
         <ra-button>top-start</ra-button>
       </ra-tooltip>
       <ra-tooltip
@@ -108,7 +114,18 @@
       </ra-tooltip>
     </div>
   </div>
+  <ra-button @click="handleClick">点击</ra-button>
 </template>
+
+<script setup lang="ts">
+import { ExternalLink } from '@capybara-plus/icons-vue'
+import { ref } from 'vue'
+
+const trigger = ref('click')
+const handleClick = () => {
+  trigger.value = 'hover'
+}
+</script>
 
 <style>
 .tooltip-base-box {

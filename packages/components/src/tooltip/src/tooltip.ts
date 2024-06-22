@@ -32,6 +32,10 @@ export const tooltipProps = buildProps({
   content: {
     type: String,
   },
+  offset: {
+    type: Number,
+    default: 10,
+  },
   /**
    * @description where tooltip should be placed
    */

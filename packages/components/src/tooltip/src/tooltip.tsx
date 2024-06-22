@@ -35,7 +35,7 @@ export default defineComponent({
     const middleware = computed(() => [
       // offset must be the first middleware
       // every middleware will change the coordinate, so they should be in order
-      offset(10),
+      offset(props.offset),
       // shift the tooltip to make sure it is in the viewport
       // autoPlacemnet will automatically choose the best placement for the tooltip
       // flip the tooltip position to make sure it is in the viewport
@@ -100,10 +100,10 @@ export default defineComponent({
         return null
       }
       // only the first node is considered as the reference node
-      const handleNode = nodes[0]
+      const FirstNode = nodes[0]
       // create reference node
       function createReferenceNode() {
-        return h(handleNode as VNode, {
+        return h(FirstNode as VNode, {
           ref: referenceRef,
           class: ucn.m('reference'),
           ...triggerEvents.value,
