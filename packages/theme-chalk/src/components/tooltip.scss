@@ -16,6 +16,11 @@
   z-index: 1;
   width: max-content;
   @include e(arrow) {
+    --#{$config-namespace}-tooltip-arrow-size: 0.5rem;
+    background: #222;
+    width: var(--#{$config-namespace}-tooltip-arrow-size);
+    height: var(--#{$config-namespace}-tooltip-arrow-size);
+    transform: rotate(45deg);
   }
 }
 @include m(reference) {

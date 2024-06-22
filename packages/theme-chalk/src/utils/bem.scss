@@ -1,4 +1,5 @@
 @use '../config/config.scss' as config;
+@forward '../config/config.scss' as config-*;
 
 $block: '' !default;
 

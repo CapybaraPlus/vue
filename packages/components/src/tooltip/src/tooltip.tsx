@@ -1,4 +1,4 @@
-import { VNode, h, defineComponent } from 'vue'
+import { VNode, h, defineComponent, StyleValue } from 'vue'
 import { tooltipProps } from './tooltip'
 import { ref, computed } from 'vue'
 import {
@@ -46,33 +46,34 @@ export default defineComponent({
         element: arrowRef,
       }),
     ])
-    const { floatingStyles, middlewareData } = useFloating(
-      referenceRef,
-      floatingRef,
-      {
-        whileElementsMounted: autoUpdate,
-        placement,
-        middleware,
-      }
-    )
+    const {
+      floatingStyles,
+      middlewareData,
+      placement: floatingPlacement,
+    } = useFloating(referenceRef, floatingRef, {
+      whileElementsMounted: autoUpdate,
+      placement,
+      middleware,
+    })
 
-    /**
-     * @todo compelete arrow
-     */
     // computed floating arrow styles
-    // const floatingArrowStyles = computed(() => {
-    //   return {
-    //     position: 'absolute',
-    //     left:
-    //       middlewareData.value.arrow?.x != null
-    //         ? `${middlewareData.value.arrow.x}px`
-    //         : '',
-    //     top:
-    //       middlewareData.value.arrow?.y != null
-    //         ? `${middlewareData.value.arrow.y}px`
-    //         : '',
-    //   }
-    // })
+    const floatingArrowStyles = computed(() => {
+      return {
+        position: 'absolute',
+        left:
+          middlewareData.value.arrow?.x != null
+            ? `${middlewareData.value.arrow.x}px`
+            : '',
+        top:
+          middlewareData.value.arrow?.y != null
+            ? `${middlewareData.value.arrow.y}px`
+            : '',
+        [floatingPlacement.value.split('-')[0]]:
+          'calc(100% - (var(--ra-tooltip-arrow-size) / 2))',
+      }
+    })
+
+    // trigger events
     const triggerEvents = computed(() => {
       if (props.trigger === 'hover') {
         return {
@@ -124,17 +125,7 @@ export default defineComponent({
               <div
                 class={ucn.e('arrow')}
                 ref={arrowRef}
-                style={{
-                  position: 'absolute',
-                  left:
-                    middlewareData.value.arrow?.x != null
-                      ? `${middlewareData.value.arrow.x}px`
-                      : '',
-                  top:
-                    middlewareData.value.arrow?.y != null
-                      ? `${middlewareData.value.arrow.y}px`
-                      : '',
-                }}
+                style={floatingArrowStyles.value as StyleValue}
               ></div>
             }
           </div>
