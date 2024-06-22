@@ -5,6 +5,7 @@
 - trigger: 触发方式
 - offset: 偏移量
 - disabled: 是否禁用
+- autoPlacement: 当开启该选项时会自动设置位置，会覆盖 placement 属性
 
 # 插槽
 

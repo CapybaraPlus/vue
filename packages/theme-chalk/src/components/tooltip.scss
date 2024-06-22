@@ -14,6 +14,7 @@
   background-color: getBlack();
   color: getWhite();
   z-index: 1;
+  width: max-content;
   @include e(arrow) {
   }
 }

@@ -26,14 +26,20 @@ export default defineComponent({
     // to control the tooltip floating visibility
     const visibility = ref(false)
 
-    // @floating-vue
+    // @floating-vue, see more https://floating-ui.com/
     const referenceRef = ref(null)
     const floatingRef = ref(null)
     const arrowRef = ref(null)
     // use computed create a ref which can let useFloating to update reactively
     const placement = computed(() => props.placement)
     const middleware = computed(() => [
+      // offset must be the first middleware
+      // every middleware will change the coordinate, so they should be in order
       offset(10),
+      // shift the tooltip to make sure it is in the viewport
+      // autoPlacemnet will automatically choose the best placement for the tooltip
+      // flip the tooltip position to make sure it is in the viewport
+      // see more about autoPlacement, shift and flit at https://floating-ui.com/docs/tutorial#middleware
       props.autoPlacement ? autoPlacement() : shift(),
       flip(),
       arrow({
@@ -67,6 +73,24 @@ export default defineComponent({
     //         : '',
     //   }
     // })
+    const triggerEvents = computed(() => {
+      if (props.trigger === 'hover') {
+        return {
+          onMouseenter: () => {
+            visibility.value = true
+          },
+          onMouseleave: () => {
+            visibility.value = false
+          },
+        }
+      } else {
+        return {
+          onClick: () => {
+            visibility.value = !visibility.value
+          },
+        }
+      }
+    })
 
     return () => {
       // get content of tooltip package
@@ -81,12 +105,7 @@ export default defineComponent({
         return h(handleNode as VNode, {
           ref: referenceRef,
           class: ucn.m('reference'),
-          onMouseenter: () => {
-            visibility.value = true
-          },
-          onMouseleave: () => {
-            visibility.value = false
-          },
+          ...triggerEvents.value,
         })
       }
       // create floating node

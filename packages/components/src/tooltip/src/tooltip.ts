@@ -2,7 +2,27 @@ import { buildProps, definePropType } from '@capybara-ui/utils'
 import { ExtractPropTypes } from 'vue'
 import { Placement } from '@floating-ui/vue'
 
+// placemnet type
 const floatingUIPlacement = definePropType<Placement>(String)
+// placement default values
+function getPlacementDefaultValues() {
+  const base = ['top', 'right', 'bottom', 'left']
+  const sides = ['start', 'center', 'end']
+  // combine base and base
+  let baseAndBase = base.map((b1) =>
+    base.map((b2) => {
+      if (b1 != b2) {
+        return `${b1}-${b2}`
+      }
+    })
+  )
+  // handle undefined
+  baseAndBase = baseAndBase.flat().filter((b) => b != undefined) as any
+  // combine base and sides
+  const baseAndSides = base.map((b) => sides.map((s) => `${b}-${s}`))
+  const result = [...base, ...baseAndBase, ...baseAndSides.flat()]
+  return result
+}
 
 // tooltip props
 export const tooltipProps = buildProps({
@@ -17,6 +37,7 @@ export const tooltipProps = buildProps({
    */
   placement: {
     type: floatingUIPlacement,
+    values: getPlacementDefaultValues(),
     default: 'top-center',
   },
   /**
@@ -24,11 +45,16 @@ export const tooltipProps = buildProps({
    */
   autoPlacement: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   /**
-   * @todo trriger type: hover or click
+   * @description the method of triggering tooltip
    */
+  trigger: {
+    type: String,
+    values: ['hover', 'click'],
+    default: 'hover',
+  },
 })
 
 // typescript tooltip props
