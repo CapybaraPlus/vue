@@ -40,8 +40,8 @@ export default defineComponent({
       // autoPlacemnet will automatically choose the best placement for the tooltip
       // flip the tooltip position to make sure it is in the viewport
       // see more about autoPlacement, shift and flit at https://floating-ui.com/docs/tutorial#middleware
-      props.autoPlacement ? autoPlacement() : shift(),
-      flip(),
+      props.autoPlacement ? autoPlacement() : flip(),
+      shift(),
       arrow({
         element: arrowRef,
       }),
