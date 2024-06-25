@@ -204,7 +204,7 @@ $fill: map.merge(
 @function getFillColor($type: 'base') {
   @return map.get($fill, $type);
 }
-// @debug getBoxShadow('base');
+// @debug getFillColor('base');
 
 // ---------------------
 // ----- font size -----
@@ -265,21 +265,21 @@ $border-radius: map.merge(
 // @debug getBorderRadius('small');
 
 // -------------------
-// ----- overlay -----
+// ----- mask -----
 // -------------------
-$overlay: () !default;
-$overlay: map.merge(
+$mask: () !default;
+$mask: map.merge(
   (
     'light': rgba(0, 0, 0, 0.5),
     'base': rgba(0, 0, 0, 0.7),
     'dark': rgba(0, 0, 0, 0.8),
   ),
-  $overlay
+  $mask
 );
-@function getOverlay($type: 'base') {
-  @return map.get($overlay, $type);
+@function getMask($type: 'base') {
+  @return map.get($mask, $type);
 }
-// @debug getOverlay('light');
+// @debug getMask('light');
 
 // ----------------------
 // ----- transition -----
