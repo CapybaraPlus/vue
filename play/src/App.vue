@@ -1,27 +1,36 @@
 <template>
-  <ra-mask content="i am a mask 111111111111111">
-    <ra-button
-      >button
-      <template #content>content</template>
-    </ra-button>
-  </ra-mask>
-  <ra-mask content="i am a mask">
-    <h1>hello</h1>
-  </ra-mask>
-  <ra-mask content="i am a mask">
-    <div class="box">
-      <h2>world</h2>
+  <ra-mask ref="mask" class="mask" :show="false">
+    <div class="container">
+      <h1>Playground</h1>
+      <p>Click the button to see the mask in action</p>
+      <button @click="handleClick">click me</button>
     </div>
   </ra-mask>
-  <ra-tooltip content="i am a tooltip">
-    <div>tooltip reference</div>
-  </ra-tooltip>
+  <ra-button theme="primary" @click="handleClick">click me</ra-button>
 </template>
 
+<script setup lang="ts">
+import { ref } from 'vue'
+import { RaMaskInstance } from '@capybara-ui/components'
+
+// const visibility = ref(false)
+const mask = ref<RaMaskInstance>(null)
+
+const handleClick = () => {
+  mask.value?.open()
+}
+</script>
+
 <style>
-.box {
-  position: fixed;
-  top: 0;
-  left: 0;
+.mask {
+  display: 'flex';
+  justify-content: 'center';
+  align-items: 'center';
+}
+.container {
+  width: 500px;
+  height: 200px;
+  padding: 20px;
+  background-color: #fff;
 }
 </style>

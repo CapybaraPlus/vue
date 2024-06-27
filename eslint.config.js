@@ -25,6 +25,7 @@ export default [
   {
     rules: {
       '@typescript-eslint/no-explicit-any': 'off', // allow any type
+      'vue/prefer-import-from-vue': 'off',
     },
   },
   {
