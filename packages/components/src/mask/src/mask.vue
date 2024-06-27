@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { maskProps, maskEmits } from './mask'
-import { useClassName, useClick } from '@capybara-ui/hooks'
+import { useClassName, useClick } from '@capybara-plus/hooks'
 defineOptions({
   name: 'RaMask',
 })

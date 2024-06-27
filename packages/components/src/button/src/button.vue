@@ -22,36 +22,42 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useClassName } from '@capybara-ui/hooks'
+import { useClassName } from '@capybara-plus/hooks'
 import { buttonProps, buttonEmits } from './button'
 import '../styles/index'
 
+// bem
 const ucn = useClassName('button')
+
 defineOptions({
   name: 'RaButton',
 })
-
 const $props = defineProps(buttonProps)
 const $emit = defineEmits(buttonEmits)
 
+// click event
 const handleClick = (e: MouseEvent) => {
   $emit('click', e)
 }
 
+/**
+ * computed props
+ */
+// theme
 const _theme = computed(() =>
   $props.theme == 'default' || $props.color ? '' : $props.theme
 )
-
+// size
 const _size = computed(() => ($props.size == 'normal' ? '' : $props.size))
-
+// disabled
 const _disabled = computed(() => ($props.disabled ? 'disabled' : undefined))
-
+// shape
 const _shape = computed(() =>
   $props.shape == 'default' ? undefined : $props.shape
 )
-
+// block
 const _block = computed(() => ($props.block ? 'block' : undefined))
-
+// color
 const _color = computed(() => {
   const cls = $props.color ? 'color' : ''
   const style = `--color: ${$props.color}`
@@ -60,11 +66,11 @@ const _color = computed(() => {
     style,
   }
 })
-
+// hoverAnimation
 const _hoverAnimation = computed(() =>
   $props.hoverAnimation ? `hover-${$props.hoverAnimation}` : undefined
 )
-
+// activeAnimation
 const _activeAnimation = computed(() =>
   $props.activeAnimation ? `active-${$props.activeAnimation}` : ''
 )

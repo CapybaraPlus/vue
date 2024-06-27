@@ -1,4 +1,4 @@
-import { withInstall, buildInstance } from '@capybara-ui/utils'
+import { withInstall, buildInstance } from '@capybara-plus/utils'
 import Mask from './src/mask.vue'
 
 export const RaMask = withInstall(Mask)

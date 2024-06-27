@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { RaMaskInstance } from '@capybara-ui/components'
+import { RaMask, RaMaskInstance } from '@capybara-plus/components'
 
 // const visibility = ref(false)
 const mask = ref<RaMaskInstance>(null)

@@ -1,4 +1,4 @@
-import { buildProps, definePropType } from '@capybara-ui/utils'
+import { buildProps, definePropType } from '@capybara-plus/utils'
 import { ExtractPropTypes } from 'vue'
 import { Placement } from '@floating-ui/vue'
 

@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { useClassName } from '@capybara-ui/hooks'
+import { useClassName } from '@capybara-plus/hooks'
 import './styles/index'
 import { colorDisplayProps, defaultNamesMap } from './color-display'
 

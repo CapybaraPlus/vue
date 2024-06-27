@@ -17,11 +17,11 @@
 </template>
 
 <script setup lang="ts">
-import { useClassName } from '@capybara-ui/hooks'
+import { useClassName } from '@capybara-plus/hooks'
 import { linkProps, linkEmits } from './link'
 import { computed } from 'vue'
 import '../styles'
-import { RaIcon } from '@capybara-ui/components/src/icon'
+import { RaIcon } from '@capybara-plus/components/src/icon'
 import { Link, Unlink, ExternalLink } from '@capybara-plus/icons-vue'
 
 const ucn = useClassName('link')

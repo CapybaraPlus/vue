@@ -1,4 +1,4 @@
-import { withInstall } from '@capybara-ui/utils'
+import { withInstall } from '@capybara-plus/utils'
 import Tooltip from './src/tooltip.tsx'
 
 export const RaTooltip = withInstall(Tooltip)

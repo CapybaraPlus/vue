@@ -1,1 +1,1 @@
-import '@capybara-ui/theme-chalk/src/components/button.scss'
+import '@capybara-plus/theme-chalk/src/components/button.scss'

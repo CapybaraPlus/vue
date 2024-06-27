@@ -10,7 +10,7 @@ import {
   shift,
   arrow,
 } from '@floating-ui/vue'
-import { useClassName } from '@capybara-ui/hooks'
+import { useClassName } from '@capybara-plus/hooks'
 import '../styles'
 
 export default defineComponent({
@@ -26,7 +26,7 @@ export default defineComponent({
     // to control the tooltip floating visibility
     const visibility = ref(false)
 
-    // @floating-vue, see more https://floating-ui.com/
+    // @floating-vue, see more https://floating-plus.com/
     const referenceRef = ref(null)
     const floatingRef = ref(null)
     const arrowRef = ref(null)
@@ -39,7 +39,7 @@ export default defineComponent({
       // shift the tooltip to make sure it is in the viewport
       // autoPlacemnet will automatically choose the best placement for the tooltip
       // flip the tooltip position to make sure it is in the viewport
-      // see more about autoPlacement, shift and flit at https://floating-ui.com/docs/tutorial#middleware
+      // see more about autoPlacement, shift and flit at https://floating-plus.com/docs/tutorial#middleware
       props.autoPlacement ? autoPlacement() : flip(),
       shift(),
       arrow({

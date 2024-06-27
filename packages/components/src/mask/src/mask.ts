@@ -1,4 +1,4 @@
-import { buildProps } from '@capybara-ui/utils'
+import { buildProps } from '@capybara-plus/utils'
 import { ExtractPropTypes } from 'vue'
 import '../styles/index'
 

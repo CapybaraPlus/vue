@@ -1,5 +1,10 @@
 import { ExtractPropTypes } from 'vue'
-import { buildProps } from '@capybara-ui/utils'
+import { buildProps, definePropType } from '@capybara-plus/utils'
+
+const buttonType = definePropType<'button' | 'submit' | 'reset' | undefined>([
+  String,
+  undefined,
+])
 
 // button props
 export const buttonProps = buildProps({
@@ -40,7 +45,7 @@ export const buttonProps = buildProps({
    * @description native button type
    */
   type: {
-    type: String,
+    type: buttonType,
     values: ['button', 'submit', 'reset'],
     default: 'button',
   },

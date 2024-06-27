@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { useClassName } from '@capybara-ui/hooks'
+import { useClassName } from '@capybara-plus/hooks'
 import '../styles'
 import { computed } from 'vue'
 import { iconProps } from './icon'

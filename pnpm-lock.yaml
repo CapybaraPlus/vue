@@ -8,19 +8,19 @@ importers:
 
   .:
     dependencies:
+      '@capybara-plus/components':
+        specifier: workspace:^
+        version: link:packages/components
+      '@capybara-plus/hooks':
+        specifier: workspace:^
+        version: link:packages/hooks
       '@capybara-plus/icons-vue':
         specifier: ^1.0.4
         version: 1.0.4(vue@3.4.27)
-      '@capybara-ui/components':
-        specifier: workspace:^
-        version: link:packages/components
-      '@capybara-ui/hooks':
-        specifier: workspace:^
-        version: link:packages/hooks
-      '@capybara-ui/theme-chalk':
+      '@capybara-plus/theme-chalk':
         specifier: workspace:^
         version: link:packages/theme-chalk
-      '@capybara-ui/utils':
+      '@capybara-plus/utils':
         specifier: workspace:^
         version: link:packages/utils
       '@vitepress-demo-preview/component':
@@ -29,6 +29,9 @@ importers:
       '@vitepress-demo-preview/plugin':
         specifier: ^1.2.3
         version: 1.2.3(markdown-it-container@3.0.0)(vitepress@1.2.3)(vue@3.4.27)
+      capybara-ui:
+        specifier: 'link:'
+        version: 'link:'
       vue:
         specifier: 3.4.27
         version: 3.4.27(typescript@5.4.5)

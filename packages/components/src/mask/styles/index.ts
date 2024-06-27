@@ -1,1 +1,1 @@
-import '@capybara-ui/theme-chalk/src/components/mask.scss'
+import '@capybara-plus/theme-chalk/src/components/mask.scss'

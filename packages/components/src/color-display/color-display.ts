@@ -1,4 +1,4 @@
-import { buildProps } from '@capybara-ui/utils'
+import { buildProps } from '@capybara-plus/utils'
 
 export const colorDisplayProps = buildProps({
   color: {

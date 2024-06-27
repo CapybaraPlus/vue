@@ -11,7 +11,8 @@
     "prepare": "husky",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "eslint:fix": "eslint --fix"
   },
   "peerDependencies": {
     "vue": "^3.4.21"
@@ -38,11 +39,11 @@
     "vue-tsc": "^2.0.6"
   },
   "dependencies": {
+    "@capybara-plus/components": "workspace:^",
+    "@capybara-plus/hooks": "workspace:^",
     "@capybara-plus/icons-vue": "^1.0.4",
-    "@capybara-ui/components": "workspace:^",
-    "@capybara-ui/hooks": "workspace:^",
-    "@capybara-ui/theme-chalk": "workspace:^",
-    "@capybara-ui/utils": "workspace:^",
+    "@capybara-plus/theme-chalk": "workspace:^",
+    "@capybara-plus/utils": "workspace:^",
     "@vitepress-demo-preview/component": "^2.3.2",
     "@vitepress-demo-preview/plugin": "^1.2.3",
     "vue": "3.4.27"
