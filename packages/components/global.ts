@@ -4,8 +4,16 @@ import { RaLink } from './src/link'
 import { RaIcon } from './src/icon'
 import { RaTooltip } from './src/tooltip'
 import { RaMask } from './src/mask'
+import { RaMessage } from './src/message'
 
-export const plugins = [RaButton, RaLink, RaIcon, RaTooltip, RaMask] as Plugin[]
+export const plugins = [
+  RaButton,
+  RaLink,
+  RaIcon,
+  RaTooltip,
+  RaMask,
+  RaMessage,
+] as Plugin[]
 
 export default {
   install: (app: App) => {

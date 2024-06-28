@@ -1,0 +1,40 @@
+@use '../utils/bem.scss' as * with (
+  $block: 'message'
+);
+@use '../common/var' as *;
+@use '../utils/transition.scss' as *;
+
+@include b(group) {
+  position: fixed;
+  top: 30px;
+  padding: 0 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: middle;
+  width: 100%;
+  @include b() {
+    box-shadow: getBoxShadow('base');
+    width: fit-content;
+    padding: 10px 20px;
+    margin-bottom: 15px;
+    box-sizing: inherit;
+    display: inline-flex;
+    align-items: center;
+    text-align: left;
+    vertical-align: middle;
+    border-radius: getBorderRadius();
+    overflow-wrap: break-word;
+    @include e(close) {
+      margin-left: 10px;
+      cursor: pointer;
+      transition: transform getTransition();
+      &:hover {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
+
+@include groupSlideBottom();

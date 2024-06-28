@@ -1,36 +1,21 @@
 <template>
-  <ra-mask ref="mask" class="mask" :show="false">
-    <div class="container">
-      <h1>Playground</h1>
-      <p>Click the button to see the mask in action</p>
-      <button @click="handleClick">click me</button>
-    </div>
-  </ra-mask>
-  <ra-button theme="primary" @click="handleClick">click me</ra-button>
+  <ra-button theme="primary" @click="handleClick">点击</ra-button>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { RaMask, RaMaskInstance } from '@capybara-plus/components'
-
-// const visibility = ref(false)
-const mask = ref<RaMaskInstance>(null)
+import { RaMessage } from '@capybara-plus/components'
 
 const handleClick = () => {
-  mask.value?.open()
+  RaMessage({
+    content: 'hello wolrd',
+    duration: 3000,
+    appendTo: '',
+  })
+  RaMessage({
+    content: '2222',
+    duration: 1000,
+  })
 }
 </script>
 
-<style>
-.mask {
-  display: 'flex';
-  justify-content: 'center';
-  align-items: 'center';
-}
-.container {
-  width: 500px;
-  height: 200px;
-  padding: 20px;
-  background-color: #fff;
-}
-</style>
+<style></style>
