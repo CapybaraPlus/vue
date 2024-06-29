@@ -67,7 +67,7 @@ $block: '' !default;
 }
 
 @mixin is($state) {
-  .is-#{$state} {
+  .is-#{$state + ''} {
     @content;
   }
 }
