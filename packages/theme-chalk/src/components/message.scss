@@ -26,6 +26,11 @@
     vertical-align: middle;
     border-radius: getBorderRadius();
     overflow-wrap: break-word;
+    color: getTextColor();
+    background-color: getFillColor();
+    @include e(icon) {
+      margin-right: 10px;
+    }
     @include e(close) {
       margin-left: 10px;
       cursor: pointer;

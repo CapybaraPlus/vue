@@ -1,19 +1,36 @@
 <template>
-  <ra-button theme="primary" @click="handleClick">点击</ra-button>
+  <ra-button
+    v-for="(theme, index) in themes"
+    :key="index"
+    :theme="theme"
+    @click="() => handleClick(theme)"
+    >点击</ra-button
+  >
 </template>
 
 <script setup lang="ts">
-import { RaMessage } from '@capybara-plus/components'
+import {
+  MessageTheme,
+  RaMessage,
+  messageTheme,
+} from '@capybara-plus/components'
 
-const handleClick = () => {
-  RaMessage({
-    content: 'hello wolrd',
-    duration: 3000,
-    appendTo: '',
-  })
+import { ref } from 'vue'
+const themes = ref<typeof messageTheme>([
+  'default',
+  'success',
+  'warning',
+  'error',
+] as const)
+const handleClick = (theme: string) => {
+  // RaMessage.warning({
+  //   content: 'hello wolrd',
+  //   duration: 3000,
+  // })
   RaMessage({
     content: '2222',
-    duration: 1000,
+    duration: 0,
+    theme: theme as MessageTheme,
   })
 }
 </script>

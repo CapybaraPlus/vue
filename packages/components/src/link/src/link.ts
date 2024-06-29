@@ -1,7 +1,5 @@
-import { buildProps, definePropType } from '@capybara-plus/utils'
-import { Component, ExtractPropTypes } from 'vue'
-
-const IconType = definePropType<string | Component>([String, Object, Function])
+import { buildProps, IconType } from '@capybara-plus/utils'
+import { ExtractPropTypes } from 'vue'
 
 // link props
 export const linkProps = buildProps({

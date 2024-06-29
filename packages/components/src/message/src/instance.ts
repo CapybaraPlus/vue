@@ -4,8 +4,10 @@ import {
   MessageInstance,
   MessageOptions,
   NormalizeMessageOptions,
+  MessageFunction,
 } from './message.ts'
 import { createId, isElement, isString } from '@capybara-plus/utils'
+import { Error, Success, Warning } from '@capybara-plus/icons-vue'
 
 // message instance
 // from the message.tsx
@@ -26,16 +28,26 @@ function normalizeOptions(options: MessageOptions): NormalizeMessageOptions {
     appendTo = document.body
   }
 
+  // normalize theme
+  const iconMapTheme = {
+    default: undefined,
+    success: Success,
+    warning: Warning,
+    error: Error,
+  }
+  const icon = iconMapTheme[options.theme ?? 'default']
+
   return {
     ...options,
     duration: options.duration ?? 3000,
     timer: null as ReturnType<typeof setTimeout> | null,
     _id: createId('ra-message'),
     appendTo,
+    icon,
   }
 }
 
-function callMessage(options: MessageOptions) {
+const callMessage: MessageFunction = (options: MessageOptions) => {
   const normalized = normalizeOptions(options)
 
   // call the onReady function
@@ -43,15 +55,16 @@ function callMessage(options: MessageOptions) {
     const messageVNode = h(Message, {
       onReady: (el: MessageInstance) => {
         instance = el
-        createMessageItem()
+        doCreateMessageInstance()
       },
     })
     render(messageVNode, normalized.appendTo as Element)
   } else {
-    createMessageItem()
+    doCreateMessageInstance()
   }
 
-  function createMessageItem() {
+  // create a message instance
+  function doCreateMessageInstance() {
     instance.createMessageInstance({
       ...normalized,
     })

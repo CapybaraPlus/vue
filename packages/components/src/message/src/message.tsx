@@ -1,4 +1,10 @@
-import { TransitionGroup, defineComponent, onMounted, ref } from 'vue'
+import {
+  h,
+  TransitionGroup,
+  defineComponent,
+  onMounted,
+  shallowReactive,
+} from 'vue'
 import { useClassName, useTransitionGroup } from '@capybara-plus/hooks'
 
 import {
@@ -18,15 +24,18 @@ export default defineComponent({
     // bems
     const ucn = useClassName('message')
 
-    // message queue
-    const messageQueue = ref<NormalizeMessageOptions[]>([])
+    // message queue to store the message instance
+    // shallowReactive: component should be avoided by using ref or reactive
+    // it will lead to unnecessary performance overhead
+    // so use shallowRef or shallowReactive instead
+    const messageQueue = shallowReactive<NormalizeMessageOptions[]>([])
 
-    // create message instance
+    // create a message instance
     function createMessageInstance(options: NormalizeMessageOptions) {
       const instance = {
         ...options,
       }
-      messageQueue.value.push(instance)
+      messageQueue.push(instance)
 
       // auto close when the time is arrived
       function autoClose() {
@@ -52,11 +61,11 @@ export default defineComponent({
     // close the message
     function close(id: string) {
       // find the target message
-      const targetIndex = messageQueue.value.findIndex(
+      const targetIndex = messageQueue.findIndex(
         (message) => message._id === id
       )
       // remove the target message
-      if (targetIndex !== -1) messageQueue.value.splice(targetIndex, 1)
+      if (targetIndex !== -1) messageQueue.splice(targetIndex, 1)
     }
 
     // deliver some methods to the instance.ts
@@ -69,8 +78,11 @@ export default defineComponent({
     return () => (
       <div class={ucn.b('group')}>
         <TransitionGroup name={useTransitionGroup('slide-bottom')}>
-          {messageQueue.value.map((message) => (
-            <div class={[ucn.b()]} key={message._id}>
+          {messageQueue.map((message) => (
+            <div id={message._id} class={[ucn.b()]} key={message._id}>
+              {message.icon ? (
+                <ra-icon class={[ucn.e('icon')]}>{h(message.icon)}</ra-icon>
+              ) : null}
               <span class={[ucn.e('content')]}>{message.content}</span>
               <ra-icon
                 class={ucn.e('close')}

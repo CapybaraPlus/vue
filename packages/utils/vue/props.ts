@@ -1,4 +1,4 @@
-import { PropType } from 'vue'
+import { Component, PropType } from 'vue'
 import { hasKey, isObject } from '../object'
 
 /**
@@ -175,3 +175,10 @@ export const buildProps = <Props extends ExpandingProps>(
 //     disabled: undefined,
 //   })
 // )
+
+// vue prop type for icon
+export const IconType = definePropType<string | Component>([
+  String,
+  Object,
+  Function,
+])

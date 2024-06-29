@@ -1,4 +1,4 @@
-import Message from './src/instance'
+import Message from './src/function'
 import { withInstallFunction } from '@capybara-plus/utils'
 
 export const RaMessage = withInstallFunction(Message, '$message')
