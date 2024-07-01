@@ -4,10 +4,19 @@
 
 <script setup lang="ts">
 import { RaMessage } from '@capybara-plus/components'
+import { h } from 'vue'
 
 const handleClick = () => {
   RaMessage({
-    content: 'this is a message',
+    content: h(
+      'div',
+      {
+        style: {
+          color: 'red',
+        },
+      },
+      'this is a message'
+    ),
     zIndex: 3000,
   })
 }

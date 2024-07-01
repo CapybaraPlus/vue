@@ -40,7 +40,7 @@ function normalizeOptions(options: MessageOptions) {
     warning: Warning,
     error: Error,
   }
-  const icon = iconMapTheme[options.theme ?? 'default']
+  const icon = options.icon ?? iconMapTheme[options.theme ?? 'default']
 
   return {
     ...options,

@@ -4,11 +4,14 @@
 
 <script setup lang="ts">
 import { RaMessage } from '@capybara-plus/components'
+import { Success } from '@capybara-plus/icons-vue'
 
 const handleClick = () => {
   RaMessage({
-    content: 'this is a message',
+    content: 'custom icon',
+    icon: Success,
     zIndex: 3000,
+    theme: 'error',
   })
 }
 </script>

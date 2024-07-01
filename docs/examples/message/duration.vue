@@ -10,6 +10,7 @@ const handleClick1 = () => {
   RaMessage({
     content: 'i will close after 3s',
     duration: 3000,
+    zIndex: 3000,
   })
 }
 
@@ -17,6 +18,7 @@ const handleClick2 = () => {
   RaMessage({
     content: 'i will not close',
     duration: 0,
+    zIndex: 3000,
   })
 }
 </script>

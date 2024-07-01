@@ -17,3 +17,15 @@
 可以通过属性 `theme` 来设置消息的主题，目前支持的主题有 `info`、`success`、`warning`、`error` 四种，默认为 `info`
 
 <preview path="./theme.vue" title="主题" />
+
+## 更丰富的内容
+
+可以给属性 `content` 传入一个渲染函数，来实现更加丰富的内容
+
+<preview path="./render.vue" title="更丰富的内容" />
+
+## 自定义 icon
+
+可以通过属性 `icon` 来设置自定义的图标，会覆盖掉不同主题的图标
+
+<preview path="./icon.vue" title="自定义 icon" />

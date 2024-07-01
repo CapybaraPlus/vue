@@ -12,6 +12,7 @@ const handleClick = (theme?: MessageTheme) => {
   RaMessage({
     content: `this is a ${theme ?? 'normal'} message`,
     theme,
+    zIndex: 3000,
   })
 }
 </script>
