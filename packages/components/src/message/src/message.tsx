@@ -2,6 +2,7 @@ import {
   computed,
   CSSProperties,
   defineComponent,
+  h,
   onMounted,
   ref,
   Transition,
@@ -11,8 +12,7 @@ import { useClassName, useTransition } from '@capybara-plus/hooks'
 import { RaIcon } from '../../icon'
 import { Close } from '@capybara-plus/icons-vue'
 import '../styles'
-import { TimerType } from 'packages/utils'
-import { useResizeObserver } from '@vueuse/core'
+import { useResizeObserver, useTimeoutFn } from '@vueuse/core'
 
 export default defineComponent({
   name: 'RaMessage',
@@ -22,32 +22,35 @@ export default defineComponent({
     // bem
     const ucn = useClassName('message')
 
-    let openTimer: TimerType
-    let closeTimer: TimerType
     // v-if to realize the transition component
     const visibility = ref(false)
+    let stopTimer: (() => void) | undefined
     function open() {
-      if (openTimer) clearTimeout(openTimer)
-      openTimer = setTimeout(() => {
-        visibility.value = true
-        clearTimeout(openTimer)
-      })
+      visibility.value = true
     }
     function close() {
-      // clear autoCloseTimer to prevent the memory leak
-      if (props.autoCloseTimer) clearTimeout(props.autoCloseTimer)
       visibility.value = false
-      if (closeTimer) clearTimeout(closeTimer)
-      closeTimer = setTimeout(() => {
-        props.onClose()
-        clearTimeout(closeTimer)
-        if (props.autoCloseTimer) clearTimeout(props.autoCloseTimer)
-      }, 200)
+    }
+    function autoClose() {
+      if (props.duration <= 0) return
+      const { stop } = useTimeoutFn(() => {
+        close()
+      }, props.duration)
+      stopTimer = () => {
+        stop?.()
+      }
+    }
+    /**
+     * @example package stopTimer can be proper functioning
+     */
+    function clearTimer() {
+      stopTimer?.()
     }
 
     let instanceUtils: MessageInstanceUtils
     onMounted(() => {
       open()
+      autoClose()
       instanceUtils = props.onMounted()
     })
 
@@ -85,9 +88,22 @@ export default defineComponent({
     expose(exposed)
 
     return () => (
-      <Transition name={useTransition('slide-bottom')}>
+      <Transition
+        name={useTransition('slide-bottom')}
+        onBeforeLeave={props.onClose}
+        onAfterLeave={props.afterClose}
+      >
         {visibility.value ? (
-          <div class={[ucn.b()]} style={style.value} ref={messageRef}>
+          <div
+            class={[ucn.b()]}
+            style={style.value}
+            ref={messageRef}
+            onMouseleave={autoClose}
+            onMouseenter={clearTimer}
+          >
+            {props.icon ? (
+              <ra-icon class={[ucn.e('icon')]}>{h(props.icon)}</ra-icon>
+            ) : null}
             <span class={[ucn.e('content')]}>{props.content}</span>
             <ra-icon class={[ucn.e('close')]} size=".7rem" onClick={close}>
               <Close />

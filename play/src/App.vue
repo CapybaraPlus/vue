@@ -14,25 +14,28 @@ import {
   RaMessage,
   messageTheme,
 } from '@capybara-plus/components'
+import testVue from './test.vue'
+import { getCurrentInstance, h, ref } from 'vue'
 
-import { ref } from 'vue'
 const themes = ref<typeof messageTheme>([
   'default',
   'success',
   'warning',
   'error',
 ] as const)
+const instance = getCurrentInstance()
+
 const handleClick = (theme: string) => {
   // RaMessage.warning({
   //   content: 'hello wolrd',
   //   duration: 3000,
   // })
   RaMessage({
-    content:
-      '2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222',
-    duration: 3000,
+    content: h(testVue),
+    duration: 0,
     theme: theme as MessageTheme,
     zIndex: 3000,
+    appContext: instance?.appContext,
   })
 }
 </script>

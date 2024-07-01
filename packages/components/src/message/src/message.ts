@@ -1,10 +1,5 @@
-import {
-  buildProps,
-  definePropType,
-  IconType,
-  TimerType,
-} from '@capybara-plus/utils'
-import { ExtractPropTypes, Ref } from 'vue'
+import { buildProps, definePropType, IconType } from '@capybara-plus/utils'
+import { AppContext, ExtractPropTypes, Ref, VNode } from 'vue'
 
 // message props
 export const messageProps = buildProps({
@@ -12,7 +7,7 @@ export const messageProps = buildProps({
    * @description the content of the message
    */
   content: {
-    type: String,
+    type: definePropType<string | VNode>([String, Object]),
   },
   /**
    * @description message close after the duration
@@ -45,22 +40,22 @@ export const messageProps = buildProps({
     type: String,
   },
   /**
-   * @description message timer
-   */
-  autoCloseTimer: {
-    type: definePropType<TimerType>([Number, null]),
-  },
-  /**
    * @description message close callback
    */
   onClose: {
-    type: Function,
+    type: definePropType<() => void>(Function),
+  },
+  /**
+   * @description
+   */
+  afterClose: {
+    type: definePropType<() => void>(Function),
   },
   /**
    * @description message ready callback
    */
   onMounted: {
-    type: Function,
+    type: definePropType<() => MessageInstanceUtils>(Function),
   },
   /**
    * @description message z-index
@@ -78,7 +73,7 @@ export interface MessageOptions {
   /**
    * @description the content of the message
    */
-  content: string
+  content: string | VNode
   /**
    * @description message close after the duration
    * if duration <= 0 then it will not close
@@ -112,6 +107,10 @@ export interface MessageOptions {
    * @description the z-index of the message
    */
   zIndex?: number
+  /**
+   * @description app context
+   */
+  appContext?: AppContext | null
 }
 
 // message.tsx exposed

@@ -62,16 +62,11 @@ function createMessage(options: MessageOptions): MessageInstance {
     onClose: () => {
       normalized.onClose?.()
       closeMessage(instance)
+    },
+    afterClose: () => {
       render(null, container)
     },
     onMounted: () => {
-      // auto close after the duration
-      if (normalized.autoCloseTimer) clearTimeout(normalized.autoCloseTimer)
-      if (props.duration > 0) {
-        normalized.autoCloseTimer = setTimeout(() => {
-          instance.exposed.close()
-        }, props.duration)
-      }
       const messageInstancUtils: MessageInstanceUtils = {
         getInstance,
         getPrevBottom,
@@ -81,9 +76,12 @@ function createMessage(options: MessageOptions): MessageInstance {
     },
   } as MessageProps
 
-  // render message
+  // create and render message
   const container = document.createElement('div')
   const messageVNode = h(Message, props)
+  if (normalized.appContext) {
+    messageVNode.appContext = normalized.appContext
+  }
   render(messageVNode, container)
   appendTo.appendChild(container.firstChild!)
 
@@ -141,6 +139,9 @@ function createMessage(options: MessageOptions): MessageInstance {
 const messageQueue: MessageInstance[] = shallowReactive([])
 const callMessage: MessageFunction = (options: MessageOptions) => {
   const instance = createMessage(options)
+  if (messageQueue.length >= 3) {
+    messageQueue[0].exposed.close()
+  }
   messageQueue.push(instance)
 }
 
