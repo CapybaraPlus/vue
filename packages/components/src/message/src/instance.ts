@@ -1,25 +1,25 @@
-import { h, render } from 'vue'
+import { h, render, shallowReactive } from 'vue'
 import Message from './message.tsx'
 import {
-  MessageInstance,
   MessageOptions,
-  NormalizeMessageOptions,
   MessageFunction,
+  MessageProps,
+  MessageInstance,
+  MessageExposed,
+  MessageInstanceUtils,
 } from './message.ts'
-import { createId, isElement, isString } from '@capybara-plus/utils'
+import { TimerType, createId, isElement, isString } from '@capybara-plus/utils'
 import { Error, Success, Warning } from '@capybara-plus/icons-vue'
 
-// message instance
-// from the message.tsx
-// when the message is mouted, it will call the onReady function
-let instance: MessageInstance
+let OFFSET: number
+let GAP: number
 
 // normalize options
-function normalizeOptions(options: MessageOptions): NormalizeMessageOptions {
+function normalizeOptions(options: MessageOptions) {
   // normalize appendTo
-  let appendTo: any = options.appendTo ? options.appendTo : document.body
-  if (isString(appendTo)) {
-    appendTo = document.querySelector(appendTo)
+  let appendTo: HTMLElement | null = document.body
+  if (isString(options.appendTo)) {
+    appendTo = document.querySelector(options.appendTo)
   }
   if (!isElement(appendTo)) {
     console.warn(
@@ -28,9 +28,14 @@ function normalizeOptions(options: MessageOptions): NormalizeMessageOptions {
     appendTo = document.body
   }
 
+  // normalize offset
+  OFFSET = options.offset ?? 20
+  // normalize gap
+  GAP = options.gap ?? 20
+
   // normalize theme
   const iconMapTheme = {
-    default: undefined,
+    default: null,
     success: Success,
     warning: Warning,
     error: Error,
@@ -40,35 +45,103 @@ function normalizeOptions(options: MessageOptions): NormalizeMessageOptions {
   return {
     ...options,
     duration: options.duration ?? 3000,
-    timer: null as ReturnType<typeof setTimeout> | null,
+    autoCloseTimer: undefined as TimerType,
     _id: createId('ra-message'),
     appendTo,
     icon,
+    offset: OFFSET,
   }
 }
 
+// create message instance
+function createMessage(options: MessageOptions): MessageInstance {
+  const { appendTo, ...normalized } = normalizeOptions(options)
+
+  const props: MessageProps = {
+    ...normalized,
+    onClose: () => {
+      normalized.onClose?.()
+      closeMessage(instance)
+      render(null, container)
+    },
+    onMounted: () => {
+      // auto close after the duration
+      if (normalized.autoCloseTimer) clearTimeout(normalized.autoCloseTimer)
+      if (props.duration > 0) {
+        normalized.autoCloseTimer = setTimeout(() => {
+          instance.exposed.close()
+        }, props.duration)
+      }
+      const messageInstancUtils: MessageInstanceUtils = {
+        getInstance,
+        getPrevBottom,
+        getGap,
+      }
+      return messageInstancUtils
+    },
+  } as MessageProps
+
+  // render message
+  const container = document.createElement('div')
+  const messageVNode = h(Message, props)
+  render(messageVNode, container)
+  appendTo.appendChild(container.firstChild!)
+
+  // get message instance by id
+  function getInstance() {
+    const targetIndex = messageQueue.findIndex(
+      (message) => message._id === instance._id
+    )
+    const target = messageQueue[targetIndex]
+    let prev: MessageInstance | undefined
+
+    if (targetIndex > 0) {
+      prev = messageQueue[targetIndex - 1]
+    }
+    return {
+      prev,
+      target,
+      targetIndex,
+    }
+  }
+
+  // get the prev message bottom
+  function getPrevBottom() {
+    const { prev } = getInstance()
+    return prev ? prev.exposed.bottom.value : OFFSET
+  }
+
+  // get the gap between the messages
+  function getGap() {
+    const { targetIndex } = getInstance()
+    if (targetIndex <= 0) return 0
+    return GAP
+  }
+
+  // close the message
+  // and remove message from the message queue
+  function closeMessage(instance: MessageInstance) {
+    const { targetIndex } = getInstance()
+    if (targetIndex != -1) messageQueue.splice(targetIndex, 1)
+    instance.exposed.close()
+  }
+
+  const instance: MessageInstance = {
+    _id: normalized._id,
+    exposed: messageVNode.component!.exposed! as MessageExposed,
+  }
+
+  return instance
+}
+
+// message instances queue
+// if we set it reactivly, it will auto update when close some message
+// we are supposed to use shallowReactive instead of reactive
+// because the component is made a reactive object, it can lead to unnecessary performance overhead
+const messageQueue: MessageInstance[] = shallowReactive([])
 const callMessage: MessageFunction = (options: MessageOptions) => {
-  const normalized = normalizeOptions(options)
-
-  // call the onReady function
-  if (!instance) {
-    const messageVNode = h(Message, {
-      onReady: (el: MessageInstance) => {
-        instance = el
-        doCreateMessageInstance()
-      },
-    })
-    render(messageVNode, normalized.appendTo as Element)
-  } else {
-    doCreateMessageInstance()
-  }
-
-  // create a message instance
-  function doCreateMessageInstance() {
-    instance.createMessageInstance({
-      ...normalized,
-    })
-  }
+  const instance = createMessage(options)
+  messageQueue.push(instance)
 }
 
 export default callMessage

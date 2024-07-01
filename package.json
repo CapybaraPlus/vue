@@ -21,7 +21,6 @@
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@eslint/js": "^9.2.0",
-    "@floating-ui/vue": "^1.0.6",
     "@types/uuid": "^10.0.0",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vitejs/plugin-vue-jsx": "^4.0.0",
@@ -46,8 +45,10 @@
     "@capybara-plus/icons-vue": "^1.0.4",
     "@capybara-plus/theme-chalk": "workspace:^",
     "@capybara-plus/utils": "workspace:^",
+    "@floating-ui/vue": "^1.0.7",
     "@vitepress-demo-preview/component": "^2.3.2",
     "@vitepress-demo-preview/plugin": "^1.2.3",
+    "@vueuse/core": "^10.11.0",
     "vue": "3.4.27"
   },
   "lint-staged": {

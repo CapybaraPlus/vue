@@ -28,9 +28,11 @@ const handleClick = (theme: string) => {
   //   duration: 3000,
   // })
   RaMessage({
-    content: '2222',
-    duration: 0,
+    content:
+      '2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222',
+    duration: 3000,
     theme: theme as MessageTheme,
+    zIndex: 3000,
   })
 }
 </script>

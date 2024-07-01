@@ -1,5 +1,9 @@
-import { Component, PropType } from 'vue'
+import { PropType } from 'vue'
 import { hasKey, isObject } from '../object'
+
+/**
+ * @todo 现在生成的props类型中的属性不正确，对于非required的属性，其类型不是可选的
+ */
 
 /**
  * @description define a prop type
@@ -175,10 +179,3 @@ export const buildProps = <Props extends ExpandingProps>(
 //     disabled: undefined,
 //   })
 // )
-
-// vue prop type for icon
-export const IconType = definePropType<string | Component>([
-  String,
-  Object,
-  Function,
-])

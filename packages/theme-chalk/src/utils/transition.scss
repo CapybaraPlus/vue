@@ -5,22 +5,20 @@
 // ------------------------------------------------------------------------
 
 // transition active
-@mixin transitionActive($name) {
+// $name: transition name
+// $isGroup: whether transition is group
+@mixin transitionActive($name, $isGroup: false) {
   .#{$name}-enter-active,
   .#{$name}-leave-active {
     @content;
   }
-}
-
-// transition group active
-@mixin transitionGroupActive($name) {
-  .#{$name}-move,
-  .#{$name}-enter-active,
-  .#{$name}-leave-active {
-    @content;
-  }
-  .#{$name}-leave-active {
-    position: absolute;
+  @if $isGroup {
+    .#{$name}-move {
+      @content;
+    }
+    .#{$name}-leave-active {
+      position: absolute;
+    }
   }
 }
 
@@ -32,13 +30,7 @@
   }
 }
 
-@mixin groupSlideBottom {
-  $name: 'group__slide-bottom';
-  @include transitionGroupActive($name) {
-    transition: all 0.3s ease-in-out;
-  }
-  @include enterFromAndLeaveTo($name) {
-    opacity: 0;
-    transform: translateY(-50px);
-  }
+// group name
+@function groupName($name) {
+  @return 'group__#{$name}';
 }

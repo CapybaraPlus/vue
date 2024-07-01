@@ -1,4 +1,4 @@
-import callMessage from './instance'
+import { default as callMessage } from './instance'
 import {
   MessageOptions,
   SyntacticMessageFunction,

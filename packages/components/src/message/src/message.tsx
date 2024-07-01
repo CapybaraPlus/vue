@@ -1,100 +1,100 @@
 import {
-  h,
-  TransitionGroup,
+  computed,
+  CSSProperties,
   defineComponent,
   onMounted,
-  shallowReactive,
+  ref,
+  Transition,
 } from 'vue'
-import { useClassName, useTransitionGroup } from '@capybara-plus/hooks'
-
-import {
-  MessageInstance,
-  NormalizeMessageOptions,
-  messageProps,
-} from './message'
-import '../styles'
-import { RaIcon } from '../../icon/index'
+import { MessageExposed, MessageInstanceUtils, messageProps } from './message'
+import { useClassName, useTransition } from '@capybara-plus/hooks'
+import { RaIcon } from '../../icon'
 import { Close } from '@capybara-plus/icons-vue'
+import '../styles'
+import { TimerType } from 'packages/utils'
+import { useResizeObserver } from '@vueuse/core'
 
 export default defineComponent({
   name: 'RaMessage',
-  components: { RaIcon },
+  components: { RaIcon, Close },
   props: messageProps,
-  setup(props) {
-    // bems
+  setup(props, { expose }) {
+    // bem
     const ucn = useClassName('message')
 
-    // message queue to store the message instance
-    // shallowReactive: component should be avoided by using ref or reactive
-    // it will lead to unnecessary performance overhead
-    // so use shallowRef or shallowReactive instead
-    const messageQueue = shallowReactive<NormalizeMessageOptions[]>([])
-
-    // create a message instance
-    function createMessageInstance(options: NormalizeMessageOptions) {
-      const instance = {
-        ...options,
-      }
-      messageQueue.push(instance)
-
-      // auto close when the time is arrived
-      function autoClose() {
-        // if duration <= 0 then it will not close at all
-        if (instance.duration! <= 0) {
-          return
-        }
-        // if timer is seted, clear it
-        if (instance.timer) {
-          clearTimeout(instance.timer)
-        } else {
-          instance.timer = setTimeout(() => {
-            close(instance._id)
-            // clear timer to avoid memory leak
-            if (instance.timer) clearTimeout(instance.timer)
-          }, instance.duration)
-        }
-      }
-
-      autoClose()
+    let openTimer: TimerType
+    let closeTimer: TimerType
+    // v-if to realize the transition component
+    const visibility = ref(false)
+    function open() {
+      if (openTimer) clearTimeout(openTimer)
+      openTimer = setTimeout(() => {
+        visibility.value = true
+        clearTimeout(openTimer)
+      })
+    }
+    function close() {
+      // clear autoCloseTimer to prevent the memory leak
+      if (props.autoCloseTimer) clearTimeout(props.autoCloseTimer)
+      visibility.value = false
+      if (closeTimer) clearTimeout(closeTimer)
+      closeTimer = setTimeout(() => {
+        props.onClose()
+        clearTimeout(closeTimer)
+        if (props.autoCloseTimer) clearTimeout(props.autoCloseTimer)
+      }, 200)
     }
 
-    // close the message
-    function close(id: string) {
-      // find the target message
-      const targetIndex = messageQueue.findIndex(
-        (message) => message._id === id
-      )
-      // remove the target message
-      if (targetIndex !== -1) messageQueue.splice(targetIndex, 1)
-    }
-
-    // deliver some methods to the instance.ts
+    let instanceUtils: MessageInstanceUtils
     onMounted(() => {
-      props.onReady({
-        createMessageInstance,
-      } as MessageInstance)
+      open()
+      instanceUtils = props.onMounted()
     })
 
+    const messageRef = ref<HTMLDivElement>()
+    // element height
+    const clientHeight = ref(0)
+    /**
+     * observer when the message is resized
+     * @see https://vueuse.org/useResizeObserver
+     */
+    useResizeObserver(messageRef, (entries) => {
+      clientHeight.value = entries[0].target.clientHeight
+    })
+    // element offset the top
+    const offsetTop = computed(
+      () => instanceUtils?.getPrevBottom() + instanceUtils?.getGap()
+    )
+    // the bottom of the element offset the top
+    const bottom = computed(() => offsetTop.value + clientHeight.value)
+
+    // computed style
+    const style = computed<CSSProperties>(() => {
+      return {
+        top: `${offsetTop.value}px`,
+        zIndex: `${props.zIndex}`,
+      }
+    })
+
+    // expose
+    const exposed: MessageExposed = {
+      close,
+      bottom,
+      offsetTop,
+    }
+    expose(exposed)
+
     return () => (
-      <div class={ucn.b('group')}>
-        <TransitionGroup name={useTransitionGroup('slide-bottom')}>
-          {messageQueue.map((message) => (
-            <div id={message._id} class={[ucn.b()]} key={message._id}>
-              {message.icon ? (
-                <ra-icon class={[ucn.e('icon')]}>{h(message.icon)}</ra-icon>
-              ) : null}
-              <span class={[ucn.e('content')]}>{message.content}</span>
-              <ra-icon
-                class={ucn.e('close')}
-                size=".7rem"
-                onClick={() => close(message._id)}
-              >
-                <Close />
-              </ra-icon>
-            </div>
-          ))}
-        </TransitionGroup>
-      </div>
+      <Transition name={useTransition('slide-bottom')}>
+        {visibility.value ? (
+          <div class={[ucn.b()]} style={style.value} ref={messageRef}>
+            <span class={[ucn.e('content')]}>{props.content}</span>
+            <ra-icon class={[ucn.e('close')]} size=".7rem" onClick={close}>
+              <Close />
+            </ra-icon>
+          </div>
+        ) : null}
+      </Transition>
     )
   },
 })

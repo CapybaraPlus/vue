@@ -1,5 +1,9 @@
 <template>
-  <i :class="[ucn.b()]" :style="style">
+  <i
+    :class="[ucn.b()]"
+    :style="style"
+    @click="(e: MouseEvent) => $emit('click',e)"
+  >
     <slot />
   </i>
 </template>
@@ -8,7 +12,7 @@
 import { useClassName } from '@capybara-plus/hooks'
 import '../styles'
 import { computed } from 'vue'
-import { iconProps } from './icon'
+import { iconEmits, iconProps } from './icon'
 
 const ucn = useClassName('icon')
 defineOptions({
@@ -16,6 +20,7 @@ defineOptions({
 })
 
 const $props = defineProps(iconProps)
+defineEmits(iconEmits)
 
 const style = computed(() => {
   return {

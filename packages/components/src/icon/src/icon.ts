@@ -13,5 +13,13 @@ export const iconProps = buildProps({
   },
 } as const)
 
+// icon emits
+export const iconEmits = {
+  click: (e: MouseEvent) => e instanceof MouseEvent,
+}
+
 // typescript icon props
 export type IconProps = ExtractPropTypes<typeof iconProps>
+
+// typescript icon emits
+export type IconEmits = ExtractPropTypes<typeof iconEmits>

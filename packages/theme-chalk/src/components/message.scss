@@ -4,42 +4,51 @@
 @use '../common/var' as *;
 @use '../utils/transition.scss' as *;
 
-@include b(group) {
+@include b() {
   position: fixed;
   top: 30px;
-  padding: 0 10px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
+  left: 50%;
+  transform: translateX((-50%));
+  box-shadow: getBoxShadow('base');
+  width: fit-content;
+  max-width: calc(100% - 100px);
+  padding: 10px 20px;
+  margin-bottom: 15px;
+  box-sizing: inherit;
+  display: inline-flex;
   align-items: center;
+  text-align: left;
   vertical-align: middle;
-  width: 100%;
-  @include b() {
-    box-shadow: getBoxShadow('base');
-    width: fit-content;
-    padding: 10px 20px;
-    margin-bottom: 15px;
-    box-sizing: inherit;
-    display: inline-flex;
-    align-items: center;
-    text-align: left;
-    vertical-align: middle;
-    border-radius: getBorderRadius();
-    overflow-wrap: break-word;
-    color: getTextColor();
-    background-color: getFillColor();
-    @include e(icon) {
-      margin-right: 10px;
-    }
-    @include e(close) {
-      margin-left: 10px;
-      cursor: pointer;
-      transition: transform getTransition();
-      &:hover {
-        transform: rotate(180deg);
-      }
+  border-radius: getBorderRadius('large');
+  overflow-wrap: break-word;
+  color: getTextColor();
+  background-color: getFillColor();
+  transition: all getTransition('fast');
+  @include e(icon) {
+    margin-right: 10px;
+    flex-shrink: 1;
+  }
+  @include e(content) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  @include e(close) {
+    margin-left: 10px;
+    flex-shrink: 1;
+    cursor: pointer;
+    transition: transform getTransition();
+    &:hover {
+      transform: rotate(180deg);
     }
   }
 }
 
-@include groupSlideBottom();
+$name: 'slide-bottom';
+@include transitionActive($name, false) {
+  transition: all getTranstion('fast') ease-in-out;
+}
+@include enterFromAndLeaveTo($name) {
+  opacity: 0;
+  transform: translate(-50%, -50px);
+}

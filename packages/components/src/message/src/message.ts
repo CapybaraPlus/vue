@@ -1,5 +1,77 @@
-import { buildProps, IconType } from '@capybara-plus/utils'
-import { ExtractPropTypes } from 'vue'
+import {
+  buildProps,
+  definePropType,
+  IconType,
+  TimerType,
+} from '@capybara-plus/utils'
+import { ExtractPropTypes, Ref } from 'vue'
+
+// message props
+export const messageProps = buildProps({
+  /**
+   * @description the content of the message
+   */
+  content: {
+    type: String,
+  },
+  /**
+   * @description message close after the duration
+   */
+  duration: {
+    type: Number,
+  },
+  /**
+   * @description append to the target element
+   */
+  appendTo: {
+    type: [String, Element],
+  },
+  /**
+   * @description message theme
+   */
+  theme: {
+    type: definePropType<MessageTheme>(String),
+  },
+  /**
+   * @description message icon
+   */
+  icon: {
+    type: IconType,
+  },
+  /**
+   * @description message id
+   */
+  _id: {
+    type: String,
+  },
+  /**
+   * @description message timer
+   */
+  autoCloseTimer: {
+    type: definePropType<TimerType>([Number, null]),
+  },
+  /**
+   * @description message close callback
+   */
+  onClose: {
+    type: Function,
+  },
+  /**
+   * @description message ready callback
+   */
+  onMounted: {
+    type: Function,
+  },
+  /**
+   * @description message z-index
+   */
+  zIndex: {
+    type: Number,
+  },
+})
+
+// typescript message props
+export type MessageProps = ExtractPropTypes<typeof messageProps>
 
 // message options input when call the message function
 export interface MessageOptions {
@@ -20,28 +92,38 @@ export interface MessageOptions {
    * @description message theme
    */
   theme?: MessageTheme
+  /**
+   * @description custom icon
+   */
   icon?: typeof IconType
+  /**
+   * @description message close callback
+   */
+  onClose?: () => void
+  /**
+   * @description offset
+   */
+  offset?: number
+  /**
+   * @description the gap between the messages
+   */
+  gap?: number
+  /**
+   * @description the z-index of the message
+   */
+  zIndex?: number
 }
 
-// normalize message options
-export interface NormalizeMessageOptions extends MessageOptions {
-  _id: string
-  timer: ReturnType<typeof setTimeout> | null
+// message.tsx exposed
+export type MessageExposed = {
+  close: () => void
+  bottom: Ref<number>
+  offsetTop: Ref<number>
 }
 
-// message props
-export const messageProps = buildProps({
-  onReady: {
-    type: Function,
-  },
-})
-
-// typescript message props
-export type MessageProps = ExtractPropTypes<typeof messageProps>
-
-// typescript message instance
 export type MessageInstance = {
-  createMessageInstance: (options: NormalizeMessageOptions) => void
+  _id: string
+  exposed: MessageExposed
 }
 
 // message theme
@@ -53,4 +135,15 @@ export type MessageFunction = (options: MessageOptions) => void
 // syntactic suger message function
 export type SyntacticMessageFunction = MessageFunction & {
   [K in MessageTheme]: MessageFunction
+}
+
+// instance.ts return some utils
+export type MessageInstanceUtils = {
+  getInstance: () => {
+    prev: MessageInstance | undefined
+    target: MessageInstance
+    targetIndex: number
+  }
+  getPrevBottom: () => number
+  getGap: () => number
 }
