@@ -56,8 +56,9 @@ export const useClassName = (block: string) => {
       : ''
 
   // generate state class name
-  const is = (state?: string) => {
-    return state ? `is-${state}` : ''
+  const is = (state?: string | boolean, name?: string) => {
+    if (typeof state === 'string') return state ? `is-${state}` : ''
+    if (typeof state === 'boolean') return state ? `is-${name}` : ''
   }
 
   return {

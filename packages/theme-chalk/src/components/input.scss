@@ -5,17 +5,21 @@
 @use '../common/var' as *;
 
 @include b() {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
   font-size: getFontSize();
   padding: 8px 12px;
   border-radius: getBorderRadius('round');
-  outline: none;
-  border: 1px solid getBorderColor();
+  outline: 1px solid getBorderColor();
+  cursor: text;
   &:hover {
-    border-color: getColor();
+    outline-color: getColor();
   }
   &:focus-within {
-    border-width: 2px;
-    border-color: getColor();
+    outline-width: 2px;
+    outline-color: getColor();
   }
   @include e(wrapper) {
     font-size: inherit;
@@ -29,6 +33,11 @@
       line-height: inherit;
       color: inherit;
       border: none;
+      outline: none;
+      background: none;
+      width: 100%;
+      flex-grow: 1;
+      box-sizing: border-box;
       &:focus {
         outline: none;
       }
@@ -36,16 +45,35 @@
         cursor: not-allowed;
       }
     }
+    @include e(prefix) {
+      display: inline-flex;
+      align-items: center;
+      margin-right: 8px;
+    }
+    @include e(suffix) {
+      display: inline-flex;
+      align-items: center;
+      grid-gap: 3px;
+      margin-left: 8px;
+      @include e(clear) {
+        cursor: pointer;
+        margin-left: 7px;
+        transition: all getTransition('fast');
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
+    }
   }
 }
 
 @include is(disabled) {
   cursor: not-allowed;
-  border-color: getBorderColor('disabled');
+  outline-color: getBorderColor('disabled');
   background-color: getFillColor('disabled');
   color: getTextColor('disabled');
   opacity: getOpacity('disabled');
   &:hover {
-    border-color: getBorderColor('disabled');
+    outline-color: getBorderColor('disabled');
   }
 }
