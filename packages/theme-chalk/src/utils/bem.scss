@@ -14,60 +14,88 @@ $block: '' !default;
   @if $modifier != '' {
     $name: #{$name} + #{config.$modifier-sperator} + $modifier;
   }
-  @return $name;
+  @return '.' + #{$name};
+}
+
+@function b($blockSuffix: '') {
+  @return generateBem($blockSuffix, '', '');
+}
+
+@function e($element) {
+  @return generateBem('', $element, '');
+}
+
+@function m($modifier) {
+  @return generateBem('', '', $modifier);
+}
+
+@function be($blockSuffix, $element) {
+  @return generateBem($blockSuffix, $element, '');
+}
+
+@function em($element, $modifier) {
+  @return generateBem('', $element, $modifier);
+}
+
+@function bm($blockSuffix, $modifier) {
+  @return generateBem($blockSuffix, '', $modifier);
+}
+
+@function bem($blockSuffix, $element, $modifier) {
+  @return generateBem($blockSuffix, $element, $modifier);
 }
 
 @mixin b($blockSuffix: '') {
-  $name: generateBem($blockSuffix, '', '');
-  .#{$name} {
+  $name: b($blockSuffix);
+  #{$name} {
     @content;
   }
 }
 
 @mixin e($element) {
-  $name: generateBem('', $element, '');
-  .#{$name} {
+  $name: e($element);
+  #{$name} {
     @content;
   }
 }
 
 @mixin m($modifier) {
-  $name: generateBem('', '', $modifier);
-  .#{$name} {
+  $name: m($modifier);
+  #{$name} {
     @content;
   }
 }
 
 @mixin be($blockSuffix, $element) {
-  $name: generateBem($blockSuffix, $element, '');
-  .#{$name} {
+  $name: be($blockSuffix, $element);
+  #{$name} {
     @content;
   }
 }
 
-@mixin em($blockSuffix, $element, $modifier) {
-  $name: generateBem($blockSuffix, $element, $modifier);
-  .#{$name} {
+@mixin em($element, $modifier) {
+  $name: em($element, $modifier);
+  #{$name} {
     @content;
   }
 }
 
 @mixin bm($blockSuffix, $modifier) {
-  $name: generateBem($blockSuffix, '', $modifier);
-  .#{$name} {
+  $name: bm($blockSuffix, $modifier);
+  #{$name} {
     @content;
   }
 }
 
 @mixin bem($blockSuffix, $element, $modifier) {
-  $name: generateBem($blockSuffix, $element, $modifier);
-  .#{$name} {
+  $name: bem($blockSuffix, $element, $modifier);
+  #{$name} {
     @content;
   }
 }
 
-@mixin is($state) {
-  .is-#{$state + ''} {
+@mixin is($state, $parent: b()) {
+  #{$parent}.is-#{$state + ''} {
     @content;
   }
 }

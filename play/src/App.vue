@@ -8,6 +8,7 @@
       <ra-icon><Success></Success></ra-icon>
     </template>
   </ra-input>
+  <ra-button disabled>click me</ra-button>
 </template>
 
 <script setup lang="ts">
