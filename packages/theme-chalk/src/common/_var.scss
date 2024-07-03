@@ -156,7 +156,7 @@ $text: map.merge(
     'regular': getNeutralColorWithLevel(3),
     'secondary': getNeutralColorWithLevel(5),
     'placeholder': getNeutralColorWithLevel(7),
-    'disabled': getNeutralColorWithLevel(9),
+    'disabled': getNeutralColorWithLevel(6),
   ),
   $text
 );
@@ -179,6 +179,7 @@ $border: map.merge(
     'dark': getNeutralColorWithLevel(4),
     'darker': getNeutralColorWithLevel(2),
     'darkest': getNeutralColorWithLevel(1),
+    'disabled': getNeutralColorWithLevel(7),
   ),
   $border
 );
@@ -198,6 +199,7 @@ $fill: map.merge(
     'dark': getNeutralColorWithLevel(9),
     'darker': getNeutralColorWithLevel(8),
     'darkest': getNeutralColorWithLevel(7),
+    'disabled': getNeutralColorWithLevel(9),
   ),
   $fill
 );
@@ -255,6 +257,7 @@ $border-radius: map.merge(
     'large': 20px,
     'larger': 30px,
     'largest': 50px,
+    'round': 1000px,
     'circle': 50%,
   ),
   $border-radius

@@ -1,0 +1,51 @@
+@use '../utils/bem.scss' as * with (
+  $block: 'input'
+);
+
+@use '../common/var' as *;
+
+@include b() {
+  font-size: getFontSize();
+  padding: 8px 12px;
+  border-radius: getBorderRadius('round');
+  outline: none;
+  border: 1px solid getBorderColor();
+  &:hover {
+    border-color: getColor();
+  }
+  &:focus-within {
+    border-width: 2px;
+    border-color: getColor();
+  }
+  @include e(wrapper) {
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    display: inline-flex;
+    align-items: center;
+    @include e(inner) {
+      font-size: inherit;
+      font-weight: inherit;
+      line-height: inherit;
+      color: inherit;
+      border: none;
+      &:focus {
+        outline: none;
+      }
+      &:disabled {
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+@include is(disabled) {
+  cursor: not-allowed;
+  border-color: getBorderColor('disabled');
+  background-color: getFillColor('disabled');
+  color: getTextColor('disabled');
+  opacity: getOpacity('disabled');
+  &:hover {
+    border-color: getBorderColor('disabled');
+  }
+}

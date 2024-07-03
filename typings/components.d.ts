@@ -1,4 +1,4 @@
-import { RaButton } from '@capybara-ui/components'
+import { RaButton } from '@capybara-plus/components'
 import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
