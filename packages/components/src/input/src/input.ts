@@ -1,4 +1,4 @@
-import { buildProps, definePropType } from '@capybara-plus/utils'
+import { buildProps, definePropType, isNumber } from '@capybara-plus/utils'
 import { ExtractPropTypes } from 'vue'
 
 // input props
@@ -67,6 +67,31 @@ export const inputProps = buildProps({
   autoComplete: {
     type: definePropType(String),
     default: 'off',
+  },
+  /**
+   * @description the maximum number of characters
+   */
+  maxlength: {
+    type: [String, Number],
+    validator: (val: string | number): val is number => {
+      return isNumber(val)
+    },
+  },
+  /**
+   * @description the minimum number of characters
+   */
+  minlength: {
+    type: [String, Number],
+    validator: (val: string | number): val is number => {
+      return isNumber(val)
+    },
+  },
+  /**
+   * @description show the word count
+   */
+  showCount: {
+    type: Boolean,
+    default: false,
   },
 })
 

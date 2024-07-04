@@ -45,16 +45,6 @@ export default defineComponent({
       })
     }
 
-    // clear input value
-    const clear = () => {
-      emitInputValue('')
-    }
-    const clearStyle = computed<CSSProperties>(() => {
-      if (!props.modelValue || props.modelValue.toString().length == 0)
-        return { display: 'none' }
-      return {}
-    })
-
     // input event
     const handleInput = (e: Event) => {
       emit('input', e)
@@ -68,6 +58,16 @@ export default defineComponent({
       setInputValue()
     })
 
+    // clear input value
+    const clear = () => {
+      emitInputValue('')
+    }
+    const clearStyle = computed<CSSProperties>(() => {
+      if (!props.modelValue || props.modelValue.toString().length == 0)
+        return { display: 'none' }
+      return {}
+    })
+
     // control visibility when the type is password
     const showPassword = ref(false)
     const inputType = computed(() => {
@@ -79,6 +79,18 @@ export default defineComponent({
     const changePasswordVisibility = () => {
       showPassword.value = !showPassword.value
     }
+
+    const count = computed(() => {
+      if (!props.showCount) return null
+      if (props.modelValue === '' || props.modelValue) {
+        return (
+          <span class={[ucn.e('count')]}>
+            {props.modelValue.toString().length}/{props.maxlength}
+          </span>
+        )
+      }
+      return null
+    })
 
     return () => {
       return (
@@ -104,8 +116,11 @@ export default defineComponent({
               readonly={props.readonly}
               autocomplete={props.autoComplete}
               type={inputType.value}
+              maxlength={props.maxlength}
+              minlength={props.minlength}
             />
             <div class={[ucn.e('suffix')]}>
+              {count.value}
               {props.clearable ? (
                 <ra-icon
                   class={[ucn.e('clear')]}

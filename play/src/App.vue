@@ -5,6 +5,8 @@
     placeholder="Please input"
     clearable
     theme="mask"
+    maxlength="200"
+    show-count
   >
     <template #prefix>
       <ra-icon><Success></Success></ra-icon>

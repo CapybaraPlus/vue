@@ -10,6 +10,15 @@ export const isElement = (el: any): el is Element => {
   return el instanceof Element
 }
 
+export const isNumber = (num: any): boolean => {
+  if (!num) return false
+  if (typeof num === 'boolean') return false
+  if (typeof num === 'number') {
+    return true
+  }
+  return !isNaN(Number(num))
+}
+
 // timer type
 export type TimerType = ReturnType<typeof setTimeout> | undefined
 

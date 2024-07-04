@@ -4,7 +4,7 @@
 
 @use '../common/var' as *;
 
-@mixin suffixIcon {
+@mixin suffixItem {
   cursor: pointer;
   margin-right: 7px;
   transition: all getTransition('fast');
@@ -65,13 +65,17 @@
       margin-left: 8px;
       cursor: default;
       @include e(clear) {
-        @include suffixIcon;
+        @include suffixItem;
         &:hover {
           transform: scale(1.2);
         }
       }
       @include e(password) {
-        @include suffixIcon;
+        @include suffixItem;
+      }
+      @include e(count) {
+        @include suffixItem;
+        font-size: getFontSize('extra-small');
       }
     }
   }
