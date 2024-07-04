@@ -3,8 +3,8 @@
   <ra-input
     v-model="inputValue"
     placeholder="Please input"
-    type="password"
     clearable
+    theme="mask"
   >
     <template #prefix>
       <ra-icon><Success></Success></ra-icon>
@@ -13,6 +13,9 @@
       <ra-icon><Success></Success></ra-icon>
     </template>
   </ra-input>
+  <ra-input placeholder="Please input" size="small"></ra-input>
+  <ra-input placeholder="Please input" disabled></ra-input>
+  <ra-input placeholder="Please input" size="large"></ra-input>
 </template>
 
 <script setup lang="ts">
@@ -23,4 +26,8 @@ import { RaInput } from '@capybara-plus/components'
 const inputValue = ref('123')
 </script>
 
-<style></style>
+<style>
+.ra-input {
+  margin: 10px;
+}
+</style>

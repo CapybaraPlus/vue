@@ -19,7 +19,7 @@
   padding: 0 12px;
   border-radius: getBorderRadius('round');
   outline: 1px solid getBorderColor();
-
+  transition: all getTransition('fast');
   &:hover {
     outline-color: getColor();
   }
@@ -79,12 +79,12 @@
 
 @include is(disabled) {
   cursor: not-allowed;
-  outline-color: getBorderColor('disabled');
-  background-color: getFillColor('disabled');
-  color: getTextColor('disabled');
+  outline-color: getDisabledColor('border');
+  background-color: getDisabledColor('fill');
+  color: getDisabledColor('text');
   opacity: getOpacity('disabled');
   &:hover {
-    outline-color: getBorderColor('disabled');
+    outline-color: getDisabledColor('border');
   }
 }
 
@@ -92,5 +92,45 @@
   cursor: default;
   @include e(inner) {
     cursor: inherit;
+  }
+}
+
+// size
+@include m(small) {
+  padding: 0 8px;
+  font-size: getFontSize('small');
+  @include e(wrapper) {
+    padding: 4px 0;
+  }
+}
+@include m(large) {
+  padding: 0 18px;
+  @include e(wrapper) {
+    padding: 12px 0;
+  }
+}
+
+// line theme
+@include is(line) {
+  outline: none;
+  border-radius: 0;
+  @include e(wrapper) {
+    border-bottom: 1px solid getBorderColor();
+    &:focus-within {
+      border-color: getColor();
+    }
+  }
+}
+
+@include is(mask) {
+  outline: none;
+  background-color: getFillColor('dark');
+  opacity: getOpacity();
+  &:hover {
+    background-color: getFillColor('light');
+  }
+  &:focus-within {
+    background-color: getFillColor();
+    outline: 1px solid getBorderColor();
   }
 }

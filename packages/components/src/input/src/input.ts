@@ -39,7 +39,8 @@ export const inputProps = buildProps({
    * @description input type, support text, password, textarea
    */
   type: {
-    type: definePropType<'text' | 'password' | 'textarea'>([String]),
+    type: definePropType<'text' | 'password' | 'textarea'>(String),
+    default: 'text',
   },
   /**
    * @description readonly state
@@ -47,6 +48,25 @@ export const inputProps = buildProps({
   readonly: {
     type: Boolean,
     default: false,
+  },
+  /**
+   * @description input size, support small, medium, large
+   */
+  size: {
+    type: definePropType<'small' | 'large'>(String),
+  },
+  /**
+   * @description the theme of input
+   */
+  theme: {
+    type: definePropType<'line' | 'mask'>(String),
+  },
+  /**
+   * @description input native autocomplete attribute
+   */
+  autoComplete: {
+    type: definePropType(String),
+    default: 'off',
   },
 })
 

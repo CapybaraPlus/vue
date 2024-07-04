@@ -85,8 +85,10 @@ export default defineComponent({
         <div
           class={[
             ucn.b(),
+            ucn.m(props.size),
             ucn.is(props.disabled, 'disabled'),
             ucn.is(props.readonly, 'readonly'),
+            ucn.is(props.theme, 'theme'),
           ]}
         >
           <div class={[ucn.e('wrapper')]}>
@@ -100,6 +102,7 @@ export default defineComponent({
               placeholder={props.placeholder}
               disabled={props.disabled}
               readonly={props.readonly}
+              autocomplete={props.autoComplete}
               type={inputType.value}
             />
             <div class={[ucn.e('suffix')]}>
