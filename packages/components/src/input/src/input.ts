@@ -1,4 +1,9 @@
-import { buildProps, definePropType, isNumber } from '@capybara-plus/utils'
+import {
+  buildProps,
+  definePropType,
+  isNumber,
+  isString,
+} from '@capybara-plus/utils'
 import { ExtractPropTypes } from 'vue'
 
 // input props
@@ -97,7 +102,11 @@ export const inputProps = buildProps({
 
 // input emits
 export const inputEmits = {
-  input: (e: Event) => e instanceof Event,
+  input: (e: string) => isString(e),
+  change: (e: string) => isString(e),
+  focus: (e: FocusEvent) => e instanceof FocusEvent,
+  blur: (e: FocusEvent) => e instanceof FocusEvent,
+  keydown: (e: KeyboardEvent) => e instanceof KeyboardEvent,
   ['update:modelValue']: (val: string) => typeof val == 'string',
 }
 

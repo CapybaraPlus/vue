@@ -21,10 +21,11 @@ export default defineComponent({
   },
   props: inputProps,
   emits: inputEmits,
-  setup(props, { emit, slots }) {
+  setup(props, { emit, slots, expose }) {
     // bem
     const ucn = useClassName('input')
 
+    // HTML input element
     const inputRef = ref<HTMLInputElement>()
 
     // the key of the controlled component
@@ -37,6 +38,11 @@ export default defineComponent({
         input.value = props.modelValue?.toString() || ''
     }
 
+    // avoid modelValue has the initial value, but input value is empty
+    onMounted(() => {
+      setInputValue()
+    })
+
     // emit(update:modelValue) and set input value
     const emitInputValue = (val: string) => {
       emit('update:modelValue', val)
@@ -47,16 +53,31 @@ export default defineComponent({
 
     // input event
     const handleInput = (e: Event) => {
-      emit('input', e)
+      emit('input', (e.target as HTMLInputElement).value)
 
       if ((e.target as HTMLInputElement).value == props.modelValue) return
       emitInputValue((e.target as HTMLInputElement).value)
     }
 
-    // avoid modelValue has the initial value, but input value is empty
-    onMounted(() => {
-      setInputValue()
-    })
+    // focus event
+    const handleFoucs = (e: FocusEvent) => {
+      emit('focus', e)
+    }
+
+    // blur event
+    const handleBlur = (e: FocusEvent) => {
+      emit('blur', e)
+    }
+
+    // change event
+    const handleChange = (e: Event) => {
+      emit('change', (e.target as HTMLInputElement).value)
+    }
+
+    // keydown event
+    const handleKeydown = (e: KeyboardEvent) => {
+      emit('keydown', e)
+    }
 
     // clear input value
     const clear = () => {
@@ -92,6 +113,29 @@ export default defineComponent({
       return null
     })
 
+    // HTML input element focus
+    const focus = () => {
+      inputRef.value?.focus()
+    }
+
+    // HTML input element blur
+    const blur = () => {
+      inputRef.value?.blur()
+    }
+
+    // HTML input element select
+    const select = () => {
+      inputRef.value?.select()
+    }
+
+    expose({
+      input: inputRef,
+      clear,
+      focus,
+      blur,
+      select,
+    })
+
     return () => {
       return (
         <div
@@ -110,7 +154,6 @@ export default defineComponent({
             <input
               ref={inputRef}
               class={[ucn.e('inner')]}
-              onInput={handleInput}
               placeholder={props.placeholder}
               disabled={props.disabled}
               readonly={props.readonly}
@@ -118,6 +161,11 @@ export default defineComponent({
               type={inputType.value}
               maxlength={props.maxlength}
               minlength={props.minlength}
+              onInput={handleInput}
+              onFocus={handleFoucs}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              onKeydown={handleKeydown}
             />
             <div class={[ucn.e('suffix')]}>
               {count.value}

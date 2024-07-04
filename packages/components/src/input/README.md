@@ -12,3 +12,19 @@
 - ✅clearable：是否显示清空按钮
 - ✅size：输入框尺寸
 - ✅theme: 输入框主题，line、mask
+
+# 事件
+
+- ✅input：输入框内容变化时触发
+- ✅change：输入框内容变化时触发
+- ✅focus：输入框获得焦点时触发
+- ✅blur：输入框失去焦点时触发
+- ✅keydown：按下键盘时触发
+
+# expose
+
+- ✅input: input HTML 元素
+- ✅clear: 清空输入框内容
+- ✅focus: 让输入框获得焦点
+- ✅blur: 让输入框失去焦点
+- ✅select: 选中输入框内容
