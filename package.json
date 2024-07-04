@@ -42,7 +42,7 @@
   "dependencies": {
     "@capybara-plus/components": "workspace:^",
     "@capybara-plus/hooks": "workspace:^",
-    "@capybara-plus/icons-vue": "^1.0.4",
+    "@capybara-plus/icons-vue": "^1.0.5",
     "@capybara-plus/theme-chalk": "workspace:^",
     "@capybara-plus/utils": "workspace:^",
     "@floating-ui/vue": "^1.0.7",

@@ -4,8 +4,7 @@
     v-model="inputValue"
     placeholder="Please input"
     type="password"
-    readonly
-    disabled
+    clearable
   >
     <template #prefix>
       <ra-icon><Success></Success></ra-icon>

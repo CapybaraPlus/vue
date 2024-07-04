@@ -2,6 +2,7 @@ import {
   CSSProperties,
   computed,
   defineComponent,
+  h,
   nextTick,
   onMounted,
   ref,
@@ -10,7 +11,7 @@ import { inputEmits, inputProps } from './input'
 import '../styles'
 import { useClassName } from '@capybara-plus/hooks'
 import { RaIcon } from '../../icon'
-import { Close } from '@capybara-plus/icons-vue'
+import { Close, Display, Hide } from '@capybara-plus/icons-vue'
 
 export default defineComponent({
   name: 'RaInput',
@@ -67,9 +68,27 @@ export default defineComponent({
       setInputValue()
     })
 
+    // control visibility when the type is password
+    const showPassword = ref(false)
+    const inputType = computed(() => {
+      if (props.type == 'password') {
+        return showPassword.value ? 'text' : 'password'
+      }
+      return props.type
+    })
+    const changePasswordVisibility = () => {
+      showPassword.value = !showPassword.value
+    }
+
     return () => {
       return (
-        <div class={[ucn.b(), ucn.is(props.disabled, 'disabled')]}>
+        <div
+          class={[
+            ucn.b(),
+            ucn.is(props.disabled, 'disabled'),
+            ucn.is(props.readonly, 'readonly'),
+          ]}
+        >
           <div class={[ucn.e('wrapper')]}>
             <div class={[ucn.e('prefix')]}>
               {slots.prefix ? slots.prefix() : null}
@@ -77,14 +96,13 @@ export default defineComponent({
             <input
               ref={inputRef}
               class={[ucn.e('inner')]}
-              type="text"
               onInput={handleInput}
               placeholder={props.placeholder}
               disabled={props.disabled}
               readonly={props.readonly}
+              type={inputType.value}
             />
             <div class={[ucn.e('suffix')]}>
-              {slots.suffix ? slots.suffix() : null}
               {props.clearable ? (
                 <ra-icon
                   class={[ucn.e('clear')]}
@@ -95,6 +113,15 @@ export default defineComponent({
                   <Close />
                 </ra-icon>
               ) : null}
+              {props.type == 'password' ? (
+                <ra-icon
+                  class={[ucn.e('password')]}
+                  onClick={changePasswordVisibility}
+                >
+                  {inputType.value == 'password' ? h(Hide) : h(Display)}
+                </ra-icon>
+              ) : null}
+              {slots.suffix ? slots.suffix() : null}
             </div>
           </div>
         </div>
