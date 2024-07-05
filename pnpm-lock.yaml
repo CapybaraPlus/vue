@@ -35,6 +35,9 @@ importers:
       '@vueuse/core':
         specifier: ^10.11.0
         version: 10.11.0(vue@3.4.27)
+      async-validator:
+        specifier: ^4.2.5
+        version: 4.2.5
       vue:
         specifier: 3.4.27
         version: 3.4.27(typescript@5.4.5)
@@ -95,7 +98,7 @@ importers:
         version: 5.2.10(@types/node@20.14.9)(sass@1.77.2)
       vitepress:
         specifier: ^1.2.3
-        version: 1.2.3(@algolia/client-search@4.24.0)(@types/node@20.14.9)(sass@1.77.2)(search-insights@2.14.0)(typescript@5.4.5)
+        version: 1.2.3(@algolia/client-search@4.24.0)(@types/node@20.14.9)(async-validator@4.2.5)(sass@1.77.2)(search-insights@2.14.0)(typescript@5.4.5)
       vue-tsc:
         specifier: ^2.0.6
         version: 2.0.14(typescript@5.4.5)
@@ -1529,7 +1532,7 @@ packages:
       vitepress: '*'
       vue: ^3.2.0
     dependencies:
-      vitepress: 1.2.3(@algolia/client-search@4.24.0)(@types/node@20.14.9)(sass@1.77.2)(search-insights@2.14.0)(typescript@5.4.5)
+      vitepress: 1.2.3(@algolia/client-search@4.24.0)(@types/node@20.14.9)(async-validator@4.2.5)(sass@1.77.2)(search-insights@2.14.0)(typescript@5.4.5)
       vue: 3.4.27(typescript@5.4.5)
     dev: false
 
@@ -1543,7 +1546,7 @@ packages:
       '@flypeng/tool': 5.5.2
       markdown-it: 13.0.2
       markdown-it-container: 3.0.0
-      vitepress: 1.2.3(@algolia/client-search@4.24.0)(@types/node@20.14.9)(sass@1.77.2)(search-insights@2.14.0)(typescript@5.4.5)
+      vitepress: 1.2.3(@algolia/client-search@4.24.0)(@types/node@20.14.9)(async-validator@4.2.5)(sass@1.77.2)(search-insights@2.14.0)(typescript@5.4.5)
       vue: 3.4.27(typescript@5.4.5)
     dev: false
 
@@ -1738,7 +1741,7 @@ packages:
       - '@vue/composition-api'
       - vue
 
-  /@vueuse/integrations@10.10.0(focus-trap@7.5.4)(vue@3.4.27):
+  /@vueuse/integrations@10.10.0(async-validator@4.2.5)(focus-trap@7.5.4)(vue@3.4.27):
     resolution: {integrity: sha512-vHGeK7X6mkdkpcm1eE9t3Cpm21pNVfZRwrjwwbrEs9XftnSgszF4831G2rei8Dt9cIYJIfFV+iyx/29muimJPQ==}
     peerDependencies:
       async-validator: '*'
@@ -1781,6 +1784,7 @@ packages:
     dependencies:
       '@vueuse/core': 10.10.0(vue@3.4.27)
       '@vueuse/shared': 10.10.0(vue@3.4.27)
+      async-validator: 4.2.5
       focus-trap: 7.5.4
       vue-demi: 0.14.8(vue@3.4.27)
     transitivePeerDependencies:
@@ -1920,6 +1924,9 @@ packages:
     resolution: {integrity: sha512-HGyxoOTYUyCM6stUe6EJgnd4EoewAI7zMdfqO+kGjnlZmBDz/cR5pf8r/cR4Wq60sL/p0IkcjUEEPwS3GFrIyw==}
     engines: {node: '>=8'}
     dev: true
+
+  /async-validator@4.2.5:
+    resolution: {integrity: sha512-7HhHjtERjqlNbZtqNqy2rckN/SpOOlmDliet+lP7k+eKZEjPk3DgyeU9lIXLdeLz0uBbbVp+9Qdow9wJWgwwfg==}
 
   /balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -3636,7 +3643,7 @@ packages:
     optionalDependencies:
       fsevents: 2.3.3
 
-  /vitepress@1.2.3(@algolia/client-search@4.24.0)(@types/node@20.14.9)(sass@1.77.2)(search-insights@2.14.0)(typescript@5.4.5):
+  /vitepress@1.2.3(@algolia/client-search@4.24.0)(@types/node@20.14.9)(async-validator@4.2.5)(sass@1.77.2)(search-insights@2.14.0)(typescript@5.4.5):
     resolution: {integrity: sha512-GvEsrEeNLiDE1+fuwDAYJCYLNZDAna+EtnXlPajhv/MYeTjbNK6Bvyg6NoTdO1sbwuQJ0vuJR99bOlH53bo6lg==}
     hasBin: true
     peerDependencies:
@@ -3657,7 +3664,7 @@ packages:
       '@vue/devtools-api': 7.2.1(vue@3.4.27)
       '@vue/shared': 3.4.30
       '@vueuse/core': 10.11.0(vue@3.4.27)
-      '@vueuse/integrations': 10.10.0(focus-trap@7.5.4)(vue@3.4.27)
+      '@vueuse/integrations': 10.10.0(async-validator@4.2.5)(focus-trap@7.5.4)(vue@3.4.27)
       focus-trap: 7.5.4
       mark.js: 8.11.1
       minisearch: 6.3.0

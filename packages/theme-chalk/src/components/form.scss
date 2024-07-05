@@ -1,0 +1,10 @@
+@use '../utils/bem.scss' as * with (
+  $block: 'form'
+);
+
+@include b() {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}

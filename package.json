@@ -49,6 +49,7 @@
     "@vitepress-demo-preview/component": "^2.3.2",
     "@vitepress-demo-preview/plugin": "^1.2.3",
     "@vueuse/core": "^10.11.0",
+    "async-validator": "^4.2.5",
     "vue": "3.4.27"
   },
   "lint-staged": {

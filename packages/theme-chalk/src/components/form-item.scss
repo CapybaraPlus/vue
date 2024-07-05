@@ -1,0 +1,27 @@
+@use '../utils/bem.scss' as * with (
+  $block: 'form-item'
+);
+
+@use '../common/var' as *;
+@use '../utils/form.scss' as form;
+
+@include b() {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  white-space: nowrap;
+  vertical-align: middle;
+  transition: all getTransition();
+  margin-bottom: 20px;
+  @include e(wrapper) {
+    width: 100%;
+    transition: inherit;
+    position: relative;
+    display: flex;
+    align-items: center;
+    @include e(validation) {
+      font-size: getFontSize('small');
+    }
+  }
+}

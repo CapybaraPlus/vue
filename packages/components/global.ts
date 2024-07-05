@@ -6,6 +6,7 @@ import { RaTooltip } from './src/tooltip'
 import { RaMask } from './src/mask'
 import { RaMessage } from './src/message'
 import { RaInput } from './src/input'
+import { RaForm, RaFormItem } from './src/form'
 
 export const plugins = [
   RaButton,
@@ -15,6 +16,8 @@ export const plugins = [
   RaMask,
   RaMessage,
   RaInput,
+  RaForm,
+  RaFormItem,
 ] as Plugin[]
 
 export default {

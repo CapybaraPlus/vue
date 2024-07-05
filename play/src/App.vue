@@ -1,35 +1,39 @@
 <template>
-  <div>values: {{ inputValue }}</div>
-  <ra-input
-    v-model="inputValue"
-    placeholder="Please input"
-    clearable
-    theme="mask"
-    maxlength="200"
-    show-count
-  >
-    <template #prefix>
-      <ra-icon><Success></Success></ra-icon>
-    </template>
-    <template #suffix>
-      <ra-icon><Success></Success></ra-icon>
-    </template>
-  </ra-input>
-  <ra-input placeholder="Please input" size="small"></ra-input>
-  <ra-input placeholder="Please input" disabled></ra-input>
-  <ra-input placeholder="Please input" size="large"></ra-input>
+  <ra-form :model="form" :rules="rules">
+    <ra-form-item label="用户名：" prop="username">
+      <ra-input
+        v-model="form.username"
+        theme="line"
+        clearable
+        placeholder="请输入用户名"
+      ></ra-input>
+    </ra-form-item>
+    <ra-form-item label="密码：" prop="password">
+      <ra-input
+        v-model="form.password"
+        theme="line"
+        type="password"
+        clearable
+        placeholder="请输入密码"
+      ></ra-input>
+    </ra-form-item>
+  </ra-form>
 </template>
 
 <script setup lang="ts">
-import { Success } from '@capybara-plus/icons-vue'
-import { ref } from 'vue'
-import { RaInput } from '@capybara-plus/components'
+import { reactive } from 'vue'
+import { RaForm } from '@capybara-plus/components'
 
-const inputValue = ref('123')
+const form = reactive({
+  username: '18096323189',
+  password: '',
+})
+
+const rules = {
+  username: {
+    validator: (rule, val: string) => val.length > 0 && val.length < 3,
+  },
+}
 </script>
 
-<style>
-.ra-input {
-  margin: 10px;
-}
-</style>
+<style></style>

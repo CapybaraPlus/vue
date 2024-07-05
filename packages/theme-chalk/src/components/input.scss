@@ -3,6 +3,7 @@
 );
 
 @use '../common/var' as *;
+@use '../utils/form.scss' as form;
 
 @mixin suffixItem {
   cursor: pointer;
@@ -16,10 +17,11 @@
   align-items: center;
   vertical-align: middle;
   font-size: getFontSize();
-  padding: 0 12px;
+  padding: form.$padding;
   border-radius: getBorderRadius('round');
   outline: 1px solid getBorderColor();
-  transition: all getTransition('fast');
+  box-sizing: border-box;
+  width: 100%;
   &:hover {
     outline-color: getColor();
   }
@@ -33,7 +35,8 @@
     line-height: inherit;
     display: inline-flex;
     align-items: center;
-    padding: 8px 0;
+    padding: 0;
+    width: 100%;
     @include e(inner) {
       font-size: inherit;
       font-weight: inherit;
