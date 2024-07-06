@@ -1,10 +1,17 @@
 import { buildProps, definePropType } from '@capybara-plus/utils'
-import { ExtractPropTypes, InjectionKey } from 'vue'
+import { ExtractPropTypes, InjectionKey, VNode } from 'vue'
 import { FormContext, formItemContext } from './context'
-import { RuleItem } from 'async-validator'
+import { RuleItem, ValidateError, ValidateFieldsError } from 'async-validator'
 
-interface FormRules {
-  [x: string]: RuleItem
+// expand RuleItem from 'async-validator'
+interface ExpandingRuleItem extends RuleItem {
+  trigger?: string
+  errorMessage?: string | VNode
+  successMessage?: string | VNode
+}
+
+export interface FormRules {
+  [x: string]: ExpandingRuleItem
 }
 
 // form props
@@ -18,6 +25,7 @@ export const formProps = buildProps({
     default: () => {},
   },
 })
+
 // form item props
 export const formItemProps = buildProps({
   label: {
@@ -37,3 +45,9 @@ export type FormItemProps = ExtractPropTypes<typeof formItemProps>
 export const FormContextKey: InjectionKey<FormContext> = Symbol('formContext')
 export const FormItemContextKey: InjectionKey<formItemContext> =
   Symbol('formItemContext')
+
+// 'async-validate' error type
+export type FormValidateError = {
+  errors: ValidateError[]
+  fileds: ValidateFieldsError
+}

@@ -85,7 +85,7 @@ export default defineComponent({
     }
     const clearStyle = computed<CSSProperties>(() => {
       if (!props.modelValue || props.modelValue.toString().length == 0)
-        return { display: 'none' }
+        return { opacity: 0 }
       return {}
     })
 
@@ -101,6 +101,7 @@ export default defineComponent({
       showPassword.value = !showPassword.value
     }
 
+    // input word count
     const count = computed(() => {
       if (!props.showCount) return null
       if (props.modelValue === '' || props.modelValue) {

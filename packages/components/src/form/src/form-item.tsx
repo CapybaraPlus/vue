@@ -7,14 +7,19 @@ import {
   reactive,
   ref,
   toRefs,
+  TransitionGroup,
+  VNode,
   watchEffect,
 } from 'vue'
-import { useClassName } from '@capybara-plus/hooks'
-import { FormContextKey, FormItemContextKey, formItemProps } from './form'
+import { useClassName, useTransitionGroup } from '@capybara-plus/hooks'
+import {
+  FormContextKey,
+  FormItemContextKey,
+  formItemProps,
+  FormValidateError,
+} from './form'
 import { useResizeObserver } from '@vueuse/core'
 import Schema from 'async-validator'
-import RaIcon from '../../icon'
-import { Error, Success } from '@capybara-plus/icons-vue'
 
 export default defineComponent({
   name: 'RaFormItem',
@@ -26,7 +31,9 @@ export default defineComponent({
     // formContext
     const formContext = inject(FormContextKey, undefined)
 
-    // label
+    /**
+     * @description label
+     */
     const labelRef = ref<HTMLElement>()
     useResizeObserver(labelRef, (entries) => {
       formContext?.registerLabelWidth(entries[0].target.clientWidth)
@@ -37,32 +44,68 @@ export default defineComponent({
       }
     })
 
-    const error = ref(false)
-    const createValidationMessage = computed(() => {
-      return <RaIcon>{error.value ? <Error /> : <Success />}</RaIcon>
-    })
+    /**
+     * @description validate the form item
+     */
+    // validate state
+    type ValidateState = 'pending' | 'success' | 'error'
+    const validateState = ref<ValidateState>('pending')
+    // change the validate state
+    function changeValidateState(state: ValidateState) {
+      validateState.value = state
+    }
+    // reset validate state to pending
+    function resetValidateState() {
+      changeValidateState('pending')
+    }
 
-    // function validate
-    const validate = () => {
-      if (!props.prop) return
+    // success validate message
+    const successValidateMessage = ref<string | VNode>('')
+    // when validate success
+    function onValidateSuccess() {
+      changeValidateState('success')
+      successValidateMessage.value = currentRule.value?.successMessage ?? ''
+    }
+
+    // error validate message
+    const errorValidateMessage = ref<string | VNode>('')
+    // when validate error
+    function onValidateError(error: FormValidateError) {
+      changeValidateState('error')
+
+      const { errors } = error
+
+      if (currentRule.value?.errorMessage) {
+        errorValidateMessage.value = currentRule.value.errorMessage
+      }
+
+      errorValidateMessage.value = errors
+        ? errors[0].message
+          ? currentRule.value?.errorMessage ?? errors[0].message
+          : `${props.prop} is required`
+        : ''
+    }
+
+    const currentRule = computed(() => formContext?.rules?.[props.prop])
+    // validate funciton
+    function validate() {
+      if (!props.prop || !currentRule.value) return
 
       const value = formContext?.model[props.prop]
-      const rule = formContext?.rules?.[props.prop]
-      if (!rule) return
 
       // create validator
       const validator = new Schema({
-        [props.prop]: rule,
+        [props.prop]: currentRule.value,
       })
 
       // validate
       return validator
         .validate({ [props.prop]: value })
         .then(() => {
-          error.value = false
+          onValidateSuccess()
         })
-        .catch(() => {
-          error.value = true
+        .catch((error: FormValidateError) => {
+          onValidateError(error)
         })
     }
 
@@ -75,12 +118,13 @@ export default defineComponent({
       reactive({
         ...toRefs(props),
         validate,
+        resetValidateState,
       })
     )
 
     return () => {
       return (
-        <div class={[ucn.b()]}>
+        <div class={[ucn.b(), ucn.is(currentRule.value?.required, 'required')]}>
           <label
             ref={labelRef}
             class={[ucn.e('label')]}
@@ -91,9 +135,20 @@ export default defineComponent({
 
           <div class={[ucn.e('wrapper')]}>
             {slots.default?.()}
-            <span class={[ucn.e('validation')]}>
-              {createValidationMessage.value}
-            </span>
+            <div class={[ucn.e('validation-message')]}>
+              <TransitionGroup name={useTransitionGroup('slide-bottom')}>
+                {validateState.value === 'error' ? (
+                  <span class={[ucn.m('error')]} key="error">
+                    {errorValidateMessage.value}
+                  </span>
+                ) : null}
+                {validateState.value === 'success' ? (
+                  <span class={[ucn.m('success')]} key="success">
+                    {successValidateMessage.value}
+                  </span>
+                ) : null}
+              </TransitionGroup>
+            </div>
           </div>
         </div>
       )

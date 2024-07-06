@@ -4,6 +4,7 @@
 
 @use '../common/var' as *;
 @use '../utils/form.scss' as form;
+@use '../utils/transition.scss' as *;
 
 @include b() {
   position: relative;
@@ -20,8 +21,40 @@
     position: relative;
     display: flex;
     align-items: center;
-    @include e(validation) {
+    @include e(validation-message) {
       font-size: getFontSize('small');
+      position: absolute;
+      top: 100%;
+      left: 0;
+      padding: 0 form.$padding-horizontal;
+      color: getColor('error');
+      @each $state in (success, error) {
+        @include m($state) {
+          color: getColor($state);
+        }
+      }
     }
   }
+}
+
+@include is(required) {
+  &::before {
+    content: '*';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(-100%, -50%);
+    color: getColor('error');
+    display: inline-block;
+    padding-right: 5px;
+  }
+}
+
+$error-transition-group: groupName('slide-bottom');
+@include transitionActive($error-transition-group, true) {
+  transition: all getTransition();
+}
+@include enterFromAndLeaveTo($error-transition-group) {
+  transform: translateY(-20px);
+  opacity: 0;
 }

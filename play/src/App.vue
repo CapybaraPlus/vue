@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { h, reactive } from 'vue'
 import { RaForm } from '@capybara-plus/components'
 
 const form = reactive({
@@ -31,7 +31,13 @@ const form = reactive({
 
 const rules = {
   username: {
-    validator: (rule, val: string) => val.length > 0 && val.length < 3,
+    required: true,
+    validator: (rule: any, val: string) => val.length > 0 && val.length < 3,
+    errorMessage: h('h1', '用户名长度必须大于 0 且小于 3'),
+    successMessage: '成功',
+  },
+  password: {
+    required: true,
   },
 }
 </script>
