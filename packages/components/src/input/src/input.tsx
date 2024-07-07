@@ -12,6 +12,7 @@ import '../styles'
 import { useClassName } from '@capybara-plus/hooks'
 import { RaIcon } from '../../icon'
 import { Close, Display, Hide } from '@capybara-plus/icons-vue'
+import { useFormContext } from '../../form'
 
 export default defineComponent({
   name: 'RaInput',
@@ -24,6 +25,9 @@ export default defineComponent({
   setup(props, { emit, slots, expose }) {
     // bem
     const ucn = useClassName('input')
+
+    // form context
+    const { formItemContext } = useFormContext()
 
     // HTML input element
     const inputRef = ref<HTMLInputElement>()
@@ -67,6 +71,7 @@ export default defineComponent({
     // blur event
     const handleBlur = (e: FocusEvent) => {
       emit('blur', e)
+      formItemContext?.validate()
     }
 
     // change event

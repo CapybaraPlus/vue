@@ -1,6 +1,6 @@
-import { buildProps, definePropType } from '@capybara-plus/utils'
+import { buildProps, createId, definePropType } from '@capybara-plus/utils'
 import { ExtractPropTypes, InjectionKey, VNode } from 'vue'
-import { FormContext, formItemContext } from './context'
+import { FormContext, FormItemContext } from './context'
 import { RuleItem, ValidateError, ValidateFieldsError } from 'async-validator'
 
 // expand RuleItem from 'async-validator'
@@ -21,7 +21,7 @@ export const formProps = buildProps({
     default: () => {},
   },
   rules: {
-    type: definePropType<FormRules>(Object),
+    type: definePropType<FormRules | void>(Object),
     default: () => {},
   },
 })
@@ -43,7 +43,7 @@ export type FormItemProps = ExtractPropTypes<typeof formItemProps>
 
 // provide and inject key
 export const FormContextKey: InjectionKey<FormContext> = Symbol('formContext')
-export const FormItemContextKey: InjectionKey<formItemContext> =
+export const FormItemContextKey: InjectionKey<FormItemContext> =
   Symbol('formItemContext')
 
 // 'async-validate' error type
@@ -51,3 +51,5 @@ export type FormValidateError = {
   errors: ValidateError[]
   fileds: ValidateFieldsError
 }
+
+export const FormItemId = () => createId('form-item')
