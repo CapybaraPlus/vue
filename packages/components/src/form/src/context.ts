@@ -62,18 +62,24 @@ export const useFormItemContext = () => {
     return targetIndex
   }
 
+  // reset all form item context validate state to 'pending'
   function resetValidateState() {
     formItemContextArr.value.forEach((context) => {
       context.resetValidateState()
     })
   }
 
-  function validate() {
-    return Promise.all(
-      formItemContextArr.value.map((context) => {
-        context.validate()
-      })
-    )
+  // validate all form item
+  async function validate() {
+    return new Promise<void>((resolve, reject) => {
+      Promise.all(formItemContextArr.value.map((context) => context.validate()))
+        .then(() => {
+          resolve()
+        })
+        .catch(() => {
+          reject()
+        })
+    })
   }
 
   return {

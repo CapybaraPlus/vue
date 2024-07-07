@@ -138,14 +138,18 @@ function validate() {
   })
 
   // validate
-  return validator
-    .validate({ [props.prop]: value })
-    .then(() => {
-      onValidateSuccess()
-    })
-    .catch((error: FormValidateError) => {
-      onValidateError(error)
-    })
+  return new Promise<void>((resolve, reject) => {
+    validator
+      .validate({ [props.prop]: value })
+      .then(() => {
+        onValidateSuccess()
+        resolve()
+      })
+      .catch((error: FormValidateError) => {
+        onValidateError(error)
+        reject()
+      })
+  })
 }
 
 const context: FormItemContext = reactive({
