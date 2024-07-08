@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { RaForm, RaFormInstance } from '@capybara-plus/components'
+import { RaForm, RaFormInstance, RaMessage } from '@capybara-plus/components'
 
 const formRef = ref<RaFormInstance | null>()
 
@@ -60,6 +60,10 @@ const submit = () => {
     .catch(() => {
       console.log('error')
     })
+  RaMessage({
+    theme: 'success',
+    content: 'hello',
+  })
 }
 </script>
 
