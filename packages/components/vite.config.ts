@@ -53,12 +53,13 @@ export default defineConfig({
           preserveModules: true,
           //配置打包根目录
           dir: 'lib',
+          exports: 'named',
           preserveModulesRoot: 'src',
         },
       ],
     },
     lib: {
-      entry: './index.ts',
+      entry: '.src/index.ts',
       formats: ['es', 'cjs'],
     },
   },
