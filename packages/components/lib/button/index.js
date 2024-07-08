@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperties(exports, { __esModule: { value: true }, [Symbol.toStringTag]: { value: "Module" } });
+const button_vue_vue_type_script_setup_true_lang = require("./src/button.vue.js");
+const install = require("../packages/utils/vue/install.js");
+const button = require("./src/button.js");
+const RaButton = install.withInstall(button_vue_vue_type_script_setup_true_lang);
+exports.buttonEmits = button.buttonEmits;
+exports.buttonProps = button.buttonProps;
+exports.RaButton = RaButton;
+exports.default = RaButton;

@@ -1,0 +1,18 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const form_vue_vue_type_script_setup_true_lang = require("./src/form.vue.js");
+const formItem_vue_vue_type_script_setup_true_lang = require("./src/form-item.vue.js");
+const install = require("../packages/utils/vue/install.js");
+require("../packages/theme-chalk/src/components/form.scss.js");
+require("../packages/theme-chalk/src/components/form-item.scss.js");
+const form = require("./src/form.js");
+require("vue");
+const RaForm = install.withInstall(form_vue_vue_type_script_setup_true_lang);
+const RaFormItem = install.withInstall(formItem_vue_vue_type_script_setup_true_lang);
+exports.FormContextKey = form.FormContextKey;
+exports.FormItemContextKey = form.FormItemContextKey;
+exports.FormItemId = form.FormItemId;
+exports.formItemProps = form.formItemProps;
+exports.formProps = form.formProps;
+exports.RaForm = RaForm;
+exports.RaFormItem = RaFormItem;
