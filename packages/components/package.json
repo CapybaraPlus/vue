@@ -1,15 +1,20 @@
 {
   "name": "@capybara-plus/components",
   "type": "module",
-  "version": "0.0.1-beta-1.1",
+  "version": "0.0.1-beta-1.2",
   "description": "",
-  "main": "lib/index.js",
   "module": "es/index.js",
+  "typings": "es/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./es/index.js",
+      "require": "./lib/index.js"
+    }
+  },
   "files": [
     "lib",
     "es"
   ],
-  "typings": "./lib/index.d.ts",
   "keywords": [],
   "author": "Ranaran",
   "license": "MIT",
