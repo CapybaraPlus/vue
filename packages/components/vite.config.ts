@@ -31,7 +31,7 @@ export default defineConfig({
     //压缩
     minify: false,
     //css分离
-    //cssCodeSplit: true,
+    cssCodeSplit: false,
     rollupOptions: {
       //忽略打包vue文件
       external: ['vue'],

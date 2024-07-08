@@ -1,16 +1,8 @@
 {
   "name": "@capybara-plus/components",
   "type": "module",
-  "version": "0.0.1-beta-1.2",
+  "version": "0.0.1-beta-1.3",
   "description": "",
-  "module": "es/index.js",
-  "typings": "es/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./es/index.js",
-      "require": "./lib/index.js"
-    }
-  },
   "files": [
     "lib",
     "es"
