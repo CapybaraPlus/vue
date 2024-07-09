@@ -1,7 +1,7 @@
 {
   "name": "@capybara-plus/components",
   "type": "module",
-  "version": "0.0.1-beta-1.5",
+  "version": "0.0.1-beta-1.6",
   "main": "es/index.js",
   "module": "es/index.js",
   "typings": "es/index.d.ts",

@@ -1,12 +1,12 @@
 <template>
   <div :class="[ucn.b(), ucn.is(currentRule?.required, 'required')]">
-    <label ref="labelRef" :class="[ucn.e('label')]" :style="labelStyle">
-      <template v-if="props.label || $slots.label">
+    <template v-if="props.label || $slots.label">
+      <label ref="labelRef" :class="[ucn.e('label')]" :style="labelStyle">
         <slot name="label">
           {{ props.label }}
         </slot>
-      </template>
-    </label>
+      </label>
+    </template>
 
     <div :class="[ucn.e('wrapper')]">
       <slot></slot>
