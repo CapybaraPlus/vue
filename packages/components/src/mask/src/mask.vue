@@ -17,8 +17,8 @@ import { useClassName, useClick } from '@capybara-plus/hooks'
 defineOptions({
   name: 'RaMask',
 })
-const $props = defineProps(maskProps)
-const $emit = defineEmits(maskEmits)
+const props = defineProps(maskProps)
+const emit = defineEmits(maskEmits)
 
 // bem
 const ucn = useClassName('mask')
@@ -32,19 +32,21 @@ function setVisibility(visible: boolean) {
 
 function open() {
   setVisibility(true)
+  props.afterOpen?.()
 }
-function close() {
+async function close() {
+  await props.beforeClose?.()
   setVisibility(false)
 }
 
 // handle click
 const handleClick = (e: MouseEvent) => {
   close()
-  $emit('click', e)
+  emit('click', e)
 }
 const { onClick, onMousedown, onMouseup } = useClick({ handleClick })
 
-const show = computed(() => ($props.show ? undefined : 'transparent'))
+const show = computed(() => (props.show ? undefined : 'transparent'))
 
 defineExpose({
   open,

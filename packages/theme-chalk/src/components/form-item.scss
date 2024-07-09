@@ -21,6 +21,7 @@
     position: relative;
     display: flex;
     align-items: center;
+    margin-left: 8px;
     @include e(validation-message) {
       font-size: getFontSize('small');
       position: absolute;

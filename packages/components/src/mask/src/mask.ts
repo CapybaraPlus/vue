@@ -11,6 +11,18 @@ export const maskProps = buildProps({
     type: Boolean,
     default: true,
   },
+  /**
+   * @description after open
+   */
+  afterOpen: {
+    type: Function,
+  },
+  /**
+   * @description before close
+   */
+  beforeClose: {
+    type: Function,
+  },
 })
 
 // mask emits
