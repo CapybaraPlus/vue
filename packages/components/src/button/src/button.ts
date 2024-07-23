@@ -1,6 +1,13 @@
 import { ExtractPropTypes } from 'vue'
 import { buildProps, definePropType } from '@capybara-plus/utils'
 
+const buttonThemeValues = [
+  'default',
+  'primary',
+  'success',
+  'warning',
+  'danger',
+] as const
 const buttonType = definePropType<'button' | 'submit' | 'reset' | undefined>([
   String,
   undefined,
@@ -12,8 +19,8 @@ export const buttonProps = buildProps({
    * @description button theme
    */
   theme: {
-    type: String,
-    values: ['default', 'primary', 'success', 'warning', 'danger'],
+    type: definePropType<(typeof buttonThemeValues)[number]>(String),
+    values: buttonThemeValues,
     default: 'default',
   },
   /**
