@@ -29,7 +29,7 @@
   align-items: center;
   border: none;
   outline: none;
-  padding: 8px 16px;
+  padding: 6px 16px;
   cursor: pointer;
   user-select: none;
   vertical-align: middle;
@@ -61,13 +61,13 @@
     background-color: getColor($theme);
     color: getWhite();
     @include buttonHover() {
-      color: getColor($theme);
-      background-color: getWhite();
+      color: getWhite();
+      background-color: getColorWithLevel($theme, 2);
       border: 1px solid getColor($theme);
     }
     @include buttonActive() {
       &.active-default {
-        background-color: getColorWithLevel($theme, 3);
+        background-color: getColorWithLevel($theme, 3, 'dark');
         color: getWhite();
       }
     }

@@ -9,6 +9,11 @@
   cursor: pointer;
   margin-right: 7px;
   transition: all getTransition('fast');
+  padding: 4px;
+  border-radius: getBorderRadius('small');
+  &:hover {
+    background-color: getFillColor('dark');
+  }
 }
 
 @include b() {
@@ -18,6 +23,9 @@
   vertical-align: middle;
   font-size: getFontSize();
   padding: form.$padding;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  height: 32px;
   border-radius: getBorderRadius('round');
   outline: 1px solid getBorderColor();
   box-sizing: border-box;
@@ -69,9 +77,6 @@
       cursor: default;
       @include e(clear) {
         @include suffixItem;
-        &:hover {
-          transform: scale(1.2);
-        }
       }
       @include e(password) {
         @include suffixItem;
@@ -121,11 +126,9 @@
 @include is(line) {
   outline: none;
   border-radius: 0;
-  @include e(wrapper) {
-    border-bottom: 1px solid getBorderColor();
-    &:focus-within {
-      border-color: getColor();
-    }
+  border-bottom: 1px solid getBorderColor();
+  &:focus-within {
+    border-color: getColor();
   }
 }
 

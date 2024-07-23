@@ -3,7 +3,6 @@
     <ra-form-item label="用户名：" prop="username">
       <ra-input
         v-model="form.username"
-        theme="line"
         clearable
         placeholder="请输入用户名"
       ></ra-input>
@@ -22,11 +21,13 @@
       <ra-button @click="handleClick">重置</ra-button>
     </ra-form-item>
   </ra-form>
+  <color-display></color-display>
 </template>
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { RaForm, RaFormInstance, RaMessage } from '@capybara-plus/components'
+import ColorDisplay from './components/color-display/color-display.vue'
 
 const formRef = ref<RaFormInstance | null>()
 

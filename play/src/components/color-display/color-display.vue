@@ -12,8 +12,8 @@
 
 <script setup lang="ts">
 import { useClassName } from '@capybara-plus/hooks'
-import './styles/index'
 import { colorDisplayProps, defaultNamesMap } from './color-display'
+import '@capybara-plus/theme-chalk/src/components/color-display.scss'
 
 const ucn = useClassName('color-display')
 defineOptions({

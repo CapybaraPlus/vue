@@ -15,13 +15,15 @@
   vertical-align: middle;
   transition: all getTransition();
   margin-bottom: 20px;
+  @include e(label) {
+    margin-right: 18px;
+  }
   @include e(wrapper) {
     width: 100%;
     transition: inherit;
     position: relative;
     display: flex;
     align-items: center;
-    margin-left: 8px;
     @include e(validation-message) {
       font-size: getFontSize('small');
       position: absolute;

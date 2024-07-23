@@ -15,8 +15,8 @@ $transparent: transparent;
 $neutral: #1e2024;
 
 // ----- complementray colors -----
-$primary: #125bf6; // 主色
-$success: #04b626; // 成功色
+$primary: #0829f9; // 主色
+$success: #00b96b; // 成功色
 $warning: #f7b500; // 警告色
 $danger: #f93e3e; // 危险色
 $error: #f93e3e; // 错误色
@@ -64,7 +64,7 @@ $colors: map.deep-merge(
   } @else {
     $mix-color: $black;
     $mode: 'dark';
-    $percent-divisor: 5;
+    $percent-divisor: 10;
   }
   @if $netural {
     $name: '#{$level}';
