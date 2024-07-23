@@ -1,0 +1,27 @@
+{
+  "name": "@capybara-plus/components",
+  "type": "module",
+  "version": "0.0.1-beta-1.7",
+  "description": "",
+  "main": "es/index.js",
+  "module": "es/index.js",
+  "typings": "es/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./es/index.js",
+      "require": "./lib/index.js"
+    },
+    "./es/style.css": "./es/style.css"
+  },
+  "files": [
+    "lib",
+    "es"
+  ],
+  "keywords": [],
+  "author": "Ranaran",
+  "license": "MIT",
+  "scripts": {
+    "build": "vite build",
+    "release": "pnpm publish --access public --no-git-checks"
+  }
+}

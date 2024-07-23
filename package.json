@@ -12,7 +12,8 @@
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
-    "eslint:fix": "eslint --fix"
+    "eslint:fix": "eslint --fix",
+    "release": "pnpm -C packages/components release"
   },
   "peerDependencies": {
     "vue": "^3.4.21"

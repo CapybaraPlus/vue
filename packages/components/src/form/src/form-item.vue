@@ -20,7 +20,9 @@
               {{ errorValidateMessage }}
             </span>
           </template>
-          <template v-else-if="validateState === 'success'">
+          <template
+            v-else-if="validateState === 'success' && successValidateMessage"
+          >
             <span key="success" :class="[ucn.m('success')]">
               <ra-icon>
                 <Success />
@@ -117,13 +119,11 @@ function onValidateError(error: FormValidateError) {
 
   if (currentRule.value?.errorMessage) {
     errorValidateMessage.value = currentRule.value.errorMessage
+  } else {
+    errorValidateMessage.value = errors
+      ? errors[0].message ?? `${props.prop} is required`
+      : ''
   }
-
-  errorValidateMessage.value = errors
-    ? errors[0].message
-      ? currentRule.value?.errorMessage ?? errors[0].message
-      : `${props.prop} is required`
-    : ''
 }
 
 const currentRule = computed(() => formContext?.rules?.[props.prop])

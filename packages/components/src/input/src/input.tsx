@@ -87,6 +87,7 @@ export default defineComponent({
     // clear input value
     const clear = () => {
       emitInputValue('')
+      formItemContext?.validate()
     }
     const clearStyle = computed<CSSProperties>(() => {
       if (!props.modelValue || props.modelValue.toString().length == 0)
