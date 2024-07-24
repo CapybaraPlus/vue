@@ -6,63 +6,43 @@ export const messageProps = buildProps({
   /**
    * @description the content of the message
    */
-  content: {
-    type: definePropType<string | VNode>([String, Object]),
-  },
+  content: definePropType<string | VNode>([String, Object]),
   /**
    * @description message close after the duration
    */
-  duration: {
-    type: Number,
-  },
+  duration: Number,
   /**
    * @description append to the target element
    */
-  appendTo: {
-    type: [String, Element],
-  },
+  appendTo: [String, Element],
   /**
    * @description message theme
    */
-  theme: {
-    type: definePropType<MessageTheme>(String),
-  },
+  theme: definePropType<MessageTheme>(String),
   /**
    * @description message icon
    */
-  icon: {
-    type: IconType,
-  },
+  icon: String,
   /**
    * @description message id
    */
-  _id: {
-    type: String,
-  },
+  _id: String,
   /**
    * @description message close callback
    */
-  onClose: {
-    type: definePropType<() => void>(Function),
-  },
+  onClose: definePropType<() => void>(Function),
   /**
    * @description
    */
-  afterClose: {
-    type: definePropType<() => void>(Function),
-  },
+  afterClose: definePropType<() => void>(Function),
   /**
    * @description message ready callback
    */
-  onMounted: {
-    type: definePropType<() => MessageInstanceUtils>(Function),
-  },
+  onMounted: definePropType<() => MessageInstanceUtils>(Function),
   /**
    * @description message z-index
    */
-  zIndex: {
-    type: Number,
-  },
+  zIndex: Number,
 })
 
 // typescript message props

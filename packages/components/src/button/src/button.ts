@@ -1,17 +1,14 @@
 import { ExtractPropTypes } from 'vue'
-import { buildProps, definePropType } from '@capybara-plus/utils'
+import { buildProps, definePropTypeValues } from '@capybara-plus/utils'
 
-const buttonThemeValues = [
-  'default',
-  'primary',
-  'success',
-  'warning',
-  'danger',
-] as const
-const buttonType = definePropType<'button' | 'submit' | 'reset' | undefined>([
-  String,
-  undefined,
-])
+const ButtonConst = {
+  theme: ['default', 'primary', 'success', 'warning', 'danger'] as const,
+  size: ['normal', 'large', 'medium', 'small'] as const,
+  type: ['button', 'submit', 'reset', undefined] as const,
+  shape: ['default', 'round', 'circle'] as const,
+  activeAnimation: ['default', 'zoom-out'] as const,
+  hoverAnimation: ['default', 'zoom-in'] as const,
+}
 
 // button props
 export const buttonProps = buildProps({
@@ -19,8 +16,7 @@ export const buttonProps = buildProps({
    * @description button theme
    */
   theme: {
-    type: definePropType<(typeof buttonThemeValues)[number]>(String),
-    values: buttonThemeValues,
+    type: definePropTypeValues(ButtonConst['theme'], String),
     default: 'default',
   },
   /**
@@ -31,8 +27,7 @@ export const buttonProps = buildProps({
    * @description set button size
    */
   size: {
-    type: String,
-    values: ['normal', 'large', 'medium', 'small'],
+    type: definePropTypeValues(ButtonConst['size'], String),
     default: 'normal',
   },
   /**
@@ -40,8 +35,7 @@ export const buttonProps = buildProps({
    * @todo add circle shape
    */
   shape: {
-    type: String,
-    values: ['default', 'round'],
+    type: definePropTypeValues(ButtonConst['shape'], String),
     default: 'default',
   },
   /**
@@ -52,8 +46,7 @@ export const buttonProps = buildProps({
    * @description native button type
    */
   type: {
-    type: buttonType,
-    values: ['button', 'submit', 'reset'],
+    type: definePropTypeValues(ButtonConst['type'], String),
     default: 'button',
   },
   /**
@@ -69,16 +62,14 @@ export const buttonProps = buildProps({
    * @description button animation when hover the button
    */
   hoverAnimation: {
-    type: String,
-    values: ['default', 'zoom-in'],
+    type: definePropTypeValues(ButtonConst['hoverAnimation'], String),
     default: 'default',
   },
   /**
    * @description button animation when the button is actived
    */
   activeAnimation: {
-    type: String,
-    values: ['default', 'zoom-out'],
+    type: definePropTypeValues(ButtonConst['activeAnimation'], String),
     default: 'default',
   },
 } as const)

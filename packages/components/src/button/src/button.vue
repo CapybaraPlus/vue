@@ -32,12 +32,12 @@ const ucn = useClassName('button')
 defineOptions({
   name: 'RaButton',
 })
-const $props = defineProps(buttonProps)
-const $emit = defineEmits(buttonEmits)
+const props = defineProps(buttonProps)
+const emit = defineEmits(buttonEmits)
 
 // click event
 const handleClick = (e: MouseEvent) => {
-  $emit('click', e)
+  emit('click', e)
 }
 
 /**
@@ -45,22 +45,22 @@ const handleClick = (e: MouseEvent) => {
  */
 // theme
 const _theme = computed(() =>
-  $props.theme == 'default' || $props.color ? '' : $props.theme
+  props.theme == 'default' || props.color ? '' : props.theme
 )
 // size
-const _size = computed(() => ($props.size == 'normal' ? '' : $props.size))
+const _size = computed(() => (props.size == 'normal' ? '' : props.size))
 // disabled
-const _disabled = computed(() => ($props.disabled ? 'disabled' : undefined))
+const _disabled = computed(() => (props.disabled ? 'disabled' : undefined))
 // shape
 const _shape = computed(() =>
-  $props.shape == 'default' ? undefined : $props.shape
+  props.shape == 'default' ? undefined : props.shape
 )
 // block
-const _block = computed(() => ($props.block ? 'block' : undefined))
+const _block = computed(() => (props.block ? 'block' : undefined))
 // color
 const _color = computed(() => {
-  const cls = $props.color ? 'color' : ''
-  const style = `--color: ${$props.color}`
+  const cls = props.color ? 'color' : ''
+  const style = `--color: ${props.color}`
   return {
     cls,
     style,
@@ -68,11 +68,11 @@ const _color = computed(() => {
 })
 // hoverAnimation
 const _hoverAnimation = computed(() =>
-  $props.hoverAnimation ? `hover-${$props.hoverAnimation}` : undefined
+  props.hoverAnimation ? `hover-${props.hoverAnimation}` : undefined
 )
 // activeAnimation
 const _activeAnimation = computed(() =>
-  $props.activeAnimation ? `active-${$props.activeAnimation}` : ''
+  props.activeAnimation ? `active-${props.activeAnimation}` : ''
 )
 </script>
 

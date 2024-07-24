@@ -1,5 +1,14 @@
-import { buildProps, IconType } from '@capybara-plus/utils'
+import {
+  buildProps,
+  definePropTypeValues,
+  IconType,
+} from '@capybara-plus/utils'
 import { ExtractPropTypes } from 'vue'
+
+const LinkConst = {
+  theme: ['default', 'primary', 'success', 'warning', 'danger'] as const,
+  target: ['_blank', '_self', '_parent', '_top'] as const,
+}
 
 // link props
 export const linkProps = buildProps({
@@ -7,8 +16,7 @@ export const linkProps = buildProps({
    * @description link theme
    */
   theme: {
-    type: String,
-    values: ['default', 'primary', 'success', 'warning', 'danger'],
+    type: definePropTypeValues(LinkConst['theme'], String),
     default: 'default',
   },
   /**
@@ -19,8 +27,7 @@ export const linkProps = buildProps({
    * @description original attribute target
    */
   target: {
-    type: String,
-    values: ['_blank', '_self', '_parent', '_top'],
+    type: definePropTypeValues(LinkConst['target'], String),
     default: '_self',
   },
   /**

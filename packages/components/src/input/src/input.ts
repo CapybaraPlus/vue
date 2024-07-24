@@ -1,10 +1,17 @@
 import {
   buildProps,
   definePropType,
+  definePropTypeValues,
   isNumber,
   isString,
 } from '@capybara-plus/utils'
 import { ExtractPropTypes } from 'vue'
+
+const InputConst = {
+  type: ['text', 'password', 'textarea'] as const,
+  theme: ['line', 'mask'] as const,
+  size: ['small', 'large'] as const,
+}
 
 // input props
 export const inputProps = buildProps({
@@ -29,43 +36,30 @@ export const inputProps = buildProps({
   /**
    * @description the disabled state
    */
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
+  disabled: Boolean,
   /**
    * @description clear function
    */
-  clearable: {
-    type: Boolean,
-    default: false,
-  },
+  clearable: Boolean,
   /**
    * @description input type, support text, password, textarea
    */
   type: {
-    type: definePropType<'text' | 'password' | 'textarea'>(String),
+    type: definePropTypeValues(InputConst['type'], String),
     default: 'text',
   },
   /**
    * @description readonly state
    */
-  readonly: {
-    type: Boolean,
-    default: false,
-  },
+  readonly: Boolean,
   /**
    * @description input size, support small, medium, large
    */
-  size: {
-    type: definePropType<'small' | 'large'>(String),
-  },
+  size: definePropTypeValues(InputConst['size'], String),
   /**
    * @description the theme of input
    */
-  theme: {
-    type: definePropType<'line' | 'mask'>(String),
-  },
+  theme: definePropTypeValues(InputConst['theme'], String),
   /**
    * @description input native autocomplete attribute
    */
@@ -87,17 +81,14 @@ export const inputProps = buildProps({
    */
   minlength: {
     type: [String, Number],
-    validator: (val: string | number): val is number => {
+    validator: (val: string | number): boolean => {
       return isNumber(val)
     },
   },
   /**
    * @description show the word count
    */
-  showCount: {
-    type: Boolean,
-    default: false,
-  },
+  showCount: Boolean,
 })
 
 // input emits

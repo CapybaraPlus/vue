@@ -1,5 +1,6 @@
 import { PropType } from 'vue'
 import { hasKey, isObject } from '../object'
+// import { useDebug } from '@capybara-plus/hooks'
 
 /**
  * @todo 现在生成的props类型中的属性不正确，对于非required的属性，其类型不是可选的
@@ -12,58 +13,45 @@ import { hasKey, isObject } from '../object'
    @example: definePropType<Person>(Object)
  */
 export const definePropType = <Type>(type: any): PropType<Type> => type
+export const definePropTypeValues = <Type>(
+  values: ReadonlyArray<Type>,
+  type: any
+): PropType<Type> => definePropType<(typeof values)[number]>(type)
 
 // vue prop native type
 type NativeType<T> = PropType<T> | null | undefined
 
-// vue prop native validator
-// type NativeValidator = ((val: any) => boolean) | undefined
+// if require is true, default is never; or default is extend from type
+type InputPropDefault<Required extends boolean, Default> = Required extends true
+  ? never
+  : Default extends Record<string, unknown>
+  ? () => Default
+  : Default
 
-// prop options values
-// type ExpandingValues<T> = Array<T | null | undefined>
+type IfNever<T, Y = true, N = false> = [T] extends [never] ? Y : N
 
-// prop options default
-// type ExpandingDefault<T> = T | null | undefined | never
-
-// prop options
-type ExpandingPropOptions<
-  Type,
-  Values,
-  Validator,
-  Required extends boolean,
-  Default
-> = {
-  type: NativeType<Type>
-  values?: Values
-  validator?: ((val: any) => val is Validator) | undefined
-  required?: Required
-  default?: Default
-}
-
-// const propOptions: ExpandingPropOptions<string> = {
-//   type: String,
-//   values: ['a', 'b', null, undefined, 1],
-//   validator: (val: number) => val,
-//   default: true,
-// }
-
-// native prop options
-type NativePropOptions<Type, Required, Default> = {
+// vue native prop options
+type OutputPropOptions<Type, Default, Required extends boolean = false> = {
   readonly type: NativeType<Type>
-  readonly required?: [Required] extends [true] ? true : false
-  readonly validator?: ((val: any) => boolean) | undefined
-  readonly default: Default extends [never] ? unknown : Default
+  readonly required: [Required] extends [true] ? true : false
+  readonly validator: ((val: unknown) => boolean) | undefined
+} & IfNever<Default, unknown, { readonly default: Default }>
+
+// input prop options
+type InputPropOptions<Type, Default, Required extends boolean> = {
+  type: NativeType<Type>
+  required?: Required
+  validator?: ((val: Type) => boolean) | undefined
+  default?: InputPropDefault<Required, Default>
 }
 
 // convert input prop options to native prop options
-type PropOptionsConvert<I> = I extends ExpandingPropOptions<
+type PropOptionsConvert<I> = I extends InputPropOptions<
   infer Type,
-  any,
-  any,
-  infer Required,
-  infer Default
+  infer Default,
+  infer Required
 >
-  ? NativePropOptions<Type, Required, Default>
+  ? OutputPropOptions<Type, Default, Required>
   : I extends NativeType<any>
   ? I
   : never
@@ -71,90 +59,43 @@ type PropOptionsConvert<I> = I extends ExpandingPropOptions<
 /**
  * build prop options
  * @param @requires type: prop type
- * @param values: allowed values
  * @param validator: custom validator
  * @param required: whether the prop is required
  * @param default: default value
  */
-export const buildPropOptions = (
-  options: ExpandingPropOptions<any, any, any, any, any>
-): NativePropOptions<any, any, any> => {
+export const buildPropOptions = <Type, Default, Required extends boolean>(
+  options: InputPropOptions<Type, Default, Required>
+): OutputPropOptions<Type, Default, Required> => {
   if (options == null || !isObject(options)) {
     return options as any
   }
 
-  const { values, validator, required, default: _default, type } = options
+  const { required, default: _default, validator } = options
 
-  // generate validator function
-  const _validator =
-    values || validator
-      ? (val: unknown) => {
-          let isVailded = false // whether the validation is passed
-          const allowValues: unknown[] = [] // allowed values array
-          if (values) {
-            allowValues.push(...values)
-            // check whether prop has the key of default
-            if (hasKey(options, 'default')) {
-              if (!allowValues.includes(_default)) {
-                console.warn(
-                  `Invalid prop: validation failed! The values are ${allowValues.join(
-                    ', '
-                  )}, but you use the default value: ${_default}`
-                )
-              }
-            }
-            isVailded ||= allowValues.includes(val)
-          }
-          if (validator) {
-            isVailded ||= validator(val)
-          }
-          return isVailded
-        }
-      : undefined
+  const _validator = validator
+
   const _options: any = {
-    type,
+    ...options,
     required: !!required,
     validator: _validator,
   }
+
   if (hasKey(options, 'default')) {
-    _options.default = _default
+    ;(_options as any).default = _default
   }
 
   return _options
 }
 
-// console.log(
-//   buildPropOptions({
-//     type: String,
-//     values: ['a', 1, 2],
-//     default: 'a',
-//     validator: (val: any) => val === 'b',
-//   }).validator!('a')
-// )
-
-type ExpandingProps = Record<
-  string,
-  ExpandingPropOptions<any, any, any, any, any> | NativeType<any>
->
-
-/**
- * build props
- * @example: buildProps({
- *   type: {
- *     type: String,
- *     values: ['primary', 'success', 'warning', 'danger'],
- *     default: 'primary',
- *   },
- *   size: {
- *     type: String,
- *     default: 'medium',
- *   },
- * })
- */
-export const buildProps = <Props extends ExpandingProps>(
+export const buildProps = <
+  Props extends Record<
+    string,
+    InputPropOptions<any, any, any> | NativeType<any>
+  >
+>(
   props: Props
 ): {
-  [K in keyof Props]: PropOptionsConvert<Props[K]>
+  [Key in keyof Props]: PropOptionsConvert<Props[Key]>
 } => {
   const _props: Record<string, any> = {}
   for (const [key, options] of Object.entries(props)) {
@@ -163,19 +104,9 @@ export const buildProps = <Props extends ExpandingProps>(
   return _props as any
 }
 
-// console.log(
-//   buildProps({
-//     type: {
-//       type: String,
-//       values: ['primary', 'success', 'warning', 'danger'],
-//       default: 'primary',
-//     },
-//     size: {
-//       type: [String, Number],
-//       default: 1,
-//       validator: (val: boolean) => val,
-//       required: true,
-//     },
-//     disabled: undefined,
-//   })
-// )
+buildProps({
+  type: {
+    type: String,
+    required: false,
+  },
+})
