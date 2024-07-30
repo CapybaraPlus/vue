@@ -1,6 +1,7 @@
 ## 样式
 
-- ✅ 主题：default primary success warning danger
+- ✅ 类型：default primary success warning danger
+- ✅ 主题：default
 - ✅ 尺寸：normal large medium small
 - ✅ 形状：default round
 - ✅ 禁用：disabled

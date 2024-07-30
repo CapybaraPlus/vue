@@ -2,7 +2,7 @@
   $block: button
 );
 @use '../common/var' as *;
-@use 'sass:color';
+@use 'sass:map';
 
 // hover button mixin
 @mixin buttonHover() {
@@ -15,7 +15,6 @@
 
 // active button mixin
 @mixin buttonActive() {
-  transition: all getTransition('fast');
   &:active {
     &:not(:disabled) {
       @content;
@@ -23,70 +22,98 @@
   }
 }
 
+// button size
+$size: large medium small;
+$sizeMap: (
+  normal: 12px 20px,
+  large: 18px 32px,
+  medium: 10px 16px,
+  small: 6px 12px,
+);
+@function getSize($size: normal) {
+  @return map.get($sizeMap, $size);
+}
+
 @include b() {
+  position: relative;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   border: none;
   outline: none;
-  padding: 6px 16px;
+  padding: getSize();
   cursor: pointer;
   user-select: none;
   vertical-align: middle;
-  border: 1px solid getBorderColor('light');
-  border-radius: getBorderRadius();
+  border-radius: getBorderRadius('small');
   font-size: getFontSize();
   font-weight: normal;
+  border: 1px solid getBorderColor('dark');
   background-color: getFillColor();
   color: getTextColor();
   transition: all getTransition();
-  margin: 10px;
+  margin: 0 12px 8px 0;
   box-sizing: border-box;
   text-align: center;
   white-space: nowrap;
+  border-color: transparent;
+  box-shadow: getBoxShadow('base');
+  &::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 100%;
+    background-color: getBorderColor('base');
+    color: inherit;
+    box-sizing: border-box;
+    border-radius: 200px;
+    pointer-events: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.6, 1);
+    opacity: 0;
+    z-index: -1;
+  }
   @include buttonHover() {
-    color: getColor();
-    border-color: getColor();
+    border-color: getBorderColor('base');
   }
   @include buttonActive {
-    background-color: getColor();
-    color: getWhite();
+    color: getFillColor();
+    background-color: transparent;
+    &::before {
+      width: 100%;
+      border-radius: inherit;
+      opacity: 0.9;
+    }
   }
 }
 
-// button theme mixin
-@mixin buttonTheme($theme) {
-  @include m($theme) {
-    border-color: transparent;
-    background-color: getColor($theme);
-    color: getWhite();
-    @include buttonHover() {
-      color: getWhite();
-      background-color: getColorWithLevel($theme, 2);
-      border: 1px solid getColor($theme);
-    }
-    @include buttonActive() {
-      &.active-default {
-        background-color: getColorWithLevel($theme, 1, 'dark');
-        color: getWhite();
-      }
-    }
+@mixin defaultColorMixin($color) {
+  color: $color;
+  &::before {
+    background-color: $color;
+  }
+  @include buttonHover() {
+    border-color: $color;
   }
 }
-@include buttonTheme(primary);
-@include buttonTheme(success);
-@include buttonTheme(warning);
-@include buttonTheme(danger);
+
+// button type mixin
+$buttonType: primary success warning danger;
+@each $type in $buttonType {
+  @include m($type) {
+    @include defaultColorMixin(getColor($type));
+  }
+}
 
 // button size
-@include m(large) {
-  padding: 16px 32px;
+@each $s in $size {
+  @include m($s) {
+    padding: getSize($s);
+  }
 }
-@include m(medium) {
-  padding: 12px 24px;
-}
-@include m(small) {
-  padding: 6px 12px;
+
+// custom color
+@include is(color) {
+  @include defaultColorMixin(var(--color));
 }
 
 // disabled
@@ -103,35 +130,4 @@
 // block
 @include is(block) {
   width: 100%;
-}
-
-// custom color
-@include is(color) {
-  background-color: var(--color);
-  color: getWhite();
-  border-color: transparent;
-  @include buttonHover() {
-    background-color: getWhite();
-    color: var(--color);
-    border-color: var(--color);
-  }
-  @include buttonActive() {
-    background-color: var(--color);
-    color: getWhite();
-    border-color: transparent;
-  }
-}
-
-// animation when hover the button
-.hover-zoom-in {
-  @include buttonHover() {
-    font-size: getFontSize('large');
-  }
-}
-
-// animation when the button is actived
-.active-zoom-out {
-  @include buttonActive() {
-    transform: scale(0.9);
-  }
 }

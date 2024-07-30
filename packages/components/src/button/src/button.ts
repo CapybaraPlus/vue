@@ -2,21 +2,19 @@ import { ExtractPropTypes } from 'vue'
 import { buildProps, definePropTypeValues } from '@capybara-plus/utils'
 
 const ButtonConst = {
-  theme: ['default', 'primary', 'success', 'warning', 'danger'] as const,
+  type: ['default', 'primary', 'success', 'warning', 'danger'] as const,
   size: ['normal', 'large', 'medium', 'small'] as const,
-  type: ['button', 'submit', 'reset', undefined] as const,
+  nativeType: ['button', 'submit', 'reset', undefined] as const,
   shape: ['default', 'round', 'circle'] as const,
-  activeAnimation: ['default', 'zoom-out'] as const,
-  hoverAnimation: ['default', 'zoom-in'] as const,
 }
 
 // button props
 export const buttonProps = buildProps({
   /**
-   * @description button theme
+   * @description button type
    */
-  theme: {
-    type: definePropTypeValues(ButtonConst['theme'], String),
+  type: {
+    type: definePropTypeValues(ButtonConst['type'], String),
     default: 'default',
   },
   /**
@@ -45,8 +43,8 @@ export const buttonProps = buildProps({
   /**
    * @description native button type
    */
-  type: {
-    type: definePropTypeValues(ButtonConst['type'], String),
+  nativeType: {
+    type: definePropTypeValues(ButtonConst['nativeType'], String),
     default: 'button',
   },
   /**
@@ -57,21 +55,7 @@ export const buttonProps = buildProps({
   /**
    * @description loading state
    */
-  loading: Boolean,
-  /**
-   * @description button animation when hover the button
-   */
-  hoverAnimation: {
-    type: definePropTypeValues(ButtonConst['hoverAnimation'], String),
-    default: 'default',
-  },
-  /**
-   * @description button animation when the button is actived
-   */
-  activeAnimation: {
-    type: definePropTypeValues(ButtonConst['activeAnimation'], String),
-    default: 'default',
-  },
+  loading: Boolean
 } as const)
 
 // button emits

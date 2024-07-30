@@ -2,17 +2,15 @@
   <button
     :class="[
       ucn.b(),
-      ucn.m(_theme),
+      ucn.m(_type),
       ucn.m(_size),
       ucn.is(_disabled),
       ucn.m(_shape),
       ucn.is(_block),
       ucn.is(_color.cls),
-      _hoverAnimation,
-      _activeAnimation,
     ]"
     :disabled="disabled"
-    :type="type"
+    :type="nativeType"
     :style="[_color.style]"
     @click="handleClick"
   >
@@ -44,8 +42,8 @@ const handleClick = (e: MouseEvent) => {
  * computed props
  */
 // theme
-const _theme = computed(() =>
-  props.theme == 'default' || props.color ? '' : props.theme
+const _type = computed(() =>
+  props.type == 'default' || !props.type ? '' : props.type
 )
 // size
 const _size = computed(() => (props.size == 'normal' ? '' : props.size))
@@ -57,23 +55,19 @@ const _shape = computed(() =>
 )
 // block
 const _block = computed(() => (props.block ? 'block' : undefined))
-// color
+// custom color
 const _color = computed(() => {
-  const cls = props.color ? 'color' : ''
-  const style = `--color: ${props.color}`
+  let style = ''
+  let cls = ''
+  if (props.color) {
+    cls = 'color'
+    style = `--color: ${props.color}`
+  }
   return {
     cls,
     style,
   }
 })
-// hoverAnimation
-const _hoverAnimation = computed(() =>
-  props.hoverAnimation ? `hover-${props.hoverAnimation}` : undefined
-)
-// activeAnimation
-const _activeAnimation = computed(() =>
-  props.activeAnimation ? `active-${props.activeAnimation}` : ''
-)
 </script>
 
 <style scoped></style>

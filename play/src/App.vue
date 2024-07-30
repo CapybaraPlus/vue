@@ -17,17 +17,23 @@
       ></ra-input>
     </ra-form-item>
     <ra-form-item>
-      <ra-button theme="primary" @click="submit">提交</ra-button>
+      <ra-button @click="submit">Submit a Message</ra-button>
       <ra-button
-        theme="default"
+        type="default"
         color="#83edf5"
         active-animation="zoom-out"
         @click="submit"
-        >提交</ra-button
+        >Submit a Message</ra-button
       >
-      <ra-button theme="success" @click="submit">提交</ra-button>
-      <ra-button theme="warning" @click="submit">提交</ra-button>
-      <ra-button theme="danger" @click="submit">提交</ra-button>
+      <ra-button size="small" type="success" @click="submit"
+        >Submit a Message</ra-button
+      >
+      <ra-button size="large" type="warning" @click="submit"
+        >Submit a Message</ra-button
+      >
+      <ra-button size="medium" type="danger" @click="submit"
+        >Submit a Message</ra-button
+      >
       <ra-button @click="handleClick">重置</ra-button>
     </ra-form-item>
   </ra-form>
