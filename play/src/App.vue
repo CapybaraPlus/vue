@@ -28,7 +28,7 @@
       <ra-button size="small" type="success" @click="submit"
         >Submit a Message</ra-button
       >
-      <ra-button size="large" type="warning" @click="submit"
+      <ra-button size="large" type="warning" theme="plain" @click="submit"
         >Submit a Message</ra-button
       >
       <ra-button size="medium" type="danger" @click="submit"

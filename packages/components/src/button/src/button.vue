@@ -4,9 +4,10 @@
       ucn.b(),
       ucn.m(_type),
       ucn.m(_size),
-      ucn.is(_disabled),
       ucn.m(_shape),
-      ucn.is(_block),
+      ucn.m(_theme),
+      ucn.is(_disabled),
+      ucn.is(block, 'block'),
       ucn.is(_color.cls),
     ]"
     :disabled="disabled"
@@ -53,8 +54,6 @@ const _disabled = computed(() => (props.disabled ? 'disabled' : undefined))
 const _shape = computed(() =>
   props.shape == 'default' ? undefined : props.shape
 )
-// block
-const _block = computed(() => (props.block ? 'block' : undefined))
 // custom color
 const _color = computed(() => {
   let style = ''
@@ -68,6 +67,10 @@ const _color = computed(() => {
     style,
   }
 })
+// theme
+const _theme = computed(() =>
+  props.theme == 'default' || !props.theme ? '' : props.theme
+)
 </script>
 
 <style scoped></style>

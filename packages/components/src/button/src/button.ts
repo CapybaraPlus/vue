@@ -6,6 +6,7 @@ const ButtonConst = {
   size: ['normal', 'large', 'medium', 'small'] as const,
   nativeType: ['button', 'submit', 'reset', undefined] as const,
   shape: ['default', 'round', 'circle'] as const,
+  theme: ['default', 'plain'] as const,
 }
 
 // button props
@@ -55,7 +56,14 @@ export const buttonProps = buildProps({
   /**
    * @description loading state
    */
-  loading: Boolean
+  loading: Boolean,
+  /**
+   *
+   */
+  theme: {
+    type: definePropTypeValues(ButtonConst['theme'], String),
+    default: 'default',
+  },
 } as const)
 
 // button emits

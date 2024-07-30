@@ -34,6 +34,41 @@ $sizeMap: (
   @return map.get($sizeMap, $size);
 }
 
+// button theme mixin
+@mixin themeMixin($color) {
+  background-color: $color;
+  color: getFillColor();
+  @include buttonHover() {
+    opacity: 0.7;
+  }
+  @include buttonActive() {
+    color: $color;
+    background-color: getFillColor();
+    transform: scale(0.9);
+  }
+
+  &#{m(plain)} {
+    color: $color;
+    background-color: getFillColor();
+    box-shadow: getBoxShadow('base');
+    &::before {
+      background-color: $color;
+    }
+    @include buttonHover() {
+      border-color: $color;
+    }
+    @include buttonActive() {
+      color: getFillColor();
+      background-color: transparent;
+      &::before {
+        width: 100%;
+        border-radius: inherit;
+        opacity: 0.9;
+      }
+    }
+  }
+}
+
 @include b() {
   position: relative;
   display: inline-flex;
@@ -48,22 +83,21 @@ $sizeMap: (
   border-radius: getBorderRadius('small');
   font-size: getFontSize();
   font-weight: normal;
-  border: 1px solid getBorderColor('dark');
-  background-color: getFillColor();
-  color: getTextColor();
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
   transition: all getTransition();
   margin: 0 12px 8px 0;
   box-sizing: border-box;
   text-align: center;
   white-space: nowrap;
-  border-color: transparent;
-  box-shadow: getBoxShadow('base');
+  @include themeMixin(getTextColor());
   &::before {
     content: '';
     position: absolute;
     width: 0;
     height: 100%;
-    background-color: getBorderColor('base');
+    background-color: transparent;
     color: inherit;
     box-sizing: border-box;
     border-radius: 200px;
@@ -72,35 +106,13 @@ $sizeMap: (
     opacity: 0;
     z-index: -1;
   }
-  @include buttonHover() {
-    border-color: getBorderColor('base');
-  }
-  @include buttonActive {
-    color: getFillColor();
-    background-color: transparent;
-    &::before {
-      width: 100%;
-      border-radius: inherit;
-      opacity: 0.9;
-    }
-  }
 }
 
-@mixin defaultColorMixin($color) {
-  color: $color;
-  &::before {
-    background-color: $color;
-  }
-  @include buttonHover() {
-    border-color: $color;
-  }
-}
-
-// button type mixin
+// button type
 $buttonType: primary success warning danger;
 @each $type in $buttonType {
   @include m($type) {
-    @include defaultColorMixin(getColor($type));
+    @include themeMixin(getColor($type));
   }
 }
 
@@ -113,7 +125,7 @@ $buttonType: primary success warning danger;
 
 // custom color
 @include is(color) {
-  @include defaultColorMixin(var(--color));
+  @include themeMixin(var(--color));
 }
 
 // disabled
