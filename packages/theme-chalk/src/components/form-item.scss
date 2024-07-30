@@ -14,7 +14,7 @@
   white-space: nowrap;
   vertical-align: middle;
   transition: all getTransition();
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   @include e(label) {
     margin-right: 18px;
   }
@@ -25,14 +25,15 @@
     display: flex;
     align-items: center;
     @include e(validation-message) {
-      font-size: getFontSize('small');
+      font-size: getFontSize('extra-small');
       position: absolute;
       top: 100%;
       left: 0;
-      padding: 0 form.$padding-horizontal;
       color: getColor('error');
       @each $state in (success, error) {
         @include m($state) {
+          display: flex;
+          align-items: center;
           color: getColor($state);
         }
       }

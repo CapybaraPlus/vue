@@ -5,12 +5,13 @@ import {
   isNumber,
   isString,
 } from '@capybara-plus/utils'
+import { FormSizeValues } from '@capybara-plus/consts'
 import { ExtractPropTypes } from 'vue'
 
 const InputConst = {
   type: ['text', 'password', 'textarea'] as const,
-  theme: ['line', 'mask'] as const,
-  size: ['small', 'large'] as const,
+  theme: ['mask', 'line'] as const,
+  size: FormSizeValues,
 }
 
 // input props

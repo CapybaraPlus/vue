@@ -11,6 +11,9 @@ importers:
       '@capybara-plus/components':
         specifier: workspace:^
         version: link:packages/components
+      '@capybara-plus/consts':
+        specifier: workspace:^
+        version: link:packages/consts
       '@capybara-plus/hooks':
         specifier: workspace:^
         version: link:packages/hooks
@@ -112,6 +115,8 @@ importers:
   docs: {}
 
   packages/components: {}
+
+  packages/consts: {}
 
   packages/hooks: {}
 

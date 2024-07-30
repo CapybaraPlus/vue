@@ -12,6 +12,7 @@
         v-model="form.password"
         theme="line"
         type="password"
+        size="small"
         clearable
         placeholder="请输入密码"
       ></ra-input>

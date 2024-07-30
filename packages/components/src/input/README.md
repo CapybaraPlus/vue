@@ -11,7 +11,7 @@
 - ✅autoCompelete：自动完成
 - ✅clearable：是否显示清空按钮
 - ✅size：输入框尺寸
-- ✅theme: 输入框主题，line、mask
+- ✅theme: 输入框主题，❌line、mask
 
 # 事件
 

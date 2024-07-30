@@ -1,3 +1,15 @@
-$padding-horizontal: 12px;
-$padding-vertical: 8px;
-$padding: $padding-vertical $padding-horizontal;
+@use 'sass:map';
+
+$formItemHeight: () !default;
+$formItemHeight: map.deep-merge(
+  (
+    small: 28px,
+    normal: 36px,
+    medium: 48px,
+    large: 56px,
+  ),
+  $formItemHeight
+);
+@function getFormItemHeight($size: normal) {
+  @return map.get($formItemHeight, $size);
+}

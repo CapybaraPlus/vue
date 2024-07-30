@@ -11,63 +11,70 @@
   transition: all getTransition('fast');
   padding: 4px;
   border-radius: getBorderRadius('small');
+  &:active {
+    transform: scale(0.8);
+  }
   &:hover {
     background-color: getFillColor('dark');
   }
 }
 
 @include b() {
+  width: 100%;
   position: relative;
   display: inline-flex;
   align-items: center;
   vertical-align: middle;
   font-size: getFontSize();
-  padding: form.$padding;
-  padding-top: 0px;
-  padding-bottom: 0px;
-  height: 32px;
-  border-radius: getBorderRadius('round');
-  outline: 1px solid getBorderColor();
+  padding: 0 10px;
+  height: form.getFormItemHeight();
+  border-radius: getBorderRadius('small');
+  outline: 1px solid transparent;
   box-sizing: border-box;
-  width: 100%;
+  box-shadow: getBoxShadow('base');
+  transition: all getTransition('fast');
+  color: getTextColor();
+  background-color: getFillColor();
   &:hover {
     outline-color: getColor();
+    @include e(clear) {
+      opacity: 1 !important;
+    }
   }
   &:focus-within {
     outline-width: 2px;
     outline-color: getColor();
   }
   @include e(wrapper) {
-    font-size: inherit;
-    font-weight: inherit;
-    line-height: inherit;
+    width: 100%;
+    height: 100%;
+    font: inherit;
     display: inline-flex;
     align-items: center;
-    padding: 0;
-    width: 100%;
+    position: relative;
+    @include e(prefix) {
+      display: inline-flex;
+      align-items: center;
+      margin-right: 8px;
+    }
     @include e(inner) {
-      font-size: inherit;
-      font-weight: inherit;
-      line-height: inherit;
+      font: inherit;
       color: inherit;
       border: none;
       outline: none;
       background: none;
       width: 100%;
-      flex-grow: 1;
+      flex: 1 1 auto;
       box-sizing: border-box;
       cursor: text;
+      height: 100%;
+      padding: 0;
       &:focus {
         outline: none;
       }
       &:disabled {
         cursor: not-allowed;
       }
-    }
-    @include e(prefix) {
-      display: inline-flex;
-      align-items: center;
-      margin-right: 8px;
     }
     @include e(suffix) {
       display: inline-flex;
@@ -77,6 +84,7 @@
       cursor: default;
       @include e(clear) {
         @include suffixItem;
+        opacity: 0;
       }
       @include e(password) {
         @include suffixItem;
@@ -109,31 +117,22 @@
 
 // size
 @include m(small) {
-  padding: 0 8px;
   font-size: getFontSize('small');
-  @include e(wrapper) {
-    padding: 4px 0;
-  }
+  height: form.getFormItemHeight('small');
+  padding: 0 5px;
+}
+@include m(medium) {
+  height: form.getFormItemHeight('medium');
+  padding: 0 12px;
 }
 @include m(large) {
+  height: form.getFormItemHeight('large');
   padding: 0 18px;
-  @include e(wrapper) {
-    padding: 12px 0;
-  }
 }
 
 // line theme
-@include is(line) {
-  outline: none;
-  border-radius: 0;
-  border-bottom: 1px solid getBorderColor();
-  &:focus-within {
-    border-color: getColor();
-  }
-}
-
 @include is(mask) {
-  outline: none;
+  outline-color: transparent;
   background-color: getFillColor('dark');
   opacity: getOpacity();
   &:hover {
@@ -141,6 +140,6 @@
   }
   &:focus-within {
     background-color: getFillColor();
-    outline: 1px solid getBorderColor();
+    outline-color: getColor();
   }
 }
