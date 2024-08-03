@@ -37,7 +37,9 @@
     </ra-form-item>
     <ra-form-item>
       <ra-link>同意用户协议</ra-link>
-      <ra-link type="primary">同意用户协议</ra-link>
+      <ra-link type="primary" href="https://www.baidu.com" target="_blank"
+        >同意用户协议</ra-link
+      >
       <ra-link type="success">同意用户协议</ra-link>
     </ra-form-item>
   </ra-form>

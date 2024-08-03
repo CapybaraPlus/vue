@@ -43,6 +43,7 @@
   box-sizing: border-box;
   text-align: center;
   white-space: nowrap;
+  text-decoration: none;
   cursor: pointer;
   @include linkHover() {
     background-color: getFillColor('dark');
