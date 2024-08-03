@@ -36,10 +36,15 @@
   @include e(close) {
     margin-left: 10px;
     flex-shrink: 1;
-    cursor: pointer;
+    padding: 5px;
+    border-radius: getBorderRadius('small');
     transition: transform getTransition();
+    cursor: pointer;
     &:hover {
-      transform: rotate(180deg);
+      background-color: getFillColor('dark');
+    }
+    &:active {
+      transform: scale(0.8);
     }
   }
 }

@@ -18,12 +18,10 @@
       ></ra-input>
     </ra-form-item>
     <ra-form-item>
-      <ra-button @click="submit">Submit a Message</ra-button>
-      <ra-button
-        type="default"
-        color="#83edf5"
-        active-animation="zoom-out"
-        @click="submit"
+      <ra-tooltip content="Submit a Message"
+        ><ra-button @click="submit">Submit a Message</ra-button></ra-tooltip
+      >
+      <ra-button type="default" color="#83edf5" @click="submit"
         >Submit a Message</ra-button
       >
       <ra-button size="small" type="success" @click="submit"
@@ -36,6 +34,11 @@
         >Submit a Message</ra-button
       >
       <ra-button @click="handleClick">重置</ra-button>
+    </ra-form-item>
+    <ra-form-item>
+      <ra-link>同意用户协议</ra-link>
+      <ra-link type="primary">同意用户协议</ra-link>
+      <ra-link type="success">同意用户协议</ra-link>
     </ra-form-item>
   </ra-form>
 </template>
@@ -85,7 +88,7 @@ const submit = () => {
     })
   RaMessage({
     theme: 'success',
-    content: 'hello',
+    content: 'Submit Message Successfully !!!',
   })
 }
 </script>

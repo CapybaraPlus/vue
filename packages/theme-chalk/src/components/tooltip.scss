@@ -10,7 +10,7 @@
   vertical-align: middle;
   white-space: nowrap;
   padding: 5px 10px;
-  border-radius: getBorderRadius();
+  border-radius: getBorderRadius('small');
   box-sizing: border-box;
   background-color: getBlack();
   color: getWhite();

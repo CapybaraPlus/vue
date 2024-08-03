@@ -9,16 +9,6 @@
     @content;
   }
 }
-@mixin linkLink() {
-  @include linkState('link') {
-    @content;
-  }
-}
-@mixin linkVisited() {
-  @include linkState('visited') {
-    @content;
-  }
-}
 @mixin linkFocus() {
   @include linkState('focus') {
     @content;
@@ -46,40 +36,24 @@
   align-items: center;
   vertical-align: middle;
   outline: none;
-  text-decoration: none;
-  cursor: pointer;
-  padding: 0 8px;
-  margin: 10px;
+  border-radius: getBorderRadius('small');
   font-size: getFontSize();
   font-weight: normal;
   transition: all getTransition();
   box-sizing: border-box;
   text-align: center;
   white-space: nowrap;
-  user-select: none;
-  outline: 2px solid transparent;
-  border-radius: getBorderRadius('larger');
-  // @include linkLink() {
-  //   text-decoration: underline;
-  // }
-  // @include linkVisited() {
-  //   color: getColor();
-  // }
-  @include linkFocus() {
-    outline-color: getBorderColor();
-  }
+  cursor: pointer;
   @include linkHover() {
-    color: getColor();
+    background-color: getFillColor('dark');
   }
-  // @include linkActive() {
-  //   color: getColorWithLevel(primary, 1);
-  // }
+  @include linkActive() {
+    background-color: getFillColor('light');
+  }
   @include e(inner) {
     transition: inherit;
-    text-decoration: underline;
-    @include e(icon) {
-      margin-left: 5px;
-    }
+    border-radius: inherit;
+    padding: 5px 8px;
   }
 }
 
@@ -87,18 +61,14 @@
 @mixin linkTheme($theme) {
   @include m($theme) {
     color: getColor($theme);
-    // @include linkVisited() {
-    //   color: getColorWithLevel($theme, 1, dark);
-    // }
-    @include linkFocus() {
-      outline-color: getColor($theme);
-    }
     @include linkHover() {
-      color: getColorWithLevel($theme, 1);
+      background-color: getColorWithLevel($theme, 5);
+      color: getFillColor();
     }
-    // @include linkActive() {
-    //   color: getColorWithLevel($theme, 2);
-    // }
+    @include linkActive() {
+      background-color: getColorWithLevel($theme, 6);
+      color: getTextColor();
+    }
   }
 }
 @include linkTheme(primary);
