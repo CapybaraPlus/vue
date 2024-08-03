@@ -32,7 +32,7 @@
   outline: 1px solid transparent;
   box-sizing: border-box;
   box-shadow: getBoxShadow('base');
-  transition: all getTransition('fast');
+  transition: background-color getTransition('fast');
   color: getTextColor();
   background-color: getFillColor();
   &:hover {
@@ -92,6 +92,7 @@
       @include e(count) {
         @include suffixItem;
         font-size: getFontSize('extra-small');
+        pointer-events: none;
       }
     }
   }
@@ -141,5 +142,6 @@
   &:focus-within {
     background-color: getFillColor();
     outline-color: getColor();
+    opacity: 1;
   }
 }

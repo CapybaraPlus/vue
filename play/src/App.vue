@@ -3,14 +3,18 @@
     <ra-form-item label="用户名：" prop="username">
       <ra-input
         v-model="form.username"
+        theme="mask"
         clearable
         placeholder="请输入用户名"
+        size="medium"
+        maxlength="10"
+        show-count
       ></ra-input>
     </ra-form-item>
     <ra-form-item label="密码：" prop="password">
       <ra-input
         v-model="form.password"
-        theme="line"
+        theme="mask"
         type="password"
         size="small"
         clearable
