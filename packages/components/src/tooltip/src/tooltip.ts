@@ -18,8 +18,11 @@ export const tooltipProps = buildProps({
   content: {
     type: String,
   },
+  /**
+   * @description the offset between the tooltip and the reference element
+   */
   offset: {
-    type: Number,
+    type: [String, Number],
     default: 10,
   },
   /**
@@ -43,9 +46,15 @@ export const tooltipProps = buildProps({
   /**
    * @description whether the tooltip is disabled or not
    */
-  disabled: {
+  disabled: Boolean,
+  /**
+   * @description whether show the arrow or not
+   */
+  showArrow: {
     type: Boolean,
+    default: true,
   },
+  transition: String,
 })
 
 // typescript tooltip props

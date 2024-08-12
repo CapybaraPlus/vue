@@ -1,8 +1,10 @@
 import { Component } from 'vue'
 import { definePropType } from './vue/props'
 
+// is string
 export const isString = (str: any): str is string => typeof str === 'string'
 
+// is element
 export const isElement = (el: any): el is Element => {
   if (typeof Element === 'undefined') {
     return false
@@ -10,13 +12,17 @@ export const isElement = (el: any): el is Element => {
   return el instanceof Element
 }
 
+// is number
 export const isNumber = (num: any): boolean => {
   if (!num) return false
   if (typeof num === 'boolean') return false
   if (typeof num === 'number') {
     return true
   }
-  return !isNaN(Number(num))
+  if (typeof num === 'string') {
+    return /^\d+$/.test(num)
+  }
+  return false
 }
 
 // timer type

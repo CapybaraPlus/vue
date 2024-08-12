@@ -1,6 +1,6 @@
 import { VNode, h, defineComponent, StyleValue } from 'vue'
 import { tooltipProps } from './tooltip'
-import { ref, computed } from 'vue'
+import { ref, computed, Transition } from 'vue'
 import {
   useFloating,
   autoUpdate,
@@ -10,18 +10,24 @@ import {
   shift,
   arrow,
 } from '@floating-ui/vue'
-import { useClassName } from '@capybara-plus/hooks'
+import { useClassName, useTransition } from '@capybara-plus/hooks'
 import '../styles'
+import { onClickOutside } from '@vueuse/core'
 
 export default defineComponent({
   name: 'RaTooltip',
+  components: {
+    Transition,
+  },
+  inheritAttrs: false,
   props: {
     ...tooltipProps,
   },
 
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     // bem class
-    const ucn = useClassName('tooltip')
+    const block = 'tooltip'
+    const ucn = useClassName(block)
 
     // to control the tooltip floating visibility
     const visibility = ref(false)
@@ -35,7 +41,7 @@ export default defineComponent({
     const middleware = computed(() => [
       // offset must be the first middleware
       // every middleware will change the coordinate, so they should be in order
-      offset(props.offset),
+      offset(parseFloat(props.offset.toString())),
       // shift the tooltip to make sure it is in the viewport
       // autoPlacemnet will automatically choose the best placement for the tooltip
       // flip the tooltip position to make sure it is in the viewport
@@ -58,6 +64,7 @@ export default defineComponent({
 
     // computed floating arrow styles
     const floatingArrowStyles = computed(() => {
+      if (!props.showArrow) return
       return {
         position: 'absolute',
         left:
@@ -88,6 +95,11 @@ export default defineComponent({
         return {
           onClick: () => {
             visibility.value = !visibility.value
+
+            // when click outside of the target, close the tooltip
+            onClickOutside(referenceRef, () => {
+              visibility.value = false
+            })
           },
         }
       }
@@ -111,24 +123,25 @@ export default defineComponent({
       }
       // create floating node
       function createFloatingNode() {
-        if (!visibility.value || props.disabled) {
-          return null
-        }
         return (
-          <div
-            class={[ucn.b()]}
-            ref={floatingRef}
-            style={{ ...floatingStyles.value }}
-          >
-            {slots?.content?.() ?? props?.content}
-            {
+          <Transition name={props.transition ?? useTransition(block)}>
+            {visibility.value && !props.disabled ? (
               <div
-                class={ucn.e('arrow')}
-                ref={arrowRef}
-                style={floatingArrowStyles.value as StyleValue}
-              ></div>
-            }
-          </div>
+                class={[ucn.b()]}
+                ref={floatingRef}
+                style={{ ...floatingStyles.value, ...(attrs.style ?? {}) }}
+              >
+                {slots?.content?.() ?? props?.content}
+                {props.showArrow ? (
+                  <div
+                    class={ucn.e('arrow')}
+                    ref={arrowRef}
+                    style={floatingArrowStyles.value as StyleValue}
+                  ></div>
+                ) : null}
+              </div>
+            ) : null}
+          </Transition>
         )
       }
 

@@ -1,0 +1,20 @@
+@use '../utils/bem.scss' as * with (
+  $block: 'option'
+);
+
+@use '../common/var' as *;
+@use '../utils/form.scss' as form;
+
+@include b() {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: getTextColor();
+  background-color: getFillColor();
+  min-height: form.getFormItemHeight();
+  transition: all getTransition();
+  padding: 0 10px;
+  &:hover {
+    background-color: getFillColor('light');
+  }
+}

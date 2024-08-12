@@ -1,11 +1,11 @@
-type Transitions = 'slide-bottom'
+const prefix = 'ra__'
+const suffix = '__transition'
+const groupPrefix = 'group--'
 
-const groupPrefix = 'group__'
-
-export function useTransition(name: Transitions) {
-  return name
+export function useTransition(name: string) {
+  return `${prefix}${name}${suffix}`
 }
 
-export function useTransitionGroup(name: Transitions) {
-  return `${groupPrefix}${name}`
+export function useTransitionGroup(name: string) {
+  return `${groupPrefix}${useTransition(name)}`
 }

@@ -11,7 +11,7 @@
     <div :class="[ucn.e('wrapper')]">
       <slot></slot>
       <div :class="[ucn.e('validation-message')]">
-        <TransitionGroup :name="useTransitionGroup('slide-bottom')">
+        <TransitionGroup :name="useTransitionGroup('error-message')">
           <template v-if="validateState === 'error'">
             <span key="error" :class="[ucn.m('error')]">
               <ra-icon>

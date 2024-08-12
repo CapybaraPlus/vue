@@ -13,3 +13,7 @@ $formItemHeight: map.deep-merge(
 @function getFormItemHeight($size: normal) {
   @return map.get($formItemHeight, $size);
 }
+
+@function getFormItemPadding() {
+  @return 0 10px;
+}

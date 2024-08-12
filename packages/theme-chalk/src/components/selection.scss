@@ -1,0 +1,74 @@
+@use '../utils/bem.scss' as * with (
+  $block: selection
+);
+
+@use '../common/var' as *;
+@use '../utils/transition.scss' as *;
+@use '../utils/form.scss' as form;
+
+@include b() {
+  min-width: 150px;
+  height: form.getFormItemHeight();
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  vertical-align: middle;
+  font-size: getFontSize();
+  border-radius: getBorderRadius('small');
+  outline: 1px solid transparent;
+  box-sizing: border-box;
+  color: getTextColor();
+  background-color: getFillColor();
+  box-shadow: getBoxShadow('base');
+  transition: all getTransition();
+  cursor: pointer;
+  @include e('wrapper') {
+    min-width: inherit;
+    height: inherit;
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 auto;
+    border-radius: inherit;
+    padding: form.getFormItemPadding();
+    @include e('inner') {
+      width: 0;
+      display: none;
+    }
+    @include e('placeholder') {
+      position: absolute;
+      min-width: inherit;
+      height: inherit;
+      text-align: start;
+      line-height: form.getFormItemHeight();
+      color: getTextColor('placeholder');
+      user-select: none;
+    }
+  }
+  @include e('menu') {
+    width: 100%;
+    background-color: getFillColor();
+    border: 1px solid transparent;
+    box-shadow: getBoxShadow();
+    transition: all getTransition();
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+    overflow: auto;
+    &:hover {
+      border-color: getColor();
+      cursor: pointer;
+    }
+  }
+}
+
+$selection-menu-transition-name: getTransitionName('selection-menu');
+@include transitionActive($selection-menu-transition-name) {
+  transition: all getTransition('fast');
+}
+@include enterFromAndLeaveTo($selection-menu-transition-name) {
+  opacity: 0;
+}

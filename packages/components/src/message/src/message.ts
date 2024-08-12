@@ -10,7 +10,10 @@ export const messageProps = buildProps({
   /**
    * @description message close after the duration
    */
-  duration: Number,
+  duration: {
+    type: Number,
+    duration: 3000,
+  },
   /**
    * @description append to the target element
    */

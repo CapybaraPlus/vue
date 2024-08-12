@@ -49,7 +49,7 @@
   }
 }
 
-$name: 'slide-bottom';
+$name: getTransitionName('message');
 @include transitionActive($name, false) {
   transition: all getTranstion('fast') ease-in-out;
 }

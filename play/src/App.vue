@@ -21,6 +21,14 @@
         placeholder="请输入密码"
       ></ra-input>
     </ra-form-item>
+    <ra-form-item label="城市：" prop="gender">
+      <ra-selection height="100px">
+        <ra-option label="1"></ra-option>
+        <ra-option label="1"></ra-option>
+        <ra-option>3</ra-option>
+        <ra-option>4</ra-option>
+      </ra-selection>
+    </ra-form-item>
     <ra-form-item>
       <ra-tooltip content="Submit a Message"
         ><ra-button @click="submit">Submit a Message</ra-button></ra-tooltip
@@ -47,6 +55,68 @@
       <ra-link type="success">同意用户协议</ra-link>
     </ra-form-item>
   </ra-form>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
+  <ra-button block></ra-button>
 </template>
 
 <script setup lang="ts">

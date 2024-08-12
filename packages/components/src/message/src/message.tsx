@@ -20,7 +20,8 @@ export default defineComponent({
   props: messageProps,
   setup(props, { expose }) {
     // bem
-    const ucn = useClassName('message')
+    const block = 'message'
+    const ucn = useClassName(block)
 
     // v-if to realize the transition component
     const visibility = ref(false)
@@ -51,7 +52,7 @@ export default defineComponent({
     onMounted(() => {
       open()
       autoClose()
-      instanceUtils = props.onMounted()
+      instanceUtils = props.onMounted!()
     })
 
     const messageRef = ref<HTMLDivElement>()
@@ -89,7 +90,7 @@ export default defineComponent({
 
     return () => (
       <Transition
-        name={useTransition('slide-bottom')}
+        name={useTransition(block)}
         onBeforeLeave={props.onClose}
         onAfterLeave={props.afterClose}
       >

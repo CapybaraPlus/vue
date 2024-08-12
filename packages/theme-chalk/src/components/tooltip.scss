@@ -2,6 +2,7 @@
   $block: tooltip
 );
 @use '../common/var' as *;
+@use '../utils/transition.scss' as *;
 
 @include b() {
   display: inline-flex;
@@ -16,6 +17,7 @@
   color: getWhite();
   z-index: 1;
   width: max-content;
+  transition: opacity getTransition();
   @include e(arrow) {
     --#{$config-namespace}-tooltip-arrow-size: 0.5rem;
     background: #222;
@@ -26,4 +28,12 @@
 }
 @include m(reference) {
   cursor: pointer;
+}
+
+$transitionName: getTransitionName('tooltip');
+@include transitionActive($transitionName) {
+  transition: opacity getTransition('fast');
+}
+@include enterFromAndLeaveTo($transitionName) {
+  opacity: 0;
 }

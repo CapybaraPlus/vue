@@ -7,6 +7,7 @@ import { RaMask } from './mask'
 import { RaMessage } from './message'
 import { RaInput } from './input'
 import { RaForm, RaFormItem } from './form'
+import { RaSelection, RaOption } from './selection'
 
 export const plugins = [
   RaButton,
@@ -18,6 +19,8 @@ export const plugins = [
   RaInput,
   RaForm,
   RaFormItem,
+  RaSelection,
+  RaOption,
 ] as Plugin[]
 
 export default {
@@ -36,3 +39,4 @@ export * from './mask'
 export * from './message'
 export * from './input'
 export * from './form'
+export * from './selection'

@@ -54,7 +54,7 @@
   }
 }
 
-$error-transition-group: groupName('slide-bottom');
+$error-transition-group: getTransitionGroupName('error-message');
 @include transitionActive($error-transition-group, true) {
   transition: all getTransition();
 }
