@@ -1,6 +1,7 @@
 {
   "name": "@capybara-plus/components",
   "type": "module",
+  "main": "src/index.js",
   "version": "0.0.0",
   "description": "",
   "keywords": [],

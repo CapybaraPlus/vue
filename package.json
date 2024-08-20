@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "typings": "./typings/components.d.ts",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
@@ -13,6 +14,7 @@
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
     "eslint:fix": "eslint --fix",
+    "build:components": "pnpm -C packages/components build",
     "release": "pnpm -C packages/components release"
   },
   "peerDependencies": {
@@ -52,6 +54,7 @@
     "@floating-ui/vue": "^1.0.7",
     "@vitepress-demo-preview/component": "^2.3.2",
     "@vitepress-demo-preview/plugin": "^1.2.3",
+    "@vue/runtime-core": "^3.4.38",
     "@vueuse/core": "^10.11.0",
     "async-validator": "^4.2.5",
     "vue": "3.4.27"

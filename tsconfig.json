@@ -26,7 +26,8 @@
     "jsxImportSource": "vue", // jsx导入vue的类型定义
     "paths": {
       "@capybara-plus/*": ["packages/*"]
-    }
+    },
+    "declaration": true
   },
   "include": ["packages/**/*.ts", "packages/**/*.tsx", "packages/**/*.vue"], // 包含文件
   "exclude": ["node_modules", "dist/**", "**/__tests__"], // 排除文件

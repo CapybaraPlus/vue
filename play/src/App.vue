@@ -55,79 +55,11 @@
       <ra-link type="success">同意用户协议</ra-link>
     </ra-form-item>
   </ra-form>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
-  <ra-button block></ra-button>
 </template>
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import {
-  RaForm,
-  RaFormInstance,
-  RaMessage,
-  RaButton,
-  RaInput,
-} from '@capybara-plus/components'
+import { RaFormInstance, RaMessage, RaInput } from '@capybara-plus/components'
 // import ColorDisplay from './components/color-display/color-display.vue'
 
 const formRef = ref<RaFormInstance | null>()

@@ -25,7 +25,7 @@ export const messageProps = buildProps({
   /**
    * @description message icon
    */
-  icon: String,
+  icon: IconType,
   /**
    * @description message id
    */

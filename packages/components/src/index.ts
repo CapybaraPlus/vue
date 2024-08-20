@@ -23,13 +23,15 @@ export const plugins = [
   RaOption,
 ] as Plugin[]
 
-export default {
+const CapybaraPlus: Plugin = {
   install: (app: App) => {
     plugins.forEach((plugin) => {
       app.use(plugin)
     })
   },
 }
+
+export default CapybaraPlus
 
 export * from './button'
 export * from './link'
