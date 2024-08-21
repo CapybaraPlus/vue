@@ -12,9 +12,20 @@
   line-height: 1em;
   font-size: 1em;
   position: relative;
+  margin: 2px;
   svg {
     fill: currentColor;
     width: inherit;
     height: inherit;
+  }
+}
+
+@include e('loading') {
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
   }
 }

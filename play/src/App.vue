@@ -31,11 +31,11 @@
     </ra-form-item>
     <ra-form-item>
       <ra-tooltip content="Submit a Message"
-        ><ra-button type="primary" @click="submit"
-          >Submit a Message</ra-button
-        ></ra-tooltip
+        ><ra-button :loading="loading" type="primary" @click="submit">
+          Submit a Message
+        </ra-button></ra-tooltip
       >
-      <ra-button type="default" color="#83edf5" @click="submit"
+      <ra-button disabled type="default" color="#83edf5" @click="submit"
         >Submit a Message</ra-button
       >
       <ra-button size="small" type="success" @click="submit"
@@ -63,6 +63,13 @@
       <ra-link type="success">同意用户协议</ra-link>
     </ra-form-item>
   </ra-form>
+  <h1>hello</h1>
+  <h1>hello</h1>
+  <h1>hello</h1>
+  <h1>hello</h1>
+  <h1>hello</h1>
+  <h1>hello</h1>
+  <h1>hello</h1>
 </template>
 
 <script setup lang="ts">
@@ -72,6 +79,7 @@ import { Close } from '@capybara-plus/icons-vue'
 // import ColorDisplay from './components/color-display/color-display.vue'
 
 const formRef = ref<RaFormInstance | null>()
+const loading = ref(false)
 
 const form = reactive({
   username: '18096323189',
@@ -95,6 +103,7 @@ const handleClick = () => {
 }
 
 const submit = () => {
+  loading.value = true
   formRef.value
     ?.validate()
     .then(() => {
@@ -107,6 +116,9 @@ const submit = () => {
     theme: 'success',
     content: 'Submit Message Successfully !!!',
   })
+  setTimeout(() => {
+    loading.value = false
+  }, 30000)
 }
 </script>
 

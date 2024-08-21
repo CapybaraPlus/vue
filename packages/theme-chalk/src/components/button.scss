@@ -160,6 +160,11 @@ $buttonType: primary success warning danger;
   opacity: getOpacity('disabled');
 }
 
+// loading
+@include is(loading) {
+  opacity: getOpacity('loading');
+}
+
 // shape: round
 @include m(round) {
   border-radius: getBorderRadius(larger);

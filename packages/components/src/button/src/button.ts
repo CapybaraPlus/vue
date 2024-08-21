@@ -58,7 +58,14 @@ export const buttonProps = buildProps({
    */
   loading: Boolean,
   /**
-   *
+   * @description show loading icon
+   */
+  showLoadingIcon: {
+    type: Boolean,
+    default: true,
+  },
+  /**
+   * @description theme
    */
   theme: {
     type: definePropTypeValues(ButtonConst['theme'], String),

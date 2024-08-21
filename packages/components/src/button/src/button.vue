@@ -7,16 +7,24 @@
       ucn.m(_size),
       ucn.m(_shape),
       ucn.m(_theme),
-      ucn.is(_disabled),
+      ucn.is(disabled, 'disabled'),
       ucn.is(block, 'block'),
       ucn.is(_color.cls),
+      ucn.is(loading, 'loading'),
     ]"
-    :disabled="disabled"
+    :disabled="disabled || loading"
     :type="nativeType"
     :style="[_color.style]"
     @click="handleClick"
     @mousedown="handleMouseDown"
   >
+    <template v-if="showLoadingIcon && loading">
+      <ra-icon :class="ucn.e('loading-icon')">
+        <slot name="loading-icon">
+          <Loading />
+        </slot>
+      </ra-icon>
+    </template>
     <slot></slot>
     <span
       ref="rippleRef"
@@ -31,6 +39,8 @@ import { computed, CSSProperties, nextTick, ref } from 'vue'
 import { buttonProps, buttonEmits } from './button'
 import '../styles/index'
 import { useClassName } from '@capybara-plus/hooks'
+import RaIcon from '../../icon'
+import { Loading } from '@capybara-plus/icons-vue'
 
 // bem
 const ucn = useClassName('button')
@@ -89,8 +99,6 @@ const _type = computed(() =>
 )
 // size
 const _size = computed(() => (props.size == 'normal' ? '' : props.size))
-// disabled
-const _disabled = computed(() => (props.disabled ? 'disabled' : undefined))
 // shape
 const _shape = computed(() =>
   props.shape == 'default' ? undefined : props.shape

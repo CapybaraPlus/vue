@@ -5,7 +5,8 @@
 - ✅ 尺寸：normal large medium small
 - ✅ 形状：default round circle
 - ✅ 禁用：disabled
-- 加载：loading
+- ✅ 加载：loading
+- ✅ 是否展示加载 icon：show-loading-icon
 - ✅ 原生类型：button submit reset
 
 ## 事件
@@ -15,3 +16,4 @@
 ## 插槽
 
 - 文字：text
+- 加载 icon: loading-icon
