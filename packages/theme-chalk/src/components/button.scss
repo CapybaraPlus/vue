@@ -55,11 +55,13 @@ $sizeMap: (
   }
 
   &#{m(plain)} {
+    font-weight: 700;
     color: $color;
     background-color: getFillColor();
     border-color: $color;
     @include buttonHover() {
-      color: getFillColor();
+      background-color: getFillColor('light');
+      border-color: transparent;
     }
     @include buttonActive() {
       color: getFillColor();
@@ -120,7 +122,7 @@ $buttonType: primary success warning danger;
     opacity: 0.7;
   }
   @include buttonRipple() {
-    background-color: rgba(#000, 0.9);
+    background-color: rgba(#000, 0.1);
   }
 }
 
