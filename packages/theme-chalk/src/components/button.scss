@@ -22,22 +22,45 @@
   }
 }
 
+// button ripple mixin
 @mixin buttonRipple() {
   @include e('ripple') {
     @content;
   }
 }
 
+@mixin buttonCircle($size) {
+  max-width: $size;
+  height: $size;
+  border-radius: calc($size / 2);
+  padding: 0;
+}
+
 // button size
 $size: large medium small;
 $sizeMap: (
-  normal: 12px 20px,
-  large: 18px 32px,
-  medium: 10px 16px,
-  small: 6px 12px,
+  normal: (
+    padding: 12px 20px,
+    size: 48px,
+  ),
+  large: (
+    padding: 18px 32px,
+    size: 56px,
+  ),
+  medium: (
+    padding: 10px 16px,
+    size: 40px,
+  ),
+  small: (
+    padding: 6px 12px,
+    size: 32px,
+  ),
 );
+@function getSizePadding($size: normal) {
+  @return map.get($sizeMap, $size, 'padding');
+}
 @function getSize($size: normal) {
-  @return map.get($sizeMap, $size);
+  @return map.get($sizeMap, $size, 'size');
 }
 
 // button theme mixin
@@ -71,14 +94,14 @@ $sizeMap: (
 }
 
 @include b() {
-  min-width: 50px;
+  min-width: getSize('size');
   position: relative;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   border: none;
   outline: none;
-  padding: getSize();
+  padding: getSizePadding();
   cursor: pointer;
   user-select: none;
   vertical-align: middle;
@@ -90,11 +113,13 @@ $sizeMap: (
   border-color: transparent;
   transition: all getTransition();
   margin: 0 12px 8px 0;
-  box-sizing: border-box;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
   @include themeMixin(getTextColor());
+  &#{m('circle')} {
+    @include buttonCircle(getSize());
+  }
 }
 
 // button type
@@ -108,7 +133,10 @@ $buttonType: primary success warning danger;
 // button size
 @each $s in $size {
   @include m($s) {
-    padding: getSize($s);
+    padding: getSizePadding($s);
+    &#{m('circle')} {
+      @include buttonCircle(getSize($s));
+    }
   }
 }
 
@@ -132,7 +160,7 @@ $buttonType: primary success warning danger;
   opacity: getOpacity('disabled');
 }
 
-// shape
+// shape: round
 @include m(round) {
   border-radius: getBorderRadius(larger);
 }

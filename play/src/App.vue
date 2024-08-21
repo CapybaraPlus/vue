@@ -48,6 +48,12 @@
         >Submit a Message</ra-button
       >
       <ra-button @click="handleClick"></ra-button>
+      <ra-button shape="circle" size="large">
+        <ra-icon>
+          <Close />
+        </ra-icon>
+        {{ form.username }}
+      </ra-button>
     </ra-form-item>
     <ra-form-item>
       <ra-link>同意用户协议</ra-link>
@@ -62,6 +68,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { RaFormInstance, RaMessage, RaInput } from '@capybara-plus/components'
+import { Close } from '@capybara-plus/icons-vue'
 // import ColorDisplay from './components/color-display/color-display.vue'
 
 const formRef = ref<RaFormInstance | null>()
