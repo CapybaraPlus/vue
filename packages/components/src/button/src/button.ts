@@ -69,6 +69,8 @@ export const buttonProps = buildProps({
 // button emits
 export const buttonEmits = {
   click: (e: MouseEvent) => e instanceof MouseEvent,
+  mousedown: (e: MouseEvent) => e instanceof MouseEvent,
+  mouseup: (e: MouseEvent) => e instanceof MouseEvent,
 }
 
 // typescript button props

@@ -31,7 +31,9 @@
     </ra-form-item>
     <ra-form-item>
       <ra-tooltip content="Submit a Message"
-        ><ra-button @click="submit">Submit a Message</ra-button></ra-tooltip
+        ><ra-button type="primary" @click="submit"
+          >Submit a Message</ra-button
+        ></ra-tooltip
       >
       <ra-button type="default" color="#83edf5" @click="submit"
         >Submit a Message</ra-button
@@ -45,7 +47,7 @@
       <ra-button size="medium" type="danger" @click="submit"
         >Submit a Message</ra-button
       >
-      <ra-button @click="handleClick">重置</ra-button>
+      <ra-button @click="handleClick"></ra-button>
     </ra-form-item>
     <ra-form-item>
       <ra-link>同意用户协议</ra-link>

@@ -22,6 +22,12 @@
   }
 }
 
+@mixin buttonRipple() {
+  @include e('ripple') {
+    @content;
+  }
+}
+
 // button size
 $size: large medium small;
 $sizeMap: (
@@ -39,37 +45,31 @@ $sizeMap: (
   background-color: $color;
   color: getFillColor();
   @include buttonHover() {
-    opacity: 0.7;
+    background-color: rgba($color: $color, $alpha: 0.7);
   }
   @include buttonActive() {
-    color: $color;
-    background-color: getFillColor();
     transform: scale(0.9);
+  }
+  @include buttonRipple() {
+    background-color: rgba($color: $color, $alpha: 0.9);
   }
 
   &#{m(plain)} {
     color: $color;
     background-color: getFillColor();
-    box-shadow: getBoxShadow('base');
-    &::before {
-      background-color: $color;
-    }
+    border-color: $color;
     @include buttonHover() {
-      border-color: $color;
+      color: getFillColor();
     }
     @include buttonActive() {
       color: getFillColor();
       background-color: transparent;
-      &::before {
-        width: 100%;
-        border-radius: inherit;
-        opacity: 0.9;
-      }
     }
   }
 }
 
 @include b() {
+  min-width: 50px;
   position: relative;
   display: inline-flex;
   justify-content: center;
@@ -91,21 +91,8 @@ $sizeMap: (
   box-sizing: border-box;
   text-align: center;
   white-space: nowrap;
+  overflow: hidden;
   @include themeMixin(getTextColor());
-  &::before {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 100%;
-    background-color: transparent;
-    color: inherit;
-    box-sizing: border-box;
-    border-radius: 200px;
-    pointer-events: none;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.6, 1);
-    opacity: 0;
-    z-index: -1;
-  }
 }
 
 // button type
@@ -125,7 +112,16 @@ $buttonType: primary success warning danger;
 
 // custom color
 @include is(color) {
-  @include themeMixin(var(--color));
+  $color: var(--color);
+  background-color: $color;
+  color: getFillColor();
+  @include buttonHover() {
+    background-color: $color;
+    opacity: 0.7;
+  }
+  @include buttonRipple() {
+    background-color: rgba(#000, 0.9);
+  }
 }
 
 // disabled
@@ -142,4 +138,20 @@ $buttonType: primary success warning danger;
 // block
 @include is(block) {
   width: 100%;
+}
+
+// ripple
+@include buttonRipple() {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  z-index: -1;
+}
+@include is('active', e('ripple')) {
+  animation: ripple 0.6s linear forwards;
+}
+@keyframes ripple {
+  to {
+    transform: scale(4);
+  }
 }
