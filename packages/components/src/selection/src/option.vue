@@ -1,5 +1,5 @@
 <template>
-  <div :class="[ucn.b()]" @click="handleClick">
+  <div :class="[ucn.b(), ucn.is(active, 'active')]" @click="handleClick">
     <slot name="default">{{ label }}</slot>
   </div>
 </template>
@@ -8,7 +8,7 @@
 import { useClassName } from '@capybara-plus/hooks'
 import '../styles'
 import { optionProps } from './option'
-import { inject, useSlots, watchEffect } from 'vue'
+import { computed, inject, useSlots, watchEffect } from 'vue'
 import { selectionContextKey } from './context'
 
 // bem
@@ -21,9 +21,10 @@ const slots = useSlots() // slots
 
 // selection context
 const selectionContext = inject(selectionContextKey)
-const id = selectionContext?.initOption()
+const optionId = selectionContext?.initOption()
 watchEffect(() => {
-  selectionContext?.addOption(id!, {
+  selectionContext?.addOption({
+    id: optionId!,
     label: slots.default ?? props.label,
     value: props.value,
   })
@@ -31,9 +32,13 @@ watchEffect(() => {
 
 // handle click
 const handleClick = () => {
-  selectionContext?.selectOption(id!)
+  selectionContext?.selectOption(optionId!)
   selectionContext?.emit('change', props.value)
 }
+
+const active = computed(
+  () => selectionContext?.getCurrentOption()?.id === optionId
+)
 </script>
 
 <style scoped lang="scss"></style>

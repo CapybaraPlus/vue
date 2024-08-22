@@ -22,17 +22,18 @@
       ></ra-input>
     </ra-form-item>
     <ra-form-item label="城市：" prop="gender">
-      <ra-selection v-model="form.city" height="100px" @change="handleChange">
+      <ra-selection
+        v-model="form.city"
+        width="200px"
+        size="large"
+        @change="handleChange"
+      >
         <ra-option
           v-for="item of cities"
           :key="item.id"
           :label="item.name"
           :value="item.value"
-        >
-          <template #default>
-            <h1>{{ item.name }}</h1>
-          </template>
-        </ra-option>
+        ></ra-option>
       </ra-selection>
     </ra-form-item>
     <ra-form-item>

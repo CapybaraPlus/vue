@@ -1,5 +1,10 @@
-import { buildProps } from '@capybara-plus/utils'
+import { buildProps, definePropTypeValues } from '@capybara-plus/utils'
 import { ExtractPropTypes } from 'vue'
+import { FormSizeValues } from '@capybara-plus/consts'
+
+const SelectionConst = {
+  size: FormSizeValues,
+}
 
 // selection props
 export const selectionProps = buildProps({
@@ -11,6 +16,14 @@ export const selectionProps = buildProps({
    * @description height
    */
   height: [Number, String],
+  /**
+   * @description width
+   */
+  width: [Number, String],
+  /**
+   * @description size
+   */
+  size: definePropTypeValues(SelectionConst['size'], String),
 })
 
 // select emits

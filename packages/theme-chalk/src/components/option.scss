@@ -18,3 +18,8 @@
     background-color: getFillColor('light');
   }
 }
+
+@include is('active') {
+  background-color: getColor();
+  color: getFillColor();
+}

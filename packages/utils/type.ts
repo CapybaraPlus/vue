@@ -13,9 +13,10 @@ export const isElement = (el: any): el is Element => {
 }
 
 // is number
+// boolean => false
+// number => true
+// string: '100' => true; '100px' => false
 export const isNumber = (num: any): num is number => {
-  if (!num) return false
-  if (typeof num === 'boolean') return false
   if (typeof num === 'number') {
     return true
   }

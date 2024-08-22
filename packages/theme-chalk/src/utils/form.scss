@@ -1,5 +1,6 @@
 @use 'sass:map';
 
+$size: small medium large;
 $formItemHeight: () !default;
 $formItemHeight: map.deep-merge(
   (

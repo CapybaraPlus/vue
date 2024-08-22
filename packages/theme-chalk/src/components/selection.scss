@@ -7,7 +7,7 @@
 @use '../utils/form.scss' as form;
 
 @include b() {
-  min-width: 150px;
+  width: 100%;
   height: form.getFormItemHeight();
   position: relative;
   display: inline-flex;
@@ -43,10 +43,12 @@
     }
     @include e('placeholder') {
       position: absolute;
-      min-width: inherit;
+      left: 10px;
+      width: 100%;
       height: inherit;
-      text-align: start;
-      line-height: form.getFormItemHeight();
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
       color: getTextColor('placeholder');
       user-select: none;
     }
@@ -80,10 +82,17 @@
     flex-direction: column;
     user-select: none;
     overflow: auto;
+    padding: 10px 0;
     &:hover {
       border-color: getColor();
       cursor: pointer;
     }
+  }
+}
+
+@each $s in form.$size {
+  @include m($s) {
+    height: form.getFormItemHeight($s);
   }
 }
 

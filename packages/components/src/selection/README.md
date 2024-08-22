@@ -3,6 +3,8 @@
 - ✅v-model: 当前选中的数据
 - ✅placeholder: 占位符
 - ✅height: 当设置了该属性后表示菜单的最大高度
+- ✅width: select 组件宽度
+- ✅size: select 大小
 
 # select 事件
 

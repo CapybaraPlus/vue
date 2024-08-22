@@ -6,19 +6,20 @@ const _id = 'ra__selection--'
 export type OptionsLabel = string | Slot<any> | undefined
 // selection option
 export interface HandleOption {
+  id: string
   label: OptionsLabel
   value: any
 }
 // selection state
 export interface SelectionState {
-  options: Map<string, HandleOption>
+  options: HandleOption[]
   currentOption: HandleOption | null
   events: Map<string, Set<(data?: any) => void>>
 }
 // selection context
 export interface SelectionContext {
   initOption: () => string
-  addOption: (id: string, option: HandleOption) => void
+  addOption: (option: HandleOption) => void
   selectOption: (id: string) => void
   getCurrentOption: () => HandleOption | null
   on: (name: string, callback: (data?: any) => void) => void
@@ -32,7 +33,7 @@ export const selectionContextKey: InjectionKey<SelectionContext> =
 // use selection context
 export function useSelectionContext(): SelectionContext {
   const state = reactive<SelectionState>({
-    options: new Map(),
+    options: [],
     currentOption: null,
     events: new Map(),
   })
@@ -43,8 +44,13 @@ export function useSelectionContext(): SelectionContext {
   }
 
   // push option
-  function addOption(id: string, option: HandleOption) {
-    state.options.set(id, option)
+  function addOption(option: HandleOption) {
+    const index = getOptionIndexById(option.id)
+    if (index === -1) {
+      state.options.push(option)
+    } else {
+      state.options.splice(index, 1, option)
+    }
   }
 
   // select option by id
@@ -67,7 +73,12 @@ export function useSelectionContext(): SelectionContext {
 
   // get option by id
   function getOptionById(id: string) {
-    return state.options.get(id)
+    return state.options.find((option) => option.id === id)
+  }
+
+  // get option index by id
+  function getOptionIndexById(id: string) {
+    return state.options.findIndex((option) => option.id === id)
   }
 
   // subscribe

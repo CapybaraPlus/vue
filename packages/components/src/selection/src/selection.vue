@@ -1,5 +1,9 @@
 <template>
-  <div ref="selectionRef" :class="[ucn.b()]">
+  <div
+    ref="selectionRef"
+    :class="[ucn.b(), ucn.m(size)]"
+    :style="selectionStyles"
+  >
     <ra-tooltip
       trigger="click"
       :style="tooltipStyles"
@@ -50,14 +54,13 @@
 </template>
 
 <script setup lang="ts">
-import { useClassName, useTransition } from '@capybara-plus/hooks'
+import { useClassName, useTransition, useUnit } from '@capybara-plus/hooks'
 import RaIcon from '@capybara-plus/components/src/icon'
 import RaTooltip from '@capybara-plus/components/src/tooltip'
 import { useElementSize } from '@vueuse/core'
-import { computed, provide, ref } from 'vue'
+import { computed, CSSProperties, provide, ref } from 'vue'
 import '../styles'
 import { selectionEmits, selectionProps } from './selection'
-import { isNumber } from '@capybara-plus/utils'
 import { selectionContextKey, useSelectionContext } from './context'
 import { Close } from '@capybara-plus/icons-vue'
 import LabelSlot from './label-slot.ts'
@@ -79,21 +82,10 @@ const emits = defineEmits(selectionEmits) // emits
 const selectionContext = useSelectionContext()
 provide(selectionContextKey, selectionContext)
 selectionContext.on('change', (value: any) => {
-  console.log(currentLabel.value)
   modelValue.value = value
   emits('change', value)
 })
 const currentLabel = computed(() => selectionContext?.getCurrentOption()?.label)
-
-// const renderLabel = computed(() => {
-//   return {
-//     render() {
-//       if (isFunction(currentLabel)) {
-//         return h((currentLabel.value as Slot<any>)())
-//       }
-//     },
-//   }
-// })
 
 // clear
 const clear = () => {
@@ -110,15 +102,17 @@ const tooltipStyles = computed(() => {
   }
 })
 // computed menu styles
-const menuStyles = computed(() => {
-  let _height = props.height ?? ''
-  if (props.height) {
-    if (isNumber(props.height)) {
-      _height = `${props.height}px`
-    }
-  }
+const menuStyles = computed<CSSProperties>(() => {
+  let _height = useUnit(props.height, 'px')
   return {
     'max-height': _height,
+  }
+})
+// computed selection styles
+const selectionStyles = computed<CSSProperties>(() => {
+  const _width = useUnit(props.width, 'px')
+  return {
+    width: _width,
   }
 })
 </script>
