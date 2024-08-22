@@ -23,3 +23,13 @@
   background-color: getColor();
   color: getFillColor();
 }
+
+@include is('disabled') {
+  cursor: not-allowed;
+  color: getDisabledColor('text');
+  background-color: getDisabledColor('fill');
+  &:hover {
+    color: getDisabledColor('text');
+    background-color: getDisabledColor('fill');
+  }
+}

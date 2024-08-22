@@ -1,5 +1,8 @@
 <template>
-  <div :class="[ucn.b(), ucn.is(active, 'active')]" @click="handleClick">
+  <div
+    :class="[ucn.b(), ucn.is(active, 'active'), ucn.is(disabled, 'disabled')]"
+    @click.stop="handleClick"
+  >
     <slot name="default">{{ label }}</slot>
   </div>
 </template>
@@ -32,6 +35,7 @@ watchEffect(() => {
 
 // handle click
 const handleClick = () => {
+  if (props.disabled) return
   selectionContext?.selectOption(optionId!)
   selectionContext?.emit('change', props.value)
 }

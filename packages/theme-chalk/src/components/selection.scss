@@ -74,7 +74,7 @@
   @include e('menu') {
     width: 100%;
     background-color: getFillColor();
-    border: 1px solid transparent;
+    outline: 1px solid transparent;
     box-shadow: getBoxShadow();
     transition: all getTransition();
     height: fit-content;
@@ -84,7 +84,7 @@
     overflow: auto;
     padding: 10px 0;
     &:hover {
-      border-color: getColor();
+      outline-color: getColor();
       cursor: pointer;
     }
   }

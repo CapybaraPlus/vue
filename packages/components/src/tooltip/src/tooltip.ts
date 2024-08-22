@@ -65,7 +65,16 @@ export const tooltipProps = buildProps({
     type: Boolean,
     default: false,
   },
+  /**
+   * @description when trigger method is click, click the outside of the el to close tooltip
+   */
+  triggerEl: definePropType<any>(Object),
 })
 
 // typescript tooltip props
 export type TooltipProps = ExtractPropTypes<typeof tooltipProps>
+
+// typescript tooltip exposed
+export interface TooltipExposed {
+  close: () => void
+}

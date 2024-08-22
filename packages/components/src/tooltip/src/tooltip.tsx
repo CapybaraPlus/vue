@@ -1,5 +1,5 @@
 import { VNode, h, defineComponent, StyleValue } from 'vue'
-import { tooltipProps } from './tooltip'
+import { TooltipExposed, tooltipProps } from './tooltip'
 import { ref, computed, Transition } from 'vue'
 import {
   useFloating,
@@ -24,7 +24,7 @@ export default defineComponent({
     ...tooltipProps,
   },
 
-  setup(props, { slots, attrs }) {
+  setup(props, { slots, attrs, expose }) {
     // bem class
     const block = 'tooltip'
     const ucn = useClassName(block)
@@ -92,6 +92,11 @@ export default defineComponent({
       }
     })
 
+    // close tooltip
+    const close = () => {
+      visibility.value = false
+    }
+
     // trigger events
     const triggerEvents = computed(() => {
       if (props.trigger === 'hover') {
@@ -100,7 +105,7 @@ export default defineComponent({
             visibility.value = true
           },
           onMouseleave: () => {
-            visibility.value = false
+            close()
           },
         }
       } else {
@@ -109,13 +114,17 @@ export default defineComponent({
             visibility.value = !visibility.value
 
             // when click outside of the target, close the tooltip
-            onClickOutside(referenceRef, () => {
-              visibility.value = false
+            onClickOutside(props.triggerEl ?? referenceRef, () => {
+              close()
             })
           },
         }
       }
     })
+
+    expose({
+      close,
+    } as TooltipExposed)
 
     return () => {
       // get content of tooltip package

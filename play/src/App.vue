@@ -33,6 +33,7 @@
           :key="item.id"
           :label="item.name"
           :value="item.value"
+          :disabled="item.disabled"
         ></ra-option>
       </ra-selection>
     </ra-form-item>
@@ -67,21 +68,25 @@ const cities = ref([
     id: 1,
     name: '北京',
     value: 'beijing',
+    disabled: true,
   },
   {
     id: 2,
     name: '上海',
     value: 'shanghai',
+    disabled: true,
   },
   {
     id: 3,
     name: '广州',
     value: 'guangzhou',
+    disabled: false,
   },
   {
     id: 4,
     name: '深圳',
     value: 'shenzhen',
+    disabled: false,
   },
 ])
 

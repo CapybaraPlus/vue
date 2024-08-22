@@ -5,12 +5,14 @@
     :style="selectionStyles"
   >
     <ra-tooltip
+      ref="tooltipRef"
       trigger="click"
       :style="tooltipStyles"
       :show-arrow="false"
       offset="0"
       :transition="useTransition('selection-menu')"
       use-show
+      :trigger-el="selectionRef"
     >
       <template #default>
         <div :class="[ucn.e('wrapper')]">
@@ -56,7 +58,9 @@
 <script setup lang="ts">
 import { useClassName, useTransition, useUnit } from '@capybara-plus/hooks'
 import RaIcon from '@capybara-plus/components/src/icon'
-import RaTooltip from '@capybara-plus/components/src/tooltip'
+import RaTooltip, {
+  TooltipExposed,
+} from '@capybara-plus/components/src/tooltip'
 import { useElementSize } from '@vueuse/core'
 import { computed, CSSProperties, provide, ref } from 'vue'
 import '../styles'
@@ -78,11 +82,16 @@ const modelValue = defineModel({
 const props = defineProps(selectionProps) // props
 const emits = defineEmits(selectionEmits) // emits
 
+// template ref
+const tooltipRef = ref(null)
+const selectionRef = ref(null)
+
 // selection context
 const selectionContext = useSelectionContext()
 provide(selectionContextKey, selectionContext)
 selectionContext.on('change', (value: any) => {
   modelValue.value = value
+  ;(tooltipRef.value as unknown as TooltipExposed).close()
   emits('change', value)
 })
 const currentLabel = computed(() => selectionContext?.getCurrentOption()?.label)
@@ -92,7 +101,6 @@ const clear = () => {
   selectionContext.clearSelected()
 }
 
-const selectionRef = ref(null)
 // computed tooltip styles
 const { width: tooltipWidth } = useElementSize(selectionRef)
 const tooltipStyles = computed(() => {
