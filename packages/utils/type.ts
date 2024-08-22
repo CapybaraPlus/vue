@@ -13,7 +13,7 @@ export const isElement = (el: any): el is Element => {
 }
 
 // is number
-export const isNumber = (num: any): boolean => {
+export const isNumber = (num: any): num is number => {
   if (!num) return false
   if (typeof num === 'boolean') return false
   if (typeof num === 'number') {
@@ -23,6 +23,11 @@ export const isNumber = (num: any): boolean => {
     return /^\d+$/.test(num)
   }
   return false
+}
+
+// is function
+export const isFunction = (fn: any): boolean => {
+  return typeof fn === 'function'
 }
 
 // timer type

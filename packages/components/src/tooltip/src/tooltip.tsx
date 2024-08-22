@@ -53,13 +53,25 @@ export default defineComponent({
       }),
     ])
     const {
-      floatingStyles,
+      floatingStyles: floatingUIStyles,
       middlewareData,
       placement: floatingPlacement,
     } = useFloating(referenceRef, floatingRef, {
       whileElementsMounted: autoUpdate,
       placement,
       middleware,
+    })
+
+    const floatingStyles = computed(() => {
+      let display = ''
+      if (props.useShow) {
+        display = visibility.value && !props.disabled ? '' : 'none'
+      }
+      return {
+        ...floatingUIStyles.value,
+        ...(attrs.style ?? {}),
+        display,
+      }
     })
 
     // computed floating arrow styles
@@ -125,7 +137,7 @@ export default defineComponent({
       function createFloatingNode() {
         return (
           <Transition name={props.transition ?? useTransition(block)}>
-            {visibility.value && !props.disabled ? (
+            {props.useShow || (visibility.value && !props.disabled) ? (
               <div
                 class={[ucn.b()]}
                 ref={floatingRef}

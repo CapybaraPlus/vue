@@ -54,7 +54,17 @@ export const tooltipProps = buildProps({
     type: Boolean,
     default: true,
   },
+  /**
+   * @description transition animation
+   */
   transition: String,
+  /**
+   * @description use v-if or v-show
+   */
+  useShow: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 // typescript tooltip props

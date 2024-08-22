@@ -3,16 +3,17 @@
 );
 
 @include b() {
+  $size: 1em;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   vertical-align: middle;
-  width: 1em;
-  height: 1em;
-  line-height: 1em;
-  font-size: 1em;
+  width: $size;
+  height: $size;
+  line-height: $size;
+  font-size: $size;
   position: relative;
-  margin: 2px;
+  margin: 0px 5px;
   svg {
     fill: currentColor;
     width: inherit;
@@ -20,7 +21,7 @@
   }
 }
 
-@include e('loading') {
+@include m('loading') {
   animation: rotate 1s linear infinite;
 }
 

@@ -22,40 +22,21 @@
       ></ra-input>
     </ra-form-item>
     <ra-form-item label="城市：" prop="gender">
-      <ra-selection height="100px">
-        <ra-option label="1"></ra-option>
-        <ra-option label="1"></ra-option>
-        <ra-option>3</ra-option>
-        <ra-option>4</ra-option>
+      <ra-selection v-model="form.city" height="100px" @change="handleChange">
+        <ra-option
+          v-for="item of cities"
+          :key="item.id"
+          :label="item.name"
+          :value="item.value"
+        >
+          <template #default>
+            <h1>{{ item.name }}</h1>
+          </template>
+        </ra-option>
       </ra-selection>
     </ra-form-item>
     <ra-form-item>
-      <ra-tooltip content="Submit a Message"
-        ><ra-button :loading="loading" type="primary" @click="submit">
-          Submit a Message
-        </ra-button></ra-tooltip
-      >
-      <ra-button disabled type="default" color="#83edf5" @click="submit"
-        >Submit a Message</ra-button
-      >
-      <ra-button size="small" type="success" @click="submit"
-        >Submit a Message</ra-button
-      >
-      <ra-button size="large" type="warning" theme="plain" @click="submit"
-        >Submit a Message</ra-button
-      >
-      <ra-button size="medium" type="danger" @click="submit"
-        >Submit a Message</ra-button
-      >
-      <ra-button @click="handleClick"></ra-button>
-      <ra-button shape="circle" size="large">
-        <ra-icon>
-          <Close />
-        </ra-icon>
-        {{ form.username }}
-      </ra-button>
-    </ra-form-item>
-    <ra-form-item>
+      <ra-button type="primary" @click="handleClick">click</ra-button>
       <ra-link>同意用户协议</ra-link>
       <ra-link type="primary" href="https://www.baidu.com" target="_blank"
         >同意用户协议</ra-link
@@ -63,28 +44,45 @@
       <ra-link type="success">同意用户协议</ra-link>
     </ra-form-item>
   </ra-form>
-  <h1>hello</h1>
-  <h1>hello</h1>
-  <h1>hello</h1>
-  <h1>hello</h1>
-  <h1>hello</h1>
-  <h1>hello</h1>
-  <h1>hello</h1>
+  <h1>{{ form.city }}</h1>
 </template>
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { RaFormInstance, RaMessage, RaInput } from '@capybara-plus/components'
-import { Close } from '@capybara-plus/icons-vue'
+import { RaFormInstance, RaInput } from '@capybara-plus/components'
 // import ColorDisplay from './components/color-display/color-display.vue'
 
 const formRef = ref<RaFormInstance | null>()
-const loading = ref(false)
+// const loading = ref(false)
 
 const form = reactive({
   username: '18096323189',
   password: '',
+  city: '',
 })
+
+const cities = ref([
+  {
+    id: 1,
+    name: '北京',
+    value: 'beijing',
+  },
+  {
+    id: 2,
+    name: '上海',
+    value: 'shanghai',
+  },
+  {
+    id: 3,
+    name: '广州',
+    value: 'guangzhou',
+  },
+  {
+    id: 4,
+    name: '深圳',
+    value: 'shenzhen',
+  },
+])
 
 const rules = {
   username: {
@@ -99,27 +97,40 @@ const rules = {
 }
 
 const handleClick = () => {
-  formRef.value?.reset()
+  cities.value = cities.value.map((item) => {
+    return {
+      ...item,
+      value: item.value.toUpperCase(),
+    }
+  })
 }
 
-const submit = () => {
-  loading.value = true
-  formRef.value
-    ?.validate()
-    .then(() => {
-      console.log('success')
-    })
-    .catch(() => {
-      console.log('error')
-    })
-  RaMessage({
-    theme: 'success',
-    content: 'Submit Message Successfully !!!',
-  })
-  setTimeout(() => {
-    loading.value = false
-  }, 30000)
+const handleChange = (value: any) => {
+  console.log('change', value)
 }
+
+// const handleClick = () => {
+//   formRef.value?.reset()
+// }
+
+// const submit = () => {
+//   loading.value = true
+//   formRef.value
+//     ?.validate()
+//     .then(() => {
+//       console.log('success')
+//     })
+//     .catch(() => {
+//       console.log('error')
+//     })
+//   RaMessage({
+//     theme: 'success',
+//     content: 'Submit Message Successfully !!!',
+//   })
+//   setTimeout(() => {
+//     loading.value = false
+//   }, 3000)
+// }
 </script>
 
 <style></style>
