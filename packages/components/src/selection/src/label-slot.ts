@@ -5,7 +5,7 @@ export default defineComponent({
   props: {
     label: {
       type: [String, Function],
-      required: true,
+      default: '',
     },
   },
   setup(props) {

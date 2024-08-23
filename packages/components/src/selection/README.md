@@ -14,6 +14,7 @@
 
 - ✅label：展示内容
 - ✅value: 对应的值
+- ✅disabled: 禁用
 
 # option 插槽
 

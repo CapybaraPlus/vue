@@ -24,6 +24,10 @@ export const selectionProps = buildProps({
    * @description size
    */
   size: definePropTypeValues(SelectionConst['size'], String),
+  /**
+   * @description whether multiple
+   */
+  multiple: Boolean,
 })
 
 // select emits

@@ -25,6 +25,7 @@ const slots = useSlots() // slots
 // selection context
 const selectionContext = inject(selectionContextKey)
 const optionId = selectionContext?.initOption()
+
 watchEffect(() => {
   selectionContext?.addOption({
     id: optionId!,
@@ -40,9 +41,7 @@ const handleClick = () => {
   selectionContext?.emit('change', props.value)
 }
 
-const active = computed(
-  () => selectionContext?.getCurrentOption()?.id === optionId
-)
+const active = computed(() => selectionContext?.isSelected(optionId!))
 </script>
 
 <style scoped lang="scss"></style>

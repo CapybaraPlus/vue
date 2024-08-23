@@ -22,21 +22,32 @@
             readonly
             :value="modelValue"
           />
-          <!-- label -->
-          <template v-if="currentLabel">
-            <div :class="ucn.e('label')">
-              <LabelSlot :label="currentLabel"></LabelSlot>
-            </div>
-          </template>
-          <!-- placeholder -->
-          <template v-else>
+          <template v-if="showPlaceholder">
             <div :class="[ucn.e('placeholder')]">
               {{ placeholder ?? 'Please Select' }}
             </div>
           </template>
+          <template v-else>
+            <div>
+              <div :class="ucn.e('label')">
+                <template v-if="multiple">
+                  <div :class="ucn.e('label-group')">
+                    <LabelSlot
+                      v-for="option in selectedOption as HandleOption[]"
+                      :key="option.id"
+                      :label="option.label"
+                    />
+                  </div>
+                </template>
+                <template v-else>
+                  <LabelSlot :label="(selectedOption as HandleOption).label" />
+                </template>
+              </div>
+            </div>
+          </template>
           <div :class="[ucn.e('suffix')]">
             <ra-icon
-              v-show="currentLabel"
+              v-show="selectedOption"
               :class="ucn.e('clear')"
               size=".7em"
               @click.stop="clear"
@@ -65,7 +76,11 @@ import { useElementSize } from '@vueuse/core'
 import { computed, CSSProperties, provide, ref } from 'vue'
 import '../styles'
 import { selectionEmits, selectionProps } from './selection'
-import { selectionContextKey, useSelectionContext } from './context'
+import {
+  HandleOption,
+  selectionContextKey,
+  useSelectionContext,
+} from './context'
 import { Close } from '@capybara-plus/icons-vue'
 import LabelSlot from './label-slot.ts'
 
@@ -77,7 +92,7 @@ defineOptions({
 })
 // v-model
 const modelValue = defineModel({
-  type: [Object, String, Number],
+  type: [Object, String, Number, Array],
 })
 const props = defineProps(selectionProps) // props
 const emits = defineEmits(selectionEmits) // emits
@@ -87,14 +102,38 @@ const tooltipRef = ref(null)
 const selectionRef = ref(null)
 
 // selection context
-const selectionContext = useSelectionContext()
+const selectionContext = useSelectionContext(props.multiple)
 provide(selectionContextKey, selectionContext)
+
+// on change
 selectionContext.on('change', (value: any) => {
-  modelValue.value = value
+  if (props.multiple) {
+    modelValue.value = selectionContext
+      .getSelectedOptions()
+      .map((item) => item.value)
+  } else {
+    modelValue.value = value
+  }
   ;(tooltipRef.value as unknown as TooltipExposed).close()
   emits('change', value)
 })
-const currentLabel = computed(() => selectionContext?.getCurrentOption()?.label)
+
+// selected option
+const selectedOption = computed(() => {
+  if (props.multiple) {
+    return selectionContext.getSelectedOptions()
+  }
+  return selectionContext.getCurrentOption()
+})
+
+// whether show placeholder or not
+const showPlaceholder = computed(() => {
+  if (!selectedOption.value) return true
+  if (props.multiple) {
+    return (selectedOption.value as HandleOption[]).length === 0
+  }
+  return false
+})
 
 // clear
 const clear = () => {

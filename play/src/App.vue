@@ -25,6 +25,7 @@
       <ra-selection
         v-model="form.city"
         width="200px"
+        height="200px"
         size="large"
         @change="handleChange"
       >
@@ -88,6 +89,36 @@ const cities = ref([
     value: 'shenzhen',
     disabled: false,
   },
+  {
+    id: 5,
+    name: '成都',
+    value: 'chengdu',
+    disabled: false,
+  },
+  {
+    id: 6,
+    name: '杭州',
+    value: 'hangzhou',
+    disabled: false,
+  },
+  {
+    id: 7,
+    name: '武汉',
+    value: 'wuhan',
+    disabled: true,
+  },
+  {
+    id: 8,
+    name: '天津',
+    value: 'tianjin',
+    disabled: false,
+  },
+  {
+    id: 9,
+    name: '黑龙江',
+    value: 'heilongjiang',
+    disabled: false,
+  },
 ])
 
 const rules = {
@@ -103,11 +134,8 @@ const rules = {
 }
 
 const handleClick = () => {
-  cities.value = cities.value.map((item) => {
-    return {
-      ...item,
-      value: item.value.toUpperCase(),
-    }
+  cities.value.forEach((item) => {
+    item.value = item.value.toUpperCase()
   })
 }
 
