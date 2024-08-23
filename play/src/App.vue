@@ -35,16 +35,18 @@
           :label="item.name"
           :value="item.value"
           :disabled="item.disabled"
-        ></ra-option>
+        >
+        </ra-option>
       </ra-selection>
     </ra-form-item>
     <ra-form-item>
-      <ra-button type="primary" @click="handleClick">click</ra-button>
-      <ra-link>同意用户协议</ra-link>
+      <ra-button type="primary" @click="handleClick">update</ra-button>
+      <ra-button type="success" @click="handleClick2">delete</ra-button>
+      <!-- <ra-link>同意用户协议</ra-link>
       <ra-link type="primary" href="https://www.baidu.com" target="_blank"
         >同意用户协议</ra-link
       >
-      <ra-link type="success">同意用户协议</ra-link>
+      <ra-link type="success">同意用户协议</ra-link> -->
     </ra-form-item>
   </ra-form>
   <h1>{{ form.city }}</h1>
@@ -137,6 +139,10 @@ const handleClick = () => {
   cities.value.forEach((item) => {
     item.value = item.value.toUpperCase()
   })
+}
+
+const handleClick2 = () => {
+  cities.value.splice(Math.floor(Math.random() * cities.value.length), 1)
 }
 
 const handleChange = (value: any) => {

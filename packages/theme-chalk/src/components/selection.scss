@@ -23,7 +23,11 @@
   box-shadow: getBoxShadow('base');
   transition: all getTransition();
   cursor: pointer;
+  &:hover {
+    outline-color: getColor();
+  }
   @include e('wrapper') {
+    width: 100%;
     min-width: inherit;
     height: inherit;
     position: relative;
@@ -33,11 +37,13 @@
     flex: 1 1 auto;
     border-radius: inherit;
     padding: form.getFormItemPadding();
+    overflow: hidden;
     @include e('inner') {
       width: 0;
       display: none;
     }
     @include e('label') {
+      width: 100%;
       flex: 1;
       text-align: start;
     }

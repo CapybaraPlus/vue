@@ -11,7 +11,7 @@
 import { useClassName } from '@capybara-plus/hooks'
 import '../styles'
 import { optionProps } from './option'
-import { computed, inject, useSlots, watchEffect } from 'vue'
+import { computed, inject, onBeforeUnmount, useSlots } from 'vue'
 import { selectionContextKey } from './context'
 
 // bem
@@ -26,17 +26,20 @@ const slots = useSlots() // slots
 const selectionContext = inject(selectionContextKey)
 const optionId = selectionContext?.initOption()
 
-watchEffect(() => {
-  selectionContext?.addOption({
-    id: optionId!,
-    label: slots.default ?? props.label,
-    value: props.value,
-  })
+// add option to selection context
+selectionContext?.addOption({
+  id: optionId!,
+  props,
+  slots,
+})
+
+// before unmount remove the option of selection context
+onBeforeUnmount(() => {
+  selectionContext?.removeOption(optionId!)
 })
 
 // handle click
 const handleClick = () => {
-  if (props.disabled) return
   selectionContext?.selectOption(optionId!)
   selectionContext?.emit('change', props.value)
 }

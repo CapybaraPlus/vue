@@ -28,26 +28,13 @@
             </div>
           </template>
           <template v-else>
-            <div>
-              <div :class="ucn.e('label')">
-                <template v-if="multiple">
-                  <div :class="ucn.e('label-group')">
-                    <LabelSlot
-                      v-for="option in selectedOption as HandleOption[]"
-                      :key="option.id"
-                      :label="option.label"
-                    />
-                  </div>
-                </template>
-                <template v-else>
-                  <LabelSlot :label="(selectedOption as HandleOption).label" />
-                </template>
-              </div>
+            <div :class="ucn.e('label')">
+              <label-slot :label="currentLabel"></label-slot>
             </div>
           </template>
           <div :class="[ucn.e('suffix')]">
             <ra-icon
-              v-show="selectedOption"
+              v-show="currentLabel"
               :class="ucn.e('clear')"
               size=".7em"
               @click.stop="clear"
@@ -73,16 +60,12 @@ import RaTooltip, {
   TooltipExposed,
 } from '@capybara-plus/components/src/tooltip'
 import { useElementSize } from '@vueuse/core'
-import { computed, CSSProperties, provide, ref } from 'vue'
+import { computed, CSSProperties, provide, ref, watchEffect } from 'vue'
 import '../styles'
 import { selectionEmits, selectionProps } from './selection'
-import {
-  HandleOption,
-  selectionContextKey,
-  useSelectionContext,
-} from './context'
+import { selectionContextKey, useSelectionContext } from './context'
 import { Close } from '@capybara-plus/icons-vue'
-import LabelSlot from './label-slot.ts'
+import LabelSlot from './label-slot'
 
 // bem
 const ucn = useClassName('selection')
@@ -102,37 +85,33 @@ const tooltipRef = ref(null)
 const selectionRef = ref(null)
 
 // selection context
-const selectionContext = useSelectionContext(props.multiple)
+const selectionContext = useSelectionContext({
+  props,
+})
 provide(selectionContextKey, selectionContext)
+
+// modelValue watch
+watchEffect(() => {
+  modelValue.value = selectionContext.state.currentOption?.props.value
+})
 
 // on change
 selectionContext.on('change', (value: any) => {
-  if (props.multiple) {
-    modelValue.value = selectionContext
-      .getSelectedOptions()
-      .map((item) => item.value)
-  } else {
-    modelValue.value = value
-  }
   ;(tooltipRef.value as unknown as TooltipExposed).close()
   emits('change', value)
 })
 
 // selected option
-const selectedOption = computed(() => {
-  if (props.multiple) {
-    return selectionContext.getSelectedOptions()
-  }
-  return selectionContext.getCurrentOption()
+const currentLabel = computed(() => {
+  const currentOption = selectionContext.getCurrentOption()
+  if (!currentOption) return
+  const { props, slots } = currentOption
+  return slots.default ?? props.label
 })
 
 // whether show placeholder or not
 const showPlaceholder = computed(() => {
-  if (!selectedOption.value) return true
-  if (props.multiple) {
-    return (selectedOption.value as HandleOption[]).length === 0
-  }
-  return false
+  return !currentLabel.value
 })
 
 // clear
