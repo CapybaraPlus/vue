@@ -1,26 +1,25 @@
-import { InjectionKey, reactive, type Slots } from 'vue'
+import { InjectionKey, reactive } from 'vue'
 import type { SelectionProps } from './selection'
 import type { OptionProps } from './option'
 
 let seed = 1
 const _id = 'ra__selection--'
 
+// input params
 export interface SelectOption {
   props: SelectionProps
 }
-
 // selection option
 export interface HandleOption {
   id: string
   props: OptionProps
-  slots: Slots
 }
 // selection state
 export interface SelectionState {
   handleOptions: HandleOption[]
   currentOption: HandleOption | null
   events: Map<string, Set<(data?: any) => void>>
-  selectedOptions: HandleOption[]
+  multipleOptions: HandleOption[]
 }
 // selection context
 export interface SelectionContext {
@@ -29,12 +28,11 @@ export interface SelectionContext {
   removeOption: (id: string) => void
   selectOption: (id: string) => void
   getCurrentOption: () => HandleOption | null
-  getSelectedOptions: () => HandleOption[]
+  getMultipleOptions: () => HandleOption[]
   on: (name: string, callback: (data?: any) => void) => void
   emit: (name: string, data?: any) => void
   clearSelected: () => void
   isSelected: (id: string) => boolean
-  state: SelectionState
 }
 // selection context key
 export const selectionContextKey: InjectionKey<SelectionContext> =
@@ -48,7 +46,7 @@ export function useSelectionContext(option: SelectOption): SelectionContext {
     handleOptions: [],
     currentOption: null,
     events: new Map(),
-    selectedOptions: [],
+    multipleOptions: [],
   })
 
   // init option
@@ -71,7 +69,11 @@ export function useSelectionContext(option: SelectOption): SelectionContext {
   function selectOption(id: string) {
     const handleOption = getOptionById(id)
     if (!handleOption) return
-    if (handleOption.props.disabled) return
+    if (props.multiple) {
+      const index = state.multipleOptions.findIndex((item) => item.id === id)
+      if (index === -1) state.multipleOptions.push(handleOption)
+      else state.multipleOptions.splice(index, 1)
+    }
     state.currentOption = handleOption
   }
 
@@ -83,12 +85,12 @@ export function useSelectionContext(option: SelectOption): SelectionContext {
   // clear selected option
   function clearSelected() {
     state.currentOption = null
-    state.selectedOptions.splice(0, state.selectedOptions.length)
+    state.multipleOptions.splice(0, state.multipleOptions.length)
   }
 
   // when props.multiple, get selected options
-  function getSelectedOptions() {
-    return Array.from(state.selectedOptions)
+  function getMultipleOptions() {
+    return state.multipleOptions
   }
 
   // option is selected
@@ -96,7 +98,7 @@ export function useSelectionContext(option: SelectOption): SelectionContext {
     const option = getOptionById(id)
     if (!option) return false
     if (props.multiple) {
-      return state.selectedOptions.findIndex((item) => item.id === id) !== -1
+      return state.multipleOptions.findIndex((item) => item.id === id) !== -1
     } else {
       return state.currentOption?.id === option.id
     }
@@ -129,16 +131,15 @@ export function useSelectionContext(option: SelectOption): SelectionContext {
   }
 
   return {
+    initOption,
     addOption,
     removeOption,
     selectOption,
-    initOption,
     getCurrentOption,
-    getSelectedOptions,
+    getMultipleOptions,
     on,
     emit,
     clearSelected,
     isSelected,
-    state,
   }
 }

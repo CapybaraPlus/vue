@@ -8,7 +8,7 @@
 
 @include b() {
   width: 100%;
-  height: form.getFormItemHeight();
+  min-height: form.getFormItemHeight();
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -29,7 +29,7 @@
   @include e('wrapper') {
     width: 100%;
     min-width: inherit;
-    height: inherit;
+    min-height: inherit;
     position: relative;
     display: inline-flex;
     justify-content: center;
@@ -45,7 +45,14 @@
     @include e('label') {
       width: 100%;
       flex: 1;
-      text-align: start;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      @include e('label-item') {
+        padding-right: 5px;
+        display: flex;
+        align-items: center;
+      }
     }
     @include e('placeholder') {
       position: absolute;

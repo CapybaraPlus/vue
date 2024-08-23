@@ -11,7 +11,7 @@
 import { useClassName } from '@capybara-plus/hooks'
 import '../styles'
 import { optionProps } from './option'
-import { computed, inject, onBeforeUnmount, useSlots } from 'vue'
+import { computed, inject, onBeforeUnmount } from 'vue'
 import { selectionContextKey } from './context'
 
 // bem
@@ -20,7 +20,6 @@ defineOptions({
   name: 'RaOption',
 })
 const props = defineProps(optionProps) // props
-const slots = useSlots() // slots
 
 // selection context
 const selectionContext = inject(selectionContextKey)
@@ -30,7 +29,6 @@ const optionId = selectionContext?.initOption()
 selectionContext?.addOption({
   id: optionId!,
   props,
-  slots,
 })
 
 // before unmount remove the option of selection context
@@ -40,6 +38,7 @@ onBeforeUnmount(() => {
 
 // handle click
 const handleClick = () => {
+  if (props.disabled) return
   selectionContext?.selectOption(optionId!)
   selectionContext?.emit('change', props.value)
 }

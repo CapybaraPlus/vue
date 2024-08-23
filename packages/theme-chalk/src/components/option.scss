@@ -20,8 +20,7 @@
 }
 
 @include is('active') {
-  background-color: getColor();
-  color: getFillColor();
+  color: getColor();
 }
 
 @include is('disabled') {

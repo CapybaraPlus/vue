@@ -26,7 +26,7 @@
         v-model="form.city"
         width="200px"
         height="200px"
-        size="large"
+        :multiple="multiple"
         @change="handleChange"
       >
         <ra-option
@@ -135,10 +135,13 @@ const rules = {
   },
 }
 
+const multiple = ref(false)
+
 const handleClick = () => {
-  cities.value.forEach((item) => {
-    item.value = item.value.toUpperCase()
-  })
+  // cities.value.forEach((item) => {
+  //   item.value = item.value.toUpperCase()
+  // })
+  multiple.value = !multiple.value
 }
 
 const handleClick2 = () => {

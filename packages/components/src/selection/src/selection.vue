@@ -9,7 +9,7 @@
       trigger="click"
       :style="tooltipStyles"
       :show-arrow="false"
-      offset="0"
+      offset="10"
       :transition="useTransition('selection-menu')"
       use-show
       :trigger-el="selectionRef"
@@ -29,7 +29,18 @@
           </template>
           <template v-else>
             <div :class="ucn.e('label')">
-              <label-slot :label="currentLabel"></label-slot>
+              <template v-if="multiple">
+                <div
+                  v-for="item in (currentLabel as any[])"
+                  :key="item.id"
+                  :class="ucn.e('label-item')"
+                >
+                  {{ item.props.label }}
+                </div>
+              </template>
+              <template v-else>
+                {{ currentLabel }}
+              </template>
             </div>
           </template>
           <div :class="[ucn.e('suffix')]">
@@ -65,7 +76,6 @@ import '../styles'
 import { selectionEmits, selectionProps } from './selection'
 import { selectionContextKey, useSelectionContext } from './context'
 import { Close } from '@capybara-plus/icons-vue'
-import LabelSlot from './label-slot'
 
 // bem
 const ucn = useClassName('selection')
@@ -92,21 +102,32 @@ provide(selectionContextKey, selectionContext)
 
 // modelValue watch
 watchEffect(() => {
-  modelValue.value = selectionContext.state.currentOption?.props.value
+  if (props.multiple)
+    modelValue.value = selectionContext
+      .getMultipleOptions()
+      .map((option) => option.props.value)
+  else modelValue.value = selectionContext.getCurrentOption()?.props.value
 })
 
 // on change
 selectionContext.on('change', (value: any) => {
-  ;(tooltipRef.value as unknown as TooltipExposed).close()
+  if (!props.multiple) {
+    ;(tooltipRef.value as unknown as TooltipExposed).close()
+  }
   emits('change', value)
 })
 
 // selected option
 const currentLabel = computed(() => {
+  if (props.multiple) {
+    return selectionContext.getMultipleOptions().length == 0
+      ? null
+      : selectionContext.getMultipleOptions()
+  }
   const currentOption = selectionContext.getCurrentOption()
   if (!currentOption) return
-  const { props, slots } = currentOption
-  return slots.default ?? props.label
+  const { props: optionProps } = currentOption
+  return optionProps.label
 })
 
 // whether show placeholder or not
