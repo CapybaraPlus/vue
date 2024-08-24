@@ -40,6 +40,10 @@ export const selectionProps = buildProps({
    * @description selection theme
    */
   theme: definePropTypeValues(SelectionConst['theme'], String),
+  /**
+   * @description whether the selection is disabled
+   */
+  disabled: Boolean,
 })
 
 // select emits

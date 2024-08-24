@@ -8,6 +8,7 @@
 - ✅multiple：多选
 - ✅tabindex：html 属性
 - ✅theme：主题，mask
+- ✅disabled：禁用状态
 
 # select 事件
 

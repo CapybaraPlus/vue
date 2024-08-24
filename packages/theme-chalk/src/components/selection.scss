@@ -112,6 +112,22 @@
   }
 }
 
+// disabled
+@include is('disabled') {
+  cursor: not-allowed;
+  color: getDisabledColor('text');
+  background-color: getDisabledColor('fill');
+  opacity: getOpacity();
+  &:hover {
+    color: getDisabledColor('text');
+    background-color: getDisabledColor('fill');
+    outline-color: transparent;
+  }
+  &:focus {
+    outline-color: transparent;
+  }
+}
+
 // mask theme
 @include is('mask') {
   outline-color: transparent;

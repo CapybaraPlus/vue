@@ -2,7 +2,7 @@
   <div
     ref="selectionRef"
     :tabindex="tabindex"
-    :class="[ucn.b(), ucn.m(size), ucn.is(theme)]"
+    :class="[ucn.b(), ucn.m(size), ucn.is(theme), ucn.is(disabled, 'disabled')]"
     :style="selectionStyles"
     @keydown="handleKeyDown"
   >
@@ -15,6 +15,7 @@
       :transition="useTransition('selection-menu')"
       use-show
       :trigger-el="selectionRef"
+      :disabled="disabled"
     >
       <template #default>
         <div :class="[ucn.e('wrapper')]">

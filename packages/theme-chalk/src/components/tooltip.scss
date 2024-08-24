@@ -26,9 +26,6 @@
     transform: rotate(45deg);
   }
 }
-@include m(reference) {
-  cursor: pointer;
-}
 
 $transitionName: getTransitionName('tooltip');
 @include transitionActive($transitionName) {

@@ -27,6 +27,7 @@
         width="200px"
         height="200px"
         :multiple="multiple"
+        disabled
         @change="handleChange"
         @input="handleInput"
       >
