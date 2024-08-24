@@ -155,7 +155,7 @@ $text: map.merge(
     'primary': getNeutralColor(),
     'regular': getNeutralColorWithLevel(3),
     'secondary': getNeutralColorWithLevel(5),
-    'placeholder': getNeutralColorWithLevel(7),
+    'placeholder': getNeutralColorWithLevel(6),
   ),
   $text
 );

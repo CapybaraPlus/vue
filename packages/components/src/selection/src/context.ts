@@ -5,6 +5,10 @@ import type { OptionProps } from './option'
 let seed = 1
 const _id = 'ra__selection--'
 
+// selection context key
+export const selectionContextKey: InjectionKey<SelectionContext> =
+  Symbol('selectionContext')
+
 // input params
 export interface SelectOption {
   props: SelectionProps
@@ -20,23 +24,23 @@ export interface SelectionState {
   currentOption: HandleOption | null
   events: Map<string, Set<(data?: any) => void>>
   multipleOptions: HandleOption[]
+  currentFocusIndex: number
 }
 // selection context
 export interface SelectionContext {
   initOption: () => string
   addOption: (option: HandleOption) => void
   removeOption: (id: string) => void
-  selectOption: (id: string) => void
+  selectOption: (id?: string) => void
   getCurrentOption: () => HandleOption | null
   getMultipleOptions: () => HandleOption[]
   on: (name: string, callback: (data?: any) => void) => void
   emit: (name: string, data?: any) => void
   clearSelected: () => void
   isSelected: (id: string) => boolean
+  isFocused: (id: string) => boolean
+  moveIndex: (index: number) => void
 }
-// selection context key
-export const selectionContextKey: InjectionKey<SelectionContext> =
-  Symbol('selectionContext')
 
 // use selection context
 export function useSelectionContext(option: SelectOption): SelectionContext {
@@ -47,6 +51,7 @@ export function useSelectionContext(option: SelectOption): SelectionContext {
     currentOption: null,
     events: new Map(),
     multipleOptions: [],
+    currentFocusIndex: -1,
   })
 
   // init option
@@ -66,7 +71,11 @@ export function useSelectionContext(option: SelectOption): SelectionContext {
   }
 
   // select option by id
-  function selectOption(id: string) {
+  function selectOption(id?: string) {
+    // enter keydown
+    if (!id) {
+      id = state.handleOptions[state.currentFocusIndex]?.id
+    }
     const handleOption = getOptionById(id)
     if (!handleOption) return
     if (props.multiple) {
@@ -102,6 +111,27 @@ export function useSelectionContext(option: SelectOption): SelectionContext {
     } else {
       return state.currentOption?.id === option.id
     }
+  }
+
+  function moveIndex(index: number) {
+    state.currentFocusIndex += index
+    // boundary check
+    if (state.currentFocusIndex < 0) {
+      state.currentFocusIndex = state.handleOptions.length - 1
+    } else if (state.currentFocusIndex >= state.handleOptions.length) {
+      state.currentFocusIndex = 0
+    }
+    const target = state.handleOptions[state.currentFocusIndex]
+    // skip disabled option
+    if (target.props.disabled) {
+      moveIndex(index)
+    }
+  }
+
+  // option is focused
+  function isFocused(id: string) {
+    const index = getOptionIndexById(id)
+    return state.currentFocusIndex === index
   }
 
   // get option by id
@@ -141,5 +171,7 @@ export function useSelectionContext(option: SelectOption): SelectionContext {
     emit,
     clearSelected,
     isSelected,
+    moveIndex,
+    isFocused,
   }
 }

@@ -131,7 +131,7 @@
   padding: 0 18px;
 }
 
-// line theme
+// mask theme
 @include is(mask) {
   outline-color: transparent;
   background-color: getFillColor('dark');

@@ -1,6 +1,12 @@
 <template>
   <div
-    :class="[ucn.b(), ucn.is(active, 'active'), ucn.is(disabled, 'disabled')]"
+    :tabindex="tabindex"
+    :class="[
+      ucn.b(),
+      ucn.is(active, 'active'),
+      ucn.is(disabled, 'disabled'),
+      ucn.is(focused, 'focused'),
+    ]"
     @click.stop="handleClick"
   >
     <slot name="default">{{ label }}</slot>
@@ -39,11 +45,12 @@ onBeforeUnmount(() => {
 // handle click
 const handleClick = () => {
   if (props.disabled) return
+  selectionContext?.emit('select', props.value)
   selectionContext?.selectOption(optionId!)
-  selectionContext?.emit('change', props.value)
 }
 
 const active = computed(() => selectionContext?.isSelected(optionId!))
+const focused = computed(() => selectionContext?.isFocused(optionId!))
 </script>
 
 <style scoped lang="scss"></style>

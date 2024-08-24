@@ -5,6 +5,10 @@
 @use '../common/var' as *;
 @use '../utils/form.scss' as form;
 
+@mixin focusMixin {
+  background-color: getFillColor('light');
+}
+
 @include b() {
   position: relative;
   display: inline-flex;
@@ -14,8 +18,9 @@
   min-height: form.getFormItemHeight();
   transition: all getTransition();
   padding: 0 10px;
-  &:hover {
-    background-color: getFillColor('light');
+  &:hover,
+  &:focus {
+    @include focusMixin();
   }
 }
 
@@ -27,8 +32,13 @@
   cursor: not-allowed;
   color: getDisabledColor('text');
   background-color: getDisabledColor('fill');
+  opacity: getOpacity();
   &:hover {
     color: getDisabledColor('text');
     background-color: getDisabledColor('fill');
   }
+}
+
+@include is('focused') {
+  @include focusMixin();
 }

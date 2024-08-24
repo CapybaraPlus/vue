@@ -28,6 +28,7 @@
         height="200px"
         :multiple="multiple"
         @change="handleChange"
+        @input="handleInput"
       >
         <ra-option
           v-for="item of cities"
@@ -71,13 +72,13 @@ const cities = ref([
     id: 1,
     name: '北京',
     value: 'beijing',
-    disabled: true,
+    disabled: false,
   },
   {
     id: 2,
     name: '上海',
     value: 'shanghai',
-    disabled: true,
+    disabled: false,
   },
   {
     id: 3,
@@ -107,7 +108,7 @@ const cities = ref([
     id: 7,
     name: '武汉',
     value: 'wuhan',
-    disabled: true,
+    disabled: false,
   },
   {
     id: 8,
@@ -135,13 +136,13 @@ const rules = {
   },
 }
 
-const multiple = ref(false)
+const multiple = ref(true)
 
 const handleClick = () => {
-  // cities.value.forEach((item) => {
-  //   item.value = item.value.toUpperCase()
-  // })
-  multiple.value = !multiple.value
+  cities.value.forEach((item) => {
+    item.value = item.value.toUpperCase()
+  })
+  // multiple.value = !multiple.value
 }
 
 const handleClick2 = () => {
@@ -152,6 +153,9 @@ const handleChange = (value: any) => {
   console.log('change', value)
 }
 
+const handleInput = (val: any) => {
+  console.log('input', val)
+}
 // const handleClick = () => {
 //   formRef.value?.reset()
 // }

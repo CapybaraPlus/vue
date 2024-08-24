@@ -15,6 +15,13 @@ export const optionProps = buildProps({
    * @description whether the option is disabled
    */
   disabled: Boolean,
+  /**
+   * @description html tabindex
+   */
+  tabindex: {
+    type: [String, Number],
+    default: 0,
+  },
 })
 
 // option props type

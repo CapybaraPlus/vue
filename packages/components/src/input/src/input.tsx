@@ -151,7 +151,7 @@ export default defineComponent({
             ucn.m(props.size),
             ucn.is(props.disabled, 'disabled'),
             ucn.is(props.readonly, 'readonly'),
-            ucn.is(props.theme, 'theme'),
+            ucn.is(props.theme),
           ]}
         >
           <div class={[ucn.e('wrapper')]}>

@@ -16,14 +16,15 @@
   vertical-align: middle;
   font-size: getFontSize();
   border-radius: getBorderRadius('small');
-  outline: 1px solid transparent;
+  outline: 2px solid transparent;
   box-sizing: border-box;
   color: getTextColor();
   background-color: getFillColor();
   box-shadow: getBoxShadow('base');
   transition: all getTransition();
   cursor: pointer;
-  &:hover {
+  &:hover,
+  &:focus-within {
     outline-color: getColor();
   }
   @include e('wrapper') {
@@ -87,7 +88,8 @@
   @include e('menu') {
     width: 100%;
     background-color: getFillColor();
-    outline: 1px solid transparent;
+    outline: 2px solid transparent;
+    border-radius: getBorderRadius('small');
     box-shadow: getBoxShadow();
     transition: all getTransition();
     height: fit-content;
@@ -103,9 +105,25 @@
   }
 }
 
+// size
 @each $s in form.$size {
   @include m($s) {
     height: form.getFormItemHeight($s);
+  }
+}
+
+// mask theme
+@include is('mask') {
+  outline-color: transparent;
+  background-color: getFillColor('dark');
+  opacity: getOpacity();
+  &:hover {
+    background-color: getFillColor('light');
+  }
+  &:focus-within {
+    background-color: getFillColor();
+    outline-color: getColor();
+    opacity: 1;
   }
 }
 

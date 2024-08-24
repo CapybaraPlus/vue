@@ -1,8 +1,10 @@
 <template>
   <div
     ref="selectionRef"
-    :class="[ucn.b(), ucn.m(size)]"
+    :tabindex="tabindex"
+    :class="[ucn.b(), ucn.m(size), ucn.is(theme)]"
     :style="selectionStyles"
+    @keydown="handleKeyDown"
   >
     <ra-tooltip
       ref="tooltipRef"
@@ -56,7 +58,11 @@
         </div>
       </template>
       <template #content>
-        <div :class="[ucn.e('menu')]" :style="menuStyles">
+        <div
+          ref="selectionMenuRef"
+          :class="[ucn.e('menu')]"
+          :style="menuStyles"
+        >
           <slot name="default"></slot>
         </div>
       </template>
@@ -71,7 +77,14 @@ import RaTooltip, {
   TooltipExposed,
 } from '@capybara-plus/components/src/tooltip'
 import { useElementSize } from '@vueuse/core'
-import { computed, CSSProperties, provide, ref, watchEffect } from 'vue'
+import {
+  computed,
+  CSSProperties,
+  nextTick,
+  provide,
+  ref,
+  watchEffect,
+} from 'vue'
 import '../styles'
 import { selectionEmits, selectionProps } from './selection'
 import { selectionContextKey, useSelectionContext } from './context'
@@ -93,6 +106,7 @@ const emits = defineEmits(selectionEmits) // emits
 // template ref
 const tooltipRef = ref(null)
 const selectionRef = ref(null)
+const selectionMenuRef = ref<HTMLDivElement | null>(null)
 
 // selection context
 const selectionContext = useSelectionContext({
@@ -110,12 +124,21 @@ watchEffect(() => {
 })
 
 // on change
-selectionContext.on('change', (value: any) => {
+selectionContext.on('select', (value: any) => {
   if (!props.multiple) {
-    ;(tooltipRef.value as unknown as TooltipExposed).close()
+    closeTooltip()
   }
-  emits('change', value)
+
+  emits('input', value)
+
+  if (modelValue.value !== value) {
+    emits('change', value)
+  }
 })
+
+const closeTooltip = () => {
+  ;(tooltipRef.value as unknown as TooltipExposed).close()
+}
 
 // selected option
 const currentLabel = computed(() => {
@@ -138,6 +161,42 @@ const showPlaceholder = computed(() => {
 // clear
 const clear = () => {
   selectionContext.clearSelected()
+}
+
+// handle key down:
+// arrow down and arrow up to move focus index
+// enter to select option
+const handleKeyDown = (e: KeyboardEvent) => {
+  e.preventDefault()
+  switch (e.key) {
+    case 'ArrowDown':
+      selectionContext.moveIndex(1)
+      nextTick(() => {
+        scrollIntoFoucsedOption()
+      })
+      break
+    case 'ArrowUp':
+      selectionContext.moveIndex(-1)
+      nextTick(() => {
+        scrollIntoFoucsedOption()
+      })
+      break
+    case 'Enter':
+      selectionContext.selectOption()
+      closeTooltip()
+      break
+  }
+}
+
+// scroll into focused option
+const scrollIntoFoucsedOption = () => {
+  const focusedOptions = selectionMenuRef.value?.querySelector('.is-focused')
+  if (focusedOptions) {
+    focusedOptions.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+    })
+  }
 }
 
 // computed tooltip styles
