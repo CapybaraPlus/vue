@@ -14,6 +14,20 @@ $formItemHeight: map.deep-merge(
 @function getFormItemHeight($size: normal) {
   @return map.get($formItemHeight, $size);
 }
+// radio checkbox size
+$formItemSize: () !default;
+$formItemSize: map.deep-merge(
+  (
+    small: 12px,
+    normal: 14px,
+    medium: 16px,
+    large: 18px,
+  ),
+  $formItemSize
+);
+@function getFormItemSize($size: normal) {
+  @return map.get($formItemSize, $size);
+}
 
 @function getFormItemPadding() {
   @return 0 10px;

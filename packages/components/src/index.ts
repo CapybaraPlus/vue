@@ -8,6 +8,7 @@ import { RaMessage } from './message'
 import { RaInput } from './input'
 import { RaForm, RaFormItem } from './form'
 import { RaSelection, RaOption } from './selection'
+import { RaRadio, RaRadioGroup } from './radio'
 
 export const plugins = [
   RaButton,
@@ -21,6 +22,8 @@ export const plugins = [
   RaFormItem,
   RaSelection,
   RaOption,
+  RaRadio,
+  RaRadioGroup,
 ] as Plugin[]
 
 const CapybaraPlus: Plugin = {
@@ -42,3 +45,4 @@ export * from './message'
 export * from './input'
 export * from './form'
 export * from './selection'
+export * from './radio'

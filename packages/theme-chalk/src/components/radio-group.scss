@@ -1,0 +1,19 @@
+@use '../utils/bem.scss' as * with (
+  $block: 'radio-group'
+);
+
+@include b() {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  vertical-align: middle;
+}
+
+@include is('column') {
+  flex-direction: column;
+}
+
+@include is('disabled') {
+  cursor: not-allowed;
+}

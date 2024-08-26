@@ -1,38 +1,47 @@
 import { FormSizeValues } from '@capybara-plus/consts'
 import {
   buildProps,
-  definePropTypeValues,
-  isBoolean,
-  isNumber,
   isString,
+  isNumber,
+  isBoolean,
+  definePropTypeValues,
 } from '@capybara-plus/utils'
 import { ExtractPropTypes } from 'vue'
 
+const radioGroupConst = {
+  theme: ['button'] as const,
+}
+
 // props
-export const radioProps = buildProps({
+export const radioGroupProps = buildProps({
   /**
    * @description input name
    */
   name: String,
   /**
-   * @description input value
+   * @description v-model
    */
-  value: [String, Number, Boolean],
+  modelValue: [String, Number, Boolean],
   /**
-   * @description label
+   * @description flex-direction: column
    */
-  label: String,
+  column: Boolean,
   /**
    * @description disabled
    */
   disabled: Boolean,
   /**
+   * @description theme
+   */
+  theme: definePropTypeValues(radioGroupConst['theme'], String),
+  /**
    * @description size
    */
   size: definePropTypeValues(FormSizeValues, String),
 })
-// emit
-export const radioEmit = {
+
+// emits
+export const radioGroupEmit = {
   'update:modelValue': (val: string | number | boolean | undefined) =>
     isString(val) || isNumber(val) || isBoolean(val),
   change: (val: string | number | boolean | undefined) =>
@@ -40,6 +49,5 @@ export const radioEmit = {
 }
 
 // typescript props
-export type RadioProps = ExtractPropTypes<typeof radioProps>
-// typescript emit
-export type RadioEmit = typeof radioEmit
+export type RadioGroupProps = ExtractPropTypes<typeof radioGroupProps>
+export type RadioGroupEmit = typeof radioGroupEmit

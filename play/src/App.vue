@@ -21,6 +21,17 @@
         placeholder="请输入密码"
       ></ra-input>
     </ra-form-item>
+    <ra-form-item label="性别">
+      <ra-radio-group
+        v-model="form.gender"
+        theme="button"
+        size="small"
+        @change="handleChange"
+      >
+        <ra-radio label="男" disabled value="male" />
+        <ra-radio label="女" value="female" />
+      </ra-radio-group>
+    </ra-form-item>
     <ra-form-item label="城市：" prop="gender">
       <ra-selection
         v-model="form.city"
@@ -51,12 +62,11 @@
       <ra-link type="success">同意用户协议</ra-link> -->
     </ra-form-item>
   </ra-form>
-  <h1>{{ form.city }}</h1>
 </template>
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { RaFormInstance, RaInput } from '@capybara-plus/components'
+import { RaFormInstance, RaInput, RaRadio } from '@capybara-plus/components'
 // import ColorDisplay from './components/color-display/color-display.vue'
 
 const formRef = ref<RaFormInstance | null>()
@@ -65,6 +75,7 @@ const formRef = ref<RaFormInstance | null>()
 const form = reactive({
   username: '18096323189',
   password: '',
+  gender: '',
   city: '',
 })
 
@@ -137,12 +148,15 @@ const rules = {
   },
 }
 
+const name = ref('gender')
+
 const multiple = ref(true)
 
 const handleClick = () => {
-  cities.value.forEach((item) => {
-    item.value = item.value.toUpperCase()
-  })
+  name.value = 'sex'
+  // cities.value.forEach((item) => {
+  //   item.value = item.value.toUpperCase()
+  // })
   // multiple.value = !multiple.value
 }
 

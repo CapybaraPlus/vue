@@ -1,0 +1,67 @@
+@use '../utils/bem.scss' as * with (
+  $block: 'radio'
+);
+@use '../common/var' as *;
+@use '../utils/form.scss' as form;
+
+@mixin size($size: 'normal') {
+  $size: form.getFormItemSize($size);
+  width: $size;
+  height: $size;
+  &:checked {
+    border-width: calc(#{$size} / 3);
+    border-color: getColor();
+  }
+}
+
+@include b() {
+  position: relative;
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+  margin-right: 8px;
+  cursor: pointer;
+  &:hover {
+    color: getColor();
+    @include e('inner') {
+      border-color: getColor();
+    }
+  }
+  @include e('inner') {
+    @include size();
+    appearance: none;
+    margin: 0;
+    margin-right: 5px;
+    border-radius: 50%;
+    border: 1px solid getBorderColor();
+    transition: all 0.2s linear;
+    cursor: inherit;
+  }
+  @include e('label') {
+    user-select: none;
+  }
+}
+
+@include is('checked') {
+  color: getColor();
+}
+
+@include is('disabled') {
+  cursor: not-allowed;
+  color: getDisabledColor('text');
+  opacity: getOpacity();
+  @include e('inner') {
+    border-color: getDisabledColor('border');
+  }
+}
+
+@each $s in form.$size {
+  @include m($s) {
+    @if ($s == 'small') {
+      font-size: getFontSize('small');
+    }
+    @include e('inner') {
+      @include size($s);
+    }
+  }
+}

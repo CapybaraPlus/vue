@@ -1,6 +1,8 @@
 import { Component } from 'vue'
 import { definePropType } from './vue/props'
 
+export const isBoolean = (val: any): val is boolean => typeof val === 'boolean'
+
 // is string
 export const isString = (str: any): str is string => typeof str === 'string'
 
