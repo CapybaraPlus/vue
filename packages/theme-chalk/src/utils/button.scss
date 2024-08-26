@@ -1,0 +1,32 @@
+@use 'sass:map';
+
+// button size
+$size: large medium small;
+$sizeMap: () !default;
+$sizeMap: map.deep-merge(
+  (
+    normal: (
+      padding: 12px 20px,
+      size: 48px,
+    ),
+    large: (
+      padding: 18px 32px,
+      size: 56px,
+    ),
+    medium: (
+      padding: 10px 16px,
+      size: 40px,
+    ),
+    small: (
+      padding: 6px 12px,
+      size: 32px,
+    ),
+  ),
+  $sizeMap
+);
+@function getSizePadding($size: normal) {
+  @return map.get($sizeMap, $size, 'padding');
+}
+@function getSize($size: normal) {
+  @return map.get($sizeMap, $size, 'size');
+}

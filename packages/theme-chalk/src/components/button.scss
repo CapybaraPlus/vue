@@ -2,7 +2,7 @@
   $block: button
 );
 @use '../common/var' as *;
-@use 'sass:map';
+@use '../utils/button.scss' as button;
 
 // hover button mixin
 @mixin buttonHover() {
@@ -36,33 +36,6 @@
   padding: 0;
 }
 
-// button size
-$size: large medium small;
-$sizeMap: (
-  normal: (
-    padding: 12px 20px,
-    size: 48px,
-  ),
-  large: (
-    padding: 18px 32px,
-    size: 56px,
-  ),
-  medium: (
-    padding: 10px 16px,
-    size: 40px,
-  ),
-  small: (
-    padding: 6px 12px,
-    size: 32px,
-  ),
-);
-@function getSizePadding($size: normal) {
-  @return map.get($sizeMap, $size, 'padding');
-}
-@function getSize($size: normal) {
-  @return map.get($sizeMap, $size, 'size');
-}
-
 // button theme mixin
 @mixin themeMixin($color) {
   background-color: $color;
@@ -94,14 +67,14 @@ $sizeMap: (
 }
 
 @include b() {
-  min-width: getSize('size');
+  min-width: button.getSize();
   position: relative;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   border: none;
   outline: none;
-  padding: getSizePadding();
+  padding: button.getSizePadding();
   cursor: pointer;
   user-select: none;
   vertical-align: middle;
@@ -131,11 +104,11 @@ $buttonType: primary success warning danger;
 }
 
 // button size
-@each $s in $size {
+@each $s in button.$size {
   @include m($s) {
-    padding: getSizePadding($s);
+    padding: button.getSizePadding($s);
     &#{m('circle')} {
-      @include buttonCircle(getSize($s));
+      @include buttonCircle(button.getSize($s));
     }
   }
 }

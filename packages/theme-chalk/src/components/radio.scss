@@ -3,6 +3,26 @@
 );
 @use '../common/var' as *;
 @use '../utils/form.scss' as form;
+@use '../utils/button.scss' as button with (
+  $sizeMap: (
+    normal: (
+      padding: 8px 24px,
+      size: 28px,
+    ),
+    large: (
+      padding: 10px 26px,
+      size: 36px,
+    ),
+    medium: (
+      padding: 6px 20px,
+      size: 20px,
+    ),
+    small: (
+      padding: 4px 18px,
+      size: 12px,
+    ),
+  )
+);
 
 @mixin size($size: 'normal') {
   $size: form.getFormItemSize($size);
@@ -20,6 +40,8 @@
   align-items: center;
   vertical-align: middle;
   margin-right: 8px;
+  transition: all getTransition('fast');
+  font-size: getFontSize();
   cursor: pointer;
   &:hover {
     color: getColor();
@@ -63,5 +85,42 @@
     @include e('inner') {
       @include size($s);
     }
+    &#{m($s)} {
+      min-width: button.getSize($s);
+      padding: button.getSizePadding($s);
+      background-color: getFillColor($s);
+    }
   }
+}
+
+// button theme
+@include m('button') {
+  min-width: button.getSize();
+  padding: button.getSizePadding();
+  background-color: getFillColor();
+  border: 1px solid getBorderColor();
+  justify-content: center;
+  margin: 0;
+  &:not(:last-child) {
+    border-right-width: 0;
+  }
+  &:first-child {
+    border-top-left-radius: getBorderRadius();
+    border-bottom-left-radius: getBorderRadius();
+  }
+  &:last-child {
+    border-top-right-radius: getBorderRadius();
+    border-bottom-right-radius: getBorderRadius();
+  }
+  @include e('inner') {
+    display: none;
+  }
+}
+@include is('checked', m('button')) {
+  background-color: getColor();
+  color: getFillColor();
+  border-color: transparent;
+}
+@include is('disabled', m('button')) {
+  border-color: getDisabledColor('border');
 }

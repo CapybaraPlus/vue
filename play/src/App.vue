@@ -26,10 +26,12 @@
         v-model="form.gender"
         theme="button"
         size="small"
+        disabled
         @change="handleChange"
       >
         <ra-radio label="男" disabled value="male" />
         <ra-radio label="女" value="female" />
+        <ra-radio label="保密" value="secret" />
       </ra-radio-group>
     </ra-form-item>
     <ra-form-item label="城市：" prop="gender">
@@ -53,7 +55,9 @@
       </ra-selection>
     </ra-form-item>
     <ra-form-item>
-      <ra-button type="primary" @click="handleClick">update</ra-button>
+      <ra-button size="large" type="primary" @click="handleClick"
+        >update</ra-button
+      >
       <ra-button type="success" @click="handleClick2">delete</ra-button>
       <!-- <ra-link>同意用户协议</ra-link>
       <ra-link type="primary" href="https://www.baidu.com" target="_blank"
