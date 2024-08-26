@@ -87,7 +87,7 @@ import {
   watchEffect,
 } from 'vue'
 import '../styles'
-import { selectionEmits, selectionProps } from './selection'
+import { selectionEmit, selectionProps } from './selection'
 import { selectionContextKey, useSelectionContext } from './context'
 import { Close } from '@capybara-plus/icons-vue'
 
@@ -102,7 +102,7 @@ const modelValue = defineModel({
   type: [Object, String, Number, Array],
 })
 const props = defineProps(selectionProps) // props
-const emits = defineEmits(selectionEmits) // emits
+const emit = defineEmits(selectionEmit) // emits
 
 // template ref
 const tooltipRef = ref(null)
@@ -130,10 +130,10 @@ selectionContext.on('select', (value: any) => {
     closeTooltip()
   }
 
-  emits('input', value)
+  emit('input', value)
 
   if (modelValue.value !== value) {
-    emits('change', value)
+    emit('change', value)
   }
 })
 

@@ -92,8 +92,8 @@ export const inputProps = buildProps({
   showCount: Boolean,
 })
 
-// input emits
-export const inputEmits = {
+// input emit
+export const inputEmit = {
   input: (e: string) => isString(e),
   change: (e: string) => isString(e),
   focus: (e: FocusEvent) => e instanceof FocusEvent,
@@ -106,4 +106,4 @@ export const inputEmits = {
 export type InputProps = ExtractPropTypes<typeof inputProps>
 
 // typescript input emits
-export type InputEmits = ExtractPropTypes<typeof inputEmits>
+export type InputEmit = typeof inputEmit

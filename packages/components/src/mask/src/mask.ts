@@ -25,8 +25,8 @@ export const maskProps = buildProps({
   },
 })
 
-// mask emits
-export const maskEmits = {
+// mask emit
+export const maskEmit = {
   click: (e: MouseEvent) => e instanceof MouseEvent,
   ['update:visibility']: (e: boolean) => typeof e == 'boolean',
 }
@@ -34,4 +34,4 @@ export const maskEmits = {
 // typescript mask props
 export type MaskProps = ExtractPropTypes<typeof maskProps>
 // typescript mask emits
-export type MaskEmits = ExtractPropTypes<typeof maskEmits>
+export type MaskEmits = typeof maskEmit

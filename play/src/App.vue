@@ -79,7 +79,7 @@ const formRef = ref<RaFormInstance | null>()
 const form = reactive({
   username: '18096323189',
   password: '',
-  gender: '',
+  gender: 'male',
   city: '',
 })
 

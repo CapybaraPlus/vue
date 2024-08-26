@@ -30,7 +30,7 @@ export const linkProps = buildProps({
 })
 
 // link emits
-export const linkEmits = {
+export const linkEmit = {
   click: (e: MouseEvent) => e instanceof MouseEvent,
 }
 
@@ -38,4 +38,4 @@ export const linkEmits = {
 export type LinkProps = ExtractPropTypes<typeof linkProps>
 
 // typescript link emits
-export type LinkEmits = ExtractPropTypes<typeof linkEmits>
+export type LinkEmits = typeof linkEmit

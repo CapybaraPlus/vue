@@ -46,8 +46,8 @@ export const selectionProps = buildProps({
   disabled: Boolean,
 })
 
-// select emits
-export const selectionEmits = {
+// select emit
+export const selectionEmit = {
   input: (value: any) => value,
   change: (value: any) => value,
 }
@@ -55,5 +55,5 @@ export const selectionEmits = {
 // selection props type
 export type SelectionProps = ExtractPropTypes<typeof selectionProps>
 
-// selection emits type
-export type SelectionEmits = ExtractPropTypes<typeof selectionEmits>
+// selection emit type
+export type SelectionEmit = typeof selectionEmit

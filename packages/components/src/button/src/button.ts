@@ -74,7 +74,7 @@ export const buttonProps = buildProps({
 } as const)
 
 // button emits
-export const buttonEmits = {
+export const buttonEmit = {
   click: (e: MouseEvent) => e instanceof MouseEvent,
   mousedown: (e: MouseEvent) => e instanceof MouseEvent,
   mouseup: (e: MouseEvent) => e instanceof MouseEvent,
@@ -84,4 +84,4 @@ export const buttonEmits = {
 export type ButtonProps = ExtractPropTypes<typeof buttonProps>
 
 // typescript button emits
-export type ButtonEmits = typeof buttonEmits
+export type ButtonEmit = typeof buttonEmit

@@ -36,7 +36,7 @@
 
 <script setup lang="ts">
 import { computed, CSSProperties, nextTick, ref } from 'vue'
-import { buttonProps, buttonEmits } from './button'
+import { buttonProps, buttonEmit } from './button'
 import '../styles/index'
 import { useClassName } from '@capybara-plus/hooks'
 import RaIcon from '../../icon'
@@ -49,7 +49,7 @@ defineOptions({
   name: 'RaButton',
 })
 const props = defineProps(buttonProps) // props
-const emit = defineEmits(buttonEmits) // emits
+const emit = defineEmits(buttonEmit) // emits
 
 /**
  * @description handle ripple animation

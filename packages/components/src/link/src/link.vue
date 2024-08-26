@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import { useClassName } from '@capybara-plus/hooks'
-import { linkProps, linkEmits } from './link'
+import { linkProps, linkEmit } from './link'
 import '../styles'
 
 const ucn = useClassName('link')
@@ -22,5 +22,5 @@ defineOptions({
 })
 
 defineProps(linkProps)
-defineEmits(linkEmits)
+defineEmits(linkEmit)
 </script>

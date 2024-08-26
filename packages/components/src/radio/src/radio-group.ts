@@ -40,7 +40,7 @@ export const radioGroupProps = buildProps({
   size: definePropTypeValues(FormSizeValues, String),
 })
 
-// emits
+// emit
 export const radioGroupEmit = {
   'update:modelValue': (val: string | number | boolean | undefined) =>
     isString(val) || isNumber(val) || isBoolean(val),

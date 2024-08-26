@@ -12,13 +12,13 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { maskProps, maskEmits } from './mask'
+import { maskProps, maskEmit } from './mask'
 import { useClassName, useClick } from '@capybara-plus/hooks'
 defineOptions({
   name: 'RaMask',
 })
 const props = defineProps(maskProps)
-const emit = defineEmits(maskEmits)
+const emit = defineEmits(maskEmit)
 
 // bem
 const ucn = useClassName('mask')
@@ -26,7 +26,7 @@ const ucn = useClassName('mask')
 // create or destory the mask component
 const visibility = ref(false)
 function setVisibility(visible: boolean) {
-  // $emit('update:visibility', visibility)
+  // emit('update:visibility', visibility)
   visibility.value = visible
 }
 

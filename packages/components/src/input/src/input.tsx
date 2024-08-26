@@ -7,7 +7,7 @@ import {
   onMounted,
   ref,
 } from 'vue'
-import { inputEmits, inputProps } from './input'
+import { inputEmit, inputProps } from './input'
 import '../styles'
 import { useClassName } from '@capybara-plus/hooks'
 import { RaIcon } from '../../icon'
@@ -21,7 +21,7 @@ export default defineComponent({
     Close,
   },
   props: inputProps,
-  emits: inputEmits,
+  emits: inputEmit,
   setup(props, { emit, slots, expose }) {
     // bem
     const ucn = useClassName('input')

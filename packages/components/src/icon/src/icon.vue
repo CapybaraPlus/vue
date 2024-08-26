@@ -12,20 +12,20 @@
 import { useClassName } from '@capybara-plus/hooks'
 import '../styles'
 import { computed } from 'vue'
-import { iconEmits, iconProps } from './icon'
+import { iconEmit, iconProps } from './icon'
 
 const ucn = useClassName('icon')
 defineOptions({
   name: 'RaIcon',
 })
 
-const $props = defineProps(iconProps)
-defineEmits(iconEmits)
+const props = defineProps(iconProps)
+defineEmits(iconEmit)
 
 const style = computed(() => {
   return {
-    color: $props.color,
-    fontSize: $props.size,
+    color: props.color,
+    fontSize: props.size,
   }
 })
 </script>
