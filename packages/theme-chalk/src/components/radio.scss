@@ -24,6 +24,7 @@
   transition: all getTransition('fast');
   font-size: getFontSize();
   cursor: pointer;
+  overflow: hidden;
   &:hover {
     color: getColor();
     @include e('inner') {
@@ -42,6 +43,10 @@
   }
   @include e('label') {
     user-select: none;
+  }
+  &:active {
+    color: getFillColor();
+    background-color: getColor();
   }
 }
 

@@ -8,6 +8,7 @@
       ucn.is(checked, 'checked'),
       ucn.is(disabled, 'disabled'),
     ]"
+    @mousedown="handleMouseDown"
   >
     <input
       v-model="modelValue"
@@ -28,9 +29,10 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick } from 'vue'
+import { nextTick, ref } from 'vue'
 import { ucn, useRadioContext } from './context'
 import { radioEmit, radioProps } from './radio'
+import { RaRipple } from '@capybara-plus/components'
 
 defineOptions({
   name: 'RaRadio',
@@ -43,6 +45,22 @@ const { name, modelValue, checked, disabled, theme, size } =
 
 const handleChange = () => {
   nextTick(() => emit('change', modelValue.value))
+}
+
+const labelRef = ref(null)
+const handleMouseDown = (event: MouseEvent) => {
+  if (theme.value === 'button') {
+    const { color } = getComputedStyle(labelRef.value as unknown as HTMLElement)
+    const zIndex = ref(0)
+    RaRipple({
+      parent: labelRef.value!,
+      event,
+      color,
+      zIndex: zIndex.value,
+      duration: 200,
+    })
+  }
+  emit('mousedown', event)
 }
 </script>
 

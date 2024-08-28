@@ -37,6 +37,7 @@ export const radioEmit = {
     isString(val) || isNumber(val) || isBoolean(val),
   change: (val: string | number | boolean | undefined) =>
     isString(val) || isNumber(val) || isBoolean(val),
+  mousedown: (event: MouseEvent) => event instanceof MouseEvent,
 }
 
 // typescript props

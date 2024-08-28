@@ -59,7 +59,7 @@ const handleMouseDown = (e: MouseEvent) => {
       color = props.color
     }
     ;({ color: color } = getComputedStyle(
-      buttonRef.value as unknown as Element
+      buttonRef.value as unknown as HTMLElement
     ))
   }
   const ripple = RaRipple({

@@ -4,6 +4,7 @@
     :class="ucn.b()"
     :style="style"
     @animationend="handleAnimationed"
+    @animationstart="handleAnimationStart"
   ></span>
 </template>
 
@@ -39,10 +40,17 @@ const style = computed<CSSProperties>(() => {
     left: `${x}px`,
     top: `${y}px`,
     backgroundColor: props.color,
+    zIndex: props.zIndex,
+    animationDuration: `${props.duration}ms`,
   }
 })
 
+const handleAnimationStart = () => {
+  props.afterAnimationStart?.()
+}
+
 const handleAnimationed = () => {
+  props.beforeAnimationEnd?.()
   props.unmount()
 }
 </script>

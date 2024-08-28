@@ -28,6 +28,22 @@ export const rippleProps = buildProps({
    * @description custom color
    */
   color: String,
+  /**
+   * @description z-index
+   */
+  zIndex: Number,
+  /**
+   * @description after animation start
+   */
+  afterAnimationStart: definePropType<() => void>(Function),
+  /**
+   * @description before animation end
+   */
+  beforeAnimationEnd: definePropType<() => void>(Function),
+  /**
+   * @description animation duration, ms
+   */
+  duration: Number,
 })
 
 // typescript props

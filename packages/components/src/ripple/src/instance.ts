@@ -6,20 +6,31 @@ export interface RippleOptions {
   parent: HTMLElement
   event: MouseEvent
   color?: string
+  zIndex?: number
+  afterAnimationStart?: () => void
+  beforeAnimationEnd?: () => void
+  duration?: number
 }
 
-export const createRipple = ({ parent, event, color }: RippleOptions) => {
+const normalizedProps = (options: RippleOptions) => {
+  let { duration } = options
+  duration ??= 600
+  return {
+    ...options,
+    duration,
+  }
+}
+
+export const createRipple = (options: RippleOptions) => {
   const props: RippleProps = {
-    parent,
-    event,
+    ...normalizedProps(options),
     unmount,
-    color,
   }
 
   const container = document.createElement('div')
   const rippleVNode = h(Ripple, props)
   render(rippleVNode, container)
-  parent.appendChild(container.firstChild!)
+  props.parent.appendChild(container.firstChild!)
 
   function unmount() {
     render(null, container)
