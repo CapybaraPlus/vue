@@ -26,22 +26,17 @@
       </ra-icon>
     </template>
     <slot></slot>
-    <span
-      ref="rippleRef"
-      :class="[ucn.e('ripple'), ucn.is(rippleActive, 'active')]"
-      :style="rippleStyle"
-      @animationend="handleAnimationed"
-    ></span>
   </button>
 </template>
 
 <script setup lang="ts">
-import { computed, CSSProperties, nextTick, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { buttonProps, buttonEmit } from './button'
 import '../styles/index'
 import { useClassName } from '@capybara-plus/hooks'
 import RaIcon from '../../icon'
 import { Loading } from '@capybara-plus/icons-vue'
+import { RaRipple } from '@capybara-plus/components'
 
 // bem
 const ucn = useClassName('button')
@@ -55,46 +50,32 @@ const emit = defineEmits(buttonEmit) // emits
 /**
  * @description handle ripple animation
  */
-const buttonRef = ref<HTMLButtonElement | null>(null)
-const rippleStyle = ref<CSSProperties>({})
-const rippleActive = ref(false)
-const rippleIsAnimationed = ref(false)
-const rippleIsMouseup = ref(false)
-const handleMouseup = () => {
-  rippleIsMouseup.value = true
-  window.removeEventListener('mouseup', handleMouseup)
-}
-const handleAnimationed = () => {
-  rippleIsAnimationed.value = true
-}
-const cancelRipple = () => {
-  if (rippleIsAnimationed.value && rippleIsMouseup.value) {
-    rippleActive.value = false
-    rippleIsAnimationed.value = false
-    rippleIsMouseup.value = false
-  }
-}
-const handleRipple = (e: MouseEvent) => {
-  // cancel previous animation
-  cancelRipple()
-  window?.addEventListener('mouseup', handleMouseup)
-  nextTick(() => {
-    const { width, height, left, top } =
-      buttonRef.value!.getBoundingClientRect()
-    const diameter = Math.max(width, height)
-    const x = e.clientX - left - diameter / 2
-    const y = e.clientY - top - diameter / 2
-    rippleStyle.value = {
-      width: `${diameter}px`,
-      height: `${diameter}px`,
-      left: `${x}px`,
-      top: `${y}px`,
-    }
-    rippleActive.value = true
-  })
-}
+const buttonRef = ref(null)
+
 const handleMouseDown = (e: MouseEvent) => {
-  handleRipple(e)
+  let color = undefined
+  if (props.theme == 'plain') {
+    if (props.color) {
+      color = props.color
+    }
+    ;({ color: color } = getComputedStyle(
+      buttonRef.value as unknown as Element
+    ))
+  }
+  const ripple = RaRipple({
+    parent: buttonRef.value!,
+    event: e,
+    color,
+  })
+
+  if (props.theme == 'plain') {
+    function handleMouseup() {
+      ripple.exposed?.close()
+      window.removeEventListener('mouseup', handleMouseup)
+    }
+    window.addEventListener('mouseup', handleMouseup)
+  }
+
   emit('mousedown', e)
 }
 

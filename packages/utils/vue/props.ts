@@ -104,9 +104,9 @@ export const buildProps = <
   return _props as any
 }
 
-buildProps({
-  type: {
-    type: String,
-    required: false,
-  },
-})
+// buildProps({
+//   type: {
+//     type: String,
+//     required: false,
+//   },
+// })

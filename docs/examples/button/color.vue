@@ -1,6 +1,6 @@
 <template>
   <ra-button block color="green" class="mb8">custom-color</ra-button>
-  <ra-button block color="blue" theme="plain" class="mb8"
+  <ra-button block color="green" theme="plain" class="mb8"
     >custom-color</ra-button
   >
 </template>
