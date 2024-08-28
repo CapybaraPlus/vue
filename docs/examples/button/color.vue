@@ -1,9 +1,12 @@
 <template>
-  <ra-button
-    block
-    hover-animation="zoom-in"
-    active-animation="zoom-out"
-    color="rgb(255, 109, 109)"
+  <ra-button block color="green" class="mb8">custom-color</ra-button>
+  <ra-button block color="blue" theme="plain" class="mb8"
     >custom-color</ra-button
   >
 </template>
+
+<style scoped>
+.mb8 {
+  margin-bottom: 8px;
+}
+</style>

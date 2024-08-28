@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../common/var' as *;
 
 // button size
 $size: large medium small;
@@ -6,20 +7,28 @@ $sizeMap: () !default;
 $sizeMap: map.deep-merge(
   (
     large: (
-      padding: 18px 32px,
-      size: 56px,
+      padding: 10px 36px,
+      size: 48px,
+      font-size: getFontSize('large'),
+      line-height: 1.4,
     ),
     medium: (
-      padding: 12px 20px,
-      size: 48px,
+      padding: 8px 24px,
+      size: 40px,
+      font-size: getFontSize('base'),
+      line-height: 1.4,
     ),
     normal: (
-      padding: 10px 16px,
-      size: 40px,
+      padding: 6px 18px,
+      size: 32px,
+      font-size: getFontSize('base'),
+      line-height: 1.4,
     ),
     small: (
-      padding: 6px 12px,
-      size: 32px,
+      padding: 4px 12px,
+      size: 24px,
+      font-size: getFontSize('small'),
+      line-height: 1.2,
     ),
   ),
   $sizeMap
@@ -29,4 +38,17 @@ $sizeMap: map.deep-merge(
 }
 @function getSize($size: normal) {
   @return map.get($sizeMap, $size, 'size');
+}
+@function getFontSize($size: normal) {
+  @return map.get($sizeMap, $size, 'font-size');
+}
+@function getLineHeight($size: normal) {
+  @return map.get($sizeMap, $size, 'line-height');
+}
+
+@mixin size($s: 'normal') {
+  min-width: getSize($s);
+  padding: getSizePadding($s);
+  font-size: getFontSize($s);
+  line-height: getLineHeight($s);
 }

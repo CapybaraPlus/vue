@@ -37,23 +37,32 @@
 }
 
 // button theme mixin
-@mixin themeMixin($color) {
+@mixin themeMixin($color, $isCustom: false) {
   background-color: $color;
   color: getFillColor();
   @include buttonHover() {
-    background-color: rgba($color: $color, $alpha: 0.7);
+    @if $isCustom {
+      background-color: $color;
+      opacity: 0.7;
+    } @else {
+      background-color: rgba($color: $color, $alpha: 0.7);
+    }
   }
   @include buttonActive() {
-    transform: scale(0.9);
+    transform: scale(0.96);
   }
   @include buttonRipple() {
-    background-color: rgba($color: $color, $alpha: 0.9);
+    @if $isCustom {
+      background-color: rgba(#000, 0.1);
+    } @else {
+      background-color: rgba($color: $color, $alpha: 0.9);
+    }
   }
 
   &#{m(plain)} {
     font-weight: 700;
     color: $color;
-    background-color: getFillColor();
+    background-color: transparent;
     border-color: $color;
     @include buttonHover() {
       background-color: getFillColor('light');
@@ -61,37 +70,39 @@
     }
     @include buttonActive() {
       color: getFillColor();
-      background-color: transparent;
+      // background-color: transparent;
+    }
+    @include buttonRipple() {
+      @if $isCustom {
+        background-color: $color;
+      }
     }
   }
 }
 
 @include b() {
-  min-width: button.getSize();
   position: relative;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   border: none;
   outline: none;
-  padding: button.getSizePadding();
   cursor: pointer;
   user-select: none;
   vertical-align: middle;
   border-radius: getBorderRadius('small');
-  font-size: getFontSize();
   font-weight: normal;
   border-width: 1px;
   border-style: solid;
   border-color: transparent;
   transition: all getTransition();
-  margin: 0 12px 8px 0;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
+  @include button.size();
   @include themeMixin(getTextColor());
   &#{m('circle')} {
-    @include buttonCircle(getSize());
+    @include buttonCircle(button.getSize());
   }
 }
 
@@ -106,7 +117,7 @@ $buttonType: primary success warning danger;
 // button size
 @each $s in button.$size {
   @include m($s) {
-    padding: button.getSizePadding($s);
+    @include button.size($s);
     &#{m('circle')} {
       @include buttonCircle(button.getSize($s));
     }
@@ -116,15 +127,7 @@ $buttonType: primary success warning danger;
 // custom color
 @include is(color) {
   $color: var(--color);
-  background-color: $color;
-  color: getFillColor();
-  @include buttonHover() {
-    background-color: $color;
-    opacity: 0.7;
-  }
-  @include buttonRipple() {
-    background-color: rgba(#000, 0.1);
-  }
+  @include themeMixin($color, true);
 }
 
 // disabled

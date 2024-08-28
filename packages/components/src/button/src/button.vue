@@ -30,6 +30,7 @@
       ref="rippleRef"
       :class="[ucn.e('ripple'), ucn.is(rippleActive, 'active')]"
       :style="rippleStyle"
+      @animationend="handleAnimationed"
     ></span>
   </button>
 </template>
@@ -57,14 +58,26 @@ const emit = defineEmits(buttonEmit) // emits
 const buttonRef = ref<HTMLButtonElement | null>(null)
 const rippleStyle = ref<CSSProperties>({})
 const rippleActive = ref(false)
+const rippleIsAnimationed = ref(false)
+const rippleIsMouseup = ref(false)
+const handleMouseup = () => {
+  rippleIsMouseup.value = true
+  window.removeEventListener('mouseup', handleMouseup)
+}
+const handleAnimationed = () => {
+  rippleIsAnimationed.value = true
+}
+const cancelRipple = () => {
+  if (rippleIsAnimationed.value && rippleIsMouseup.value) {
+    rippleActive.value = false
+    rippleIsAnimationed.value = false
+    rippleIsMouseup.value = false
+  }
+}
 const handleRipple = (e: MouseEvent) => {
   // cancel previous animation
   cancelRipple()
-  function cancelRipple() {
-    rippleActive.value = false
-    window.removeEventListener('mouseup', cancelRipple)
-  }
-  window?.addEventListener('mouseup', cancelRipple)
+  window?.addEventListener('mouseup', handleMouseup)
   nextTick(() => {
     const { width, height, left, top } =
       buttonRef.value!.getBoundingClientRect()

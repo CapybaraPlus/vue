@@ -3,26 +3,7 @@
 );
 @use '../common/var' as *;
 @use '../utils/form.scss' as form;
-@use '../utils/button.scss' as button with (
-  $sizeMap: (
-    large: (
-      padding: 10px 26px,
-      size: 36px,
-    ),
-    medium: (
-      padding: 8px 24px,
-      size: 28px,
-    ),
-    normal: (
-      padding: 6px 20px,
-      size: 20px,
-    ),
-    small: (
-      padding: 4px 18px,
-      size: 12px,
-    ),
-  )
-);
+@use '../utils/button.scss' as button;
 
 @mixin size($size: 'normal') {
   $size: form.getFormItemSize($size);
@@ -85,18 +66,16 @@
     @include e('inner') {
       @include size($s);
     }
-    min-width: button.getSize($s);
     background-color: getFillColor($s);
     &#{m('button')} {
-      padding: button.getSizePadding($s);
+      @include button.size($s);
     }
   }
 }
 
 // button theme
 @include m('button') {
-  min-width: button.getSize();
-  padding: button.getSizePadding();
+  @include button.size();
   background-color: getFillColor();
   border: 1px solid getBorderColor();
   justify-content: center;
