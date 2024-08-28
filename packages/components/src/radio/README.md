@@ -17,7 +17,7 @@
 - ✅column：是否纵向布局
 - ✅disabled：禁用状态
 - ✅size： 尺寸
-- theme：主题，按钮主题
+- ✅theme：主题，按钮主题
 
 # radio-group 事件
 

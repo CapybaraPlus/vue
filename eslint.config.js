@@ -40,7 +40,6 @@ export default [
       '**/*.d.ts',
       'docs/**/*.vue',
       '**/*.js',
-      '**/*.d.ts',
     ],
   },
 ]

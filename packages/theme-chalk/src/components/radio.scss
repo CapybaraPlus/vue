@@ -5,15 +5,15 @@
 @use '../utils/form.scss' as form;
 @use '../utils/button.scss' as button with (
   $sizeMap: (
-    normal: (
-      padding: 8px 24px,
-      size: 28px,
-    ),
     large: (
       padding: 10px 26px,
       size: 36px,
     ),
     medium: (
+      padding: 8px 24px,
+      size: 28px,
+    ),
+    normal: (
       padding: 6px 20px,
       size: 20px,
     ),
@@ -85,10 +85,10 @@
     @include e('inner') {
       @include size($s);
     }
-    &#{m($s)} {
-      min-width: button.getSize($s);
+    min-width: button.getSize($s);
+    background-color: getFillColor($s);
+    &#{m('button')} {
       padding: button.getSizePadding($s);
-      background-color: getFillColor($s);
     }
   }
 }

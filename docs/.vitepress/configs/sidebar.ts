@@ -21,7 +21,7 @@ const useGuide: SidebarItem[] = [
         link: `${guide_prefix}/quick-start`,
       },
     ],
-  }
+  },
 ]
 
 /**
@@ -39,15 +39,6 @@ const useExamples: SidebarItem[] = [
       {
         text: '链接Link',
         link: `${examples_prefix}/link/`,
-      },
-    ],
-  },
-  {
-    text: '布局组件',
-    items: [
-      {
-        text: '行和列Row & Column',
-        link: `${examples_prefix}/row-col/`,
       },
     ],
   },

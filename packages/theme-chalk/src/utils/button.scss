@@ -5,15 +5,15 @@ $size: large medium small;
 $sizeMap: () !default;
 $sizeMap: map.deep-merge(
   (
-    normal: (
-      padding: 12px 20px,
-      size: 48px,
-    ),
     large: (
       padding: 18px 32px,
       size: 56px,
     ),
     medium: (
+      padding: 12px 20px,
+      size: 48px,
+    ),
+    normal: (
       padding: 10px 16px,
       size: 40px,
     ),
