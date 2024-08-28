@@ -26,10 +26,9 @@
         v-model="form.gender"
         theme="button"
         size="small"
-        disabled
         @change="handleChange"
       >
-        <ra-radio label="男" disabled value="male" />
+        <ra-radio label="男" value="male" />
         <ra-radio label="女" value="female" />
         <ra-radio label="保密" value="secret" />
       </ra-radio-group>

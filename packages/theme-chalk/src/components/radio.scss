@@ -106,10 +106,8 @@
   }
   &:first-child {
     border-top-left-radius: getBorderRadius();
-    border-bottom-left-radius: getBorderRadius();
   }
   &:last-child {
-    border-top-right-radius: getBorderRadius();
     border-bottom-right-radius: getBorderRadius();
   }
   @include e('inner') {
@@ -123,4 +121,22 @@
 }
 @include is('disabled', m('button')) {
   border-color: getDisabledColor('border');
+}
+
+.is-column {
+  @include m('button') {
+    width: 100%;
+    flex: 1;
+    border-right-width: 1px;
+    &:not(:last-child) {
+      border-bottom-width: 0;
+    }
+    &:first-child {
+      border-top-left-radius: getBorderRadius();
+    }
+    &:last-child {
+      border-bottom-right-radius: getBorderRadius();
+    }
+    border-radius: 0;
+  }
 }

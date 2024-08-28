@@ -1,5 +1,6 @@
 <template>
   <label
+    ref="labelRef"
     :class="[
       ucn.b(),
       ucn.m(theme),

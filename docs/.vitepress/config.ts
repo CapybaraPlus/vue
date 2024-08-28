@@ -6,7 +6,7 @@ import {
 } from '@vitepress-demo-preview/plugin'
 
 export default defineConfig({
-  title: 'CapybaraUI',
+  title: 'CapybaraPlus',
   description: 'A Vue3 + TypeScript Component Library',
   base: '/docs/',
   themeConfig: {
