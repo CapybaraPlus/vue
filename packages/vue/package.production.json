@@ -1,7 +1,7 @@
 {
-  "name": "@capybara-plus/components",
+  "name": "@capybara-plus/vue",
   "type": "module",
-  "version": "0.0.1-beta-1.7",
+  "version": "0.0.1",
   "description": "",
   "main": "es/index.js",
   "module": "es/index.js",
@@ -13,10 +13,7 @@
     },
     "./es/style.css": "./es/style.css"
   },
-  "files": [
-    "lib",
-    "es"
-  ],
+  "files": ["lib", "es"],
   "keywords": [],
   "author": "Ranaran",
   "license": "MIT",

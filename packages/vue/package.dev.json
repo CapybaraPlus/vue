@@ -1,5 +1,5 @@
 {
-  "name": "@capybara-plus/components",
+  "name": "@capybara-plus/vue",
   "type": "module",
   "main": "src/index.js",
   "version": "0.0.0",
