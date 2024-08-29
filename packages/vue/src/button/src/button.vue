@@ -36,7 +36,7 @@ import '../styles/index'
 import { useClassName } from '@capybara-plus/hooks'
 import RaIcon from '../../icon'
 import { Loading } from '@capybara-plus/icons-vue'
-import { RaRipple } from '@capybara-plus/components'
+import { RaRipple } from '@capybara-plus/vue'
 
 // bem
 const ucn = useClassName('button')

@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@capybara-plus/components':
-        specifier: workspace:^
-        version: link:packages/components
       '@capybara-plus/consts':
         specifier: workspace:^
         version: link:packages/consts
@@ -26,6 +23,9 @@ importers:
       '@capybara-plus/utils':
         specifier: workspace:^
         version: link:packages/utils
+      '@capybara-plus/vue':
+        specifier: workspace:^
+        version: link:packages/vue
       '@floating-ui/vue':
         specifier: ^1.0.7
         version: 1.0.7(vue@3.4.27)
@@ -117,8 +117,6 @@ importers:
 
   docs: {}
 
-  packages/components: {}
-
   packages/consts: {}
 
   packages/hooks: {}
@@ -126,6 +124,8 @@ importers:
   packages/theme-chalk: {}
 
   packages/utils: {}
+
+  packages/vue: {}
 
   play: {}
 

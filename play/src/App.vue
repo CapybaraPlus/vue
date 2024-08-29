@@ -69,7 +69,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { RaFormInstance, RaInput, RaRadio } from '@capybara-plus/components'
+import { RaFormInstance, RaInput, RaRadio } from '@capybara-plus/vue'
 // import ColorDisplay from './components/color-display/color-display.vue'
 
 const formRef = ref<RaFormInstance | null>()

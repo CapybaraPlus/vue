@@ -32,7 +32,7 @@
 import { nextTick, ref } from 'vue'
 import { ucn, useRadioContext } from './context'
 import { radioEmit, radioProps } from './radio'
-import { RaRipple } from '@capybara-plus/components'
+import { RaRipple } from '@capybara-plus/vue'
 
 defineOptions({
   name: 'RaRadio',

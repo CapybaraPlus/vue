@@ -73,10 +73,7 @@
 
 <script setup lang="ts">
 import { useClassName, useTransition, useUnit } from '@capybara-plus/hooks'
-import RaIcon from '@capybara-plus/components/src/icon'
-import RaTooltip, {
-  TooltipExposed,
-} from '@capybara-plus/components/src/tooltip'
+import { RaIcon, RaTooltip, type TooltipExposed } from '@capybara-plus/vue'
 import { useElementSize } from '@vueuse/core'
 import {
   computed,
