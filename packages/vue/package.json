@@ -1,9 +1,22 @@
 {
   "name": "@capybara-plus/vue",
   "type": "module",
-  "main": "src/index.js",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "description": "",
+  "main": "es/index.js",
+  "module": "es/index.js",
+  "typings": "es/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./es/index.js",
+      "require": "./lib/index.js"
+    },
+    "./es/style.css": "./es/style.css"
+  },
+  "files": [
+    "lib",
+    "es"
+  ],
   "keywords": [],
   "author": "Ranaran",
   "license": "MIT",

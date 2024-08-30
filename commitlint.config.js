@@ -24,6 +24,7 @@ export default {
         'build', // Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
         'chore', // Other changes that don't modify src or test files
         'revert', // Reverts a previous commit
+        'release', // Release
       ],
     ],
     'scope-enum': [
