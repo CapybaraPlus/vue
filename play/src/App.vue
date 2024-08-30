@@ -75,6 +75,12 @@ import { RaFormInstance, RaInput, RaRadio } from '@capybara-plus/vue'
 const formRef = ref<RaFormInstance | null>()
 // const loading = ref(false)
 
+setTimeout(() => {
+  console.log('upadte')
+
+  form.username = '1'
+}, 1000)
+
 const form = reactive({
   username: '18096323189',
   password: '',

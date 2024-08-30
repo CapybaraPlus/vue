@@ -6,6 +6,7 @@ import {
   nextTick,
   onMounted,
   ref,
+  watch,
 } from 'vue'
 import { inputEmit, inputProps } from './input'
 import '../styles'
@@ -42,10 +43,17 @@ export default defineComponent({
         input.value = props.modelValue?.toString() || ''
     }
 
-    // avoid modelValue has the initial value, but input value is empty
+    // if modelValue has the initial value, set input value
+    // or if modelValue has changed, set input value
     onMounted(() => {
       setInputValue()
     })
+    watch(
+      () => props.modelValue,
+      () => {
+        setInputValue()
+      }
+    )
 
     // emit(update:modelValue) and set input value
     const emitInputValue = (val: string) => {

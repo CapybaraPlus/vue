@@ -1,8 +1,8 @@
-import { h, render } from 'vue'
+import { h, render, type UnwrapRef } from 'vue'
 import { RippleProps } from './ripple'
 import Ripple from './ripple.vue'
 
-export interface RippleOptions {
+interface BaseRippleOptions {
   parent: HTMLElement
   event: MouseEvent
   color?: string
@@ -11,19 +11,16 @@ export interface RippleOptions {
   beforeAnimationEnd?: () => void
   duration?: number
 }
+export type RippleOptions = UnwrapRef<BaseRippleOptions>
 
 const normalizedProps = (options: RippleOptions) => {
-  let { duration } = options
-  duration ??= 600
-  return {
-    ...options,
-    duration,
-  }
+  options.duration ??= 600
+  return options
 }
 
 export const createRipple = (options: RippleOptions) => {
   const props: RippleProps = {
-    ...normalizedProps(options),
+    ...(normalizedProps(options) as any),
     unmount,
   }
 

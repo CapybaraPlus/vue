@@ -45,7 +45,7 @@
     transform: scale(0.96);
   }
 
-  &#{m(plain)} {
+  &#{m('plain')} {
     font-weight: 700;
     color: $color;
     background-color: transparent;
@@ -106,28 +106,34 @@ $buttonType: primary success warning danger;
 }
 
 // custom color
-@include is(color) {
+@include is('color') {
   $color: var(--color);
   @include themeMixin($color, true);
 }
 
 // disabled
-@include is(disabled) {
+@include is('disabled') {
   cursor: not-allowed;
   opacity: getOpacity('disabled');
 }
 
 // loading
-@include is(loading) {
+@include is('loading') {
   opacity: getOpacity('loading');
 }
 
 // shape: round
-@include m(round) {
+@include m('round') {
   border-radius: getBorderRadius(larger);
 }
 
 // block
-@include is(block) {
+@include is('block') {
   width: 100%;
+}
+
+@include is('ripple') {
+  &#{m('plain')} {
+    color: getFillColor();
+  }
 }

@@ -7,6 +7,7 @@
       ucn.m(_size),
       ucn.m(_shape),
       ucn.m(_theme),
+      ucn.is(ripple, 'ripple'),
       ucn.is(disabled, 'disabled'),
       ucn.is(block, 'block'),
       ucn.is(_color.cls),
@@ -30,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, reactive, ref, toRef } from 'vue'
 import { buttonProps, buttonEmit } from './button'
 import '../styles/index'
 import { useClassName } from '@capybara-plus/hooks'
@@ -52,7 +53,15 @@ const emit = defineEmits(buttonEmit) // emits
  */
 const buttonRef = ref(null)
 
+// mousedown event
 const handleMouseDown = (e: MouseEvent) => {
+  handleRipple(e)
+  emit('mousedown', e)
+}
+
+const ripple = ref(false)
+// handle ripple
+const handleRipple = (e: MouseEvent) => {
   let color = undefined
   if (props.theme == 'plain') {
     if (props.color) {
@@ -62,21 +71,22 @@ const handleMouseDown = (e: MouseEvent) => {
       buttonRef.value as unknown as HTMLElement
     ))
   }
-  const ripple = RaRipple({
+
+  const options = reactive({
     parent: buttonRef.value!,
     event: e,
     color,
+    zIndex: -1,
+    afterAnimationStart: () => {
+      ripple.value = true
+    },
+    beforeAnimationEnd: () => {
+      zIndex.value = 0
+      ripple.value = false
+    },
   })
-
-  if (props.theme == 'plain') {
-    function handleMouseup() {
-      ripple.exposed?.close()
-      window.removeEventListener('mouseup', handleMouseup)
-    }
-    window.addEventListener('mouseup', handleMouseup)
-  }
-
-  emit('mousedown', e)
+  const zIndex = toRef(options, 'zIndex')
+  RaRipple(options)
 }
 
 // click event
