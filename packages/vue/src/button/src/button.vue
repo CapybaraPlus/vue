@@ -86,7 +86,7 @@ const handleRipple = (e: MouseEvent) => {
     },
   })
   const zIndex = toRef(options, 'zIndex')
-  RaRipple(options)
+  RaRipple(options as any)
 }
 
 // click event
